@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "596805328198",
+    "firebase_url": "https://code-catalyst-asc.firebaseio.com",
+    "project_id": "code-catalyst-asc",
+    "storage_bucket": "code-catalyst-asc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596805328198:android:48bd2f7368554c2b",
+        "android_client_info": {
+          "package_name": "iitbombay.code_catalyst.com.insti20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596805328198-u18she0b811dsiptll7h0gnkuf7v5shn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iitbombay.code_catalyst.com.insti20",
+            "certificate_hash": "cd18e47d052de265936468e6af9f289d21c434c1"
+          }
+        },
+        {
+          "client_id": "596805328198-8a3haldff38fikt0vhe9ccld3v87f29k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBesPROUsJ08ULJQmwd8d4fE7bGK0I_Nr0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596805328198-8a3haldff38fikt0vhe9ccld3v87f29k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
