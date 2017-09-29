@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Insti 2.0</string>
+    <string name="iitbsignin">Sign in with IITB LDAP</string>
 </resources>
