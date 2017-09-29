@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
     GoogleApiClient mGoogleApiClient;
-
+    Button Ldap;
     @Override
     protected void onStart() {
         super.onStart();
@@ -45,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Ldap=(Button) findViewById(R.id.ldap);
+        Ldap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,IITB_login.class));
+            }
+        });
         button= (SignInButton) findViewById(R.id.google_button);
         mAuth= FirebaseAuth.getInstance();
         button.setOnClickListener(new View.OnClickListener(){
