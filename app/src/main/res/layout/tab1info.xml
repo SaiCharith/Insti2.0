@@ -1,0 +1,161 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="#000033"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#bae0e7">
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Mess Secy"
+                android:textColor="#232467"
+                android:textSize="30dp"/>
+            <ImageView
+                android:id="@+id/image1"
+                android:src="@drawable/stark"
+                android:padding="5dp"
+                android:layout_below="@+id/heading"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/imgname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image1"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:text="@string/s_name"
+                android:textSize="20dp"
+                android:textColor="#232467"
+                />
+            <TextView
+                android:padding="5dp"
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgname"
+                android:text="Contact No.: "
+                android:textColor="#000000"/>
+            <TextView
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/contact"
+                android:layout_below="@+id/imgname"
+                android:text="@string/s_contact"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contact"
+                android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
+                android:text="Email-id: "
+                android:textColor="#000000" />
+            <TextView
+                android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/email"
+                android:layout_below="@+id/contact"
+                android:text="@string/s_email"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#bae0e7">
+
+            <TextView
+                android:id="@+id/headingh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Hall Manager"
+                android:textColor="#232467"
+                android:textSize="30dp"/>
+            <ImageView
+                android:id="@+id/image1h"
+                android:src="@drawable/stark"
+                android:padding="5dp"
+                android:layout_below="@+id/headingh"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/imgnameh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image1h"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:text="@string/s_name"
+                android:textSize="20dp"
+                android:textColor="#232467"
+                />
+            <TextView
+                android:padding="5dp"
+                android:id="@+id/contacth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgnameh"
+                android:text="Contact No.: "
+                android:textColor="#000000"/>
+            <TextView
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/contacth"
+                android:layout_below="@+id/imgnameh"
+                android:text="@string/s_contact"/>
+
+            <TextView
+                android:id="@+id/emailh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contacth"
+                android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
+                android:text="Email-id: "
+                android:textColor="#000000" />
+            <TextView
+                android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/emailh"
+                android:layout_below="@+id/contacth"
+                android:text="@string/s_email"/>
+
+        </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:src="@drawable/tflogo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp" />-->
+
+    </LinearLayout>
+</ScrollView>
