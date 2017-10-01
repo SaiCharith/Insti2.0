@@ -26,7 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".After_login" />
-        <activity android:name=".IITB_login"></activity>
+        <activity android:name=".IITB_login" />
+        <activity android:name=".Mess_Secy_choice" />
+        <activity android:name=".Update_menu"></activity>
     </application>
 
 </manifest>
