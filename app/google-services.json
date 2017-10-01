@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "596805328198-v235e4er8dee6uqqhlhqldqrop659j30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "iitbombay.code_catalyst.com.insti20",
+            "certificate_hash": "65e1e6da4722cf1361d30d5a90b8ebf818cfbe79"
+          }
+        },
+        {
           "client_id": "596805328198-u18she0b811dsiptll7h0gnkuf7v5shn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
