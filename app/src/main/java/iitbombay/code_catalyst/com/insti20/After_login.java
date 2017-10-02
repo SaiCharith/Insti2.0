@@ -5,20 +5,21 @@ import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.Button;;
 import android.widget.ListView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static java.security.AccessController.getContext;
 
 public class After_login extends AppCompatActivity {
     Button button;
@@ -27,19 +28,11 @@ public class After_login extends AppCompatActivity {
 
 
     //sub-class to store to group all fields to be displayed in one unit.
-    class objects{
-        String Hostel_name;
-        int hostel_no;
-        float rating;
-        int likes;
-        int dislikes;
-        int image_id;
-        objects(int i){hostel_no=i;}
 
-    }
 
     private static ArrayList<objects> l=new ArrayList<objects>();
-    private CustomAdapter customAdapter = new CustomAdapter();
+    private static CustomAdapter customAdapter;
+    Toolbar toolbar;
 
     @Override
     protected void onStart() {
@@ -84,6 +77,12 @@ public class After_login extends AppCompatActivity {
 
         }
 
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        customAdapter=new CustomAdapter(l,After_login.this);
+
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
 
@@ -104,63 +103,58 @@ public class After_login extends AppCompatActivity {
     //To hold view of each element in list view.
     //Used for optimization.
     //This avoids re-initializing of the view-holder contents.
-    class viewHolder{
-        ImageView imageview;
-        TextView hostel_name;
-        RatingBar rating_bar;
-        TextView likes;
-        TextView dislikes;
 
-        viewHolder(View v){
-            imageview = v.findViewById(R.id.imageView);
-            hostel_name=v.findViewById(R.id.Hostel_name);
-            rating_bar=v.findViewById(R.id.ratingBar);
-            likes=v.findViewById(R.id.likes);
-            dislikes=v.findViewById(R.id.dislikes);
-        }
+    public static void sortlist(int order){
+        Collections.sort(l,new Sorter(order));
+        //Toast.makeText(MainActivity.this,"Sorting",)
+        customAdapter.notifyDataSetChanged();
+        //Toast.makeText(,"sorting",Toast.LENGTH_SHORT).show();
+
     }
 
-    class CustomAdapter extends BaseAdapter {
-
-        @Override
-        public int getCount() {
-            return 16;
+    static class Sorter implements Comparator<objects> {
+        int order=1;
+        Sorter(int order){
+            this.order=order;
         }
 
         @Override
-        public Object getItem(int i) {
-            return null;
-        }
+        public int compare(objects t1, objects t2) {
 
-        @Override
-        public long getItemId(int i) {
+            if(order==1){
+                if(t1.hostel_no>t2.hostel_no) return 1;
+                else if(t1.hostel_no<t2.hostel_no) return -1;
+                else return 0;
+            }
+            else if(order==2){
+                if(t1.rating>t2.rating) return -1;
+                else if(t1.rating<t2.rating) return 1;
+                else return 0;
+            }
+            else if(order==3){
+                if(t1.likes>t2.likes) return -1;
+                else if(t1.likes<t2.likes) return 1;
+                else return 0;
+            }
+            else if(order==4){
+                if(t1.dislikes>t2.dislikes) return -1;
+                else if(t1.dislikes<t2.dislikes) return 1;
+                else return 0;
+            }
             return 0;
         }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-
-            viewHolder holder=null;
-
-            if(view==null){
-                view=getLayoutInflater().inflate(R.layout.each_hostel_display,null);
-                holder=new viewHolder(view);
-                view.setTag(holder);
-            }
-
-            else{
-                holder= (viewHolder) view.getTag();
-            }
-
-            holder.imageview.setImageResource(l.get(i).image_id);
-            holder.hostel_name.setText(l.get(i).Hostel_name);
-            holder.rating_bar.setRating(l.get(i).rating);
-            holder.likes.setText(String.valueOf(l.get(i).likes));
-            holder.dislikes.setText(String.valueOf(l.get(i).dislikes));
-
-
-            return view;
-        }
     }
+
+
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_sort,menu);
+        return true;
+    }
+
+
+
 
 }
