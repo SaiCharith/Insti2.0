@@ -14,6 +14,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,11 +72,34 @@ public class After_login extends AppCompatActivity {
         });
 
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         for(int i=0;i<16;i++){
-            objects s= new objects(i+1);
+
+
+
+            final objects s= new objects(i+1);
             s.Hostel_name=getResources().getStringArray(R.array.Hostel_names)[i];
+            String h_name;
+            if(s.hostel_no<10) h_name="Hostel0"+s.hostel_no;
+            else h_name="Hostel"+s.hostel_no;
+            DatabaseReference hostel_ref=ref.child(h_name);
+            DatabaseReference rating_ref=hostel_ref.child("Rating");
+            DatabaseReference curr_rating=rating_ref.child("Current_Rating");
+            if(i==0)
+            curr_rating.addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Float value= dataSnapshot.getValue(Float.class);
+                    s.rating=value;
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             s.image_id=imgs.getResourceId(i,-1);
-            s.rating=(Float.parseFloat(getResources().getStringArray(R.array.Rating)[i]));
+          //  s.rating=(Float.parseFloat(getResources().getStringArray(R.array.Rating)[i]));
             s.likes=getResources().getIntArray(R.array.Likes)[i];
             s.dislikes=getResources().getIntArray(R.array.DisLikes)[i];
             l.add(s);
