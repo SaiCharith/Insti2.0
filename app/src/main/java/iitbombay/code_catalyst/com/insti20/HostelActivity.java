@@ -105,11 +105,13 @@ public class HostelActivity extends Activity {
 
             switch (position) {
                 case 0:
-                    Tab1info tab2 = new Tab1info();
-                    return tab2;
-                case 1:
-                    Tab2Rate tab1 = new Tab2Rate();
+                    Tab1info tab1 = new Tab1info();
                     return tab1;
+                case 1:
+                    Tab2Rate tab2 = new Tab2Rate();
+                    tab2.instantiate(hostel_no);
+
+                    return tab2;
                 case 2:
                     Tab3feedback tab3 = new Tab3feedback();
                     return tab3;

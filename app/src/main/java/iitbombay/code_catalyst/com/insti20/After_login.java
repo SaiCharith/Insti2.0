@@ -74,9 +74,6 @@ public class After_login extends AppCompatActivity {
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         for(int i=0;i<16;i++){
-
-
-
             final objects s= new objects(i+1);
             s.Hostel_name=getResources().getStringArray(R.array.Hostel_names)[i];
             String h_name;
@@ -85,12 +82,45 @@ public class After_login extends AppCompatActivity {
             DatabaseReference hostel_ref=ref.child(h_name);
             DatabaseReference rating_ref=hostel_ref.child("Rating");
             DatabaseReference curr_rating=rating_ref.child("Current_Rating");
-            if(i==0)
+            DatabaseReference likes_ref=hostel_ref.child("Likes");
+            DatabaseReference dislikes_ref=hostel_ref.child("Dislikes");
+            likes_ref.addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    s.likes= dataSnapshot.getValue(Integer.class);
+                    //s.rating=value;
+                    customAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+          //  Toast.makeText(After_login.this, String.valueOf(s.likes),Toast.LENGTH_SHORT).show();
+
+            dislikes_ref.addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    s.dislikes= dataSnapshot.getValue(Integer.class);
+                    //s.rating=value;
+                    customAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             curr_rating.addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Float value= dataSnapshot.getValue(Float.class);
-                    s.rating=value;
+                    s.rating= dataSnapshot.getValue(Float.class);
+                    //s.rating=value;
+                    customAdapter.notifyDataSetChanged();
+
                 }
 
                 @Override
@@ -99,9 +129,9 @@ public class After_login extends AppCompatActivity {
                 }
             });
             s.image_id=imgs.getResourceId(i,-1);
-          //  s.rating=(Float.parseFloat(getResources().getStringArray(R.array.Rating)[i]));
-            s.likes=getResources().getIntArray(R.array.Likes)[i];
-            s.dislikes=getResources().getIntArray(R.array.DisLikes)[i];
+            //s.rating=(Float.parseFloat(getResources().getStringArray(R.array.Rating)[i]));
+            //s.likes=getResources().getIntArray(R.array.Likes)[i];
+            //s.dislikes=getResources().getIntArray(R.array.DisLikes)[i];
             l.add(s);
 
         }
@@ -166,8 +196,8 @@ public class After_login extends AppCompatActivity {
                 else return 0;
             }
             else if(order==4){
-                if(t1.dislikes>t2.dislikes) return -1;
-                else if(t1.dislikes<t2.dislikes) return 1;
+                if(t1.dislikes>t2.dislikes) return 1;
+                else if(t1.dislikes<t2.dislikes) return -1;
                 else return 0;
             }
             return 0;
