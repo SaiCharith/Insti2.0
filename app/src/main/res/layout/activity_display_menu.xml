@@ -2,19 +2,139 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/forest"
     tools:context="iitbombay.code_catalyst.com.insti20.DisplayMenu">
 
 
-    <LinearLayout
-        android:layout_width="537dp"
-        android:layout_height="767dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+
+    <!--<TableLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:shrinkColumns="*"  android:stretchColumns="*" android:background="#ffffff"-->
+        <!--android:padding="18dp">-->
 
 
-    </LinearLayout>
+        <!--&lt;!&ndash; Row 1 with single column &ndash;&gt;-->
+        <!--<TableRow-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:gravity="center_horizontal">-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent" android:layout_height="wrap_content"-->
+                <!--android:textSize="18dp" android:text="Row 1"  android:layout_span="3"-->
+                <!--android:padding="18dip" android:background="#b0b0b0"-->
+                <!--android:textColor="#000"-->
+                <!--android:gravity="center"/>-->
+
+
+        <!--</TableRow>-->
+
+
+        <!--<TableRow-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:gravity="center_horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView11" android:text="Row 3 column 1"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#dcdcdc"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView12" android:text="Row 3 column 2"-->
+                <!--android:layout_weight="1" android:background="#d3d3d3"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+        <!--</TableRow>-->
+
+
+        <!--<TableRow-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:gravity="center_horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView21" android:text="Row 3 column 1"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#b0b0b0"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView22" android:text="Row 3 column 2"-->
+                <!--android:layout_weight="1" android:background="#a09f9f"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+        <!--</TableRow>-->
+
+        <!--<TableRow-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:gravity="center_horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView31" android:text="Row 3 column 1"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#dcdcdc"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView32" android:text="Row 3 column 2"-->
+                <!--android:layout_weight="1" android:background="#d3d3d3"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:gravity="center_horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView41" android:text="Row 3 column 1"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#b0b0b0"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/TextView42" android:text="Row 3 column 2"-->
+                <!--android:layout_weight="1" android:background="#a09f9f"-->
+                <!--android:textColor="#000000"-->
+                <!--android:padding="18dip" android:gravity="center"/>-->
+        <!--</TableRow>-->
+
+    <!--</TableLayout>-->
+
+
+    <TextView
+        android:id="@+id/Day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Today's Menu"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/day_menu_list"
+        android:layout_width="368dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Day" />
 </android.support.constraint.ConstraintLayout>
 
