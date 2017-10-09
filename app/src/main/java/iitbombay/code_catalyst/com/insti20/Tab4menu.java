@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created by charith on 1/10/17.
@@ -59,7 +58,7 @@ public class Tab4menu extends Fragment {
 //            }
 //        });
 
-        Button b = rootView.findViewById(R.id.button);
+        Button b = rootView.findViewById(R.id.day_part);
 
 
 
@@ -95,7 +94,7 @@ public class Tab4menu extends Fragment {
             view=getActivity().getLayoutInflater().inflate(R.layout.each_day,null);
             ImageView imageview;
 
-            Button b = view.findViewById(R.id.button);
+            Button b = view.findViewById(R.id.day_part);
             b.setText(days[i]);
 
             b.setOnClickListener(new View.OnClickListener(){

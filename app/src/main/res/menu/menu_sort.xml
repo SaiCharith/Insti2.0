@@ -5,9 +5,17 @@
     xmlns:tools="http://schmeas.android.com/tools">
 
     <item
+        android:id="@+id/search_bar"
+        android:orderInCategory="100"
+        android:title="Search..."
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
+        />
+
+    <item
         android:id="@+id/menu_sort"
         android:enabled="true"
-        android:icon="@drawable/like"
+        android:icon="@drawable/ic_sort"
         android:orderInCategory="100"
         android:title="sort"
         android:visible="true"

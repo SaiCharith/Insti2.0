@@ -21,7 +21,7 @@
     <!--/>-->
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/day_part"
         android:text="Button"
         android:textColor="#1A1FA1"
         android:textSize="15sp"

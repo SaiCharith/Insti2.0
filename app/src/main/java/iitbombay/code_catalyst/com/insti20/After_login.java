@@ -2,13 +2,17 @@ package iitbombay.code_catalyst.com.insti20;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -21,7 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -35,9 +41,13 @@ public class After_login extends AppCompatActivity {
 
     //sub-class to store to group all fields to be displayed in one unit.
 
+   // private static String[] searches={"abc","avfr","xmli"};
+    //private static ArrayList<String> ltemp= (ArrayList<String>) Arrays.asList(searches);
+    //private static ArrayAdapter adapter;
 
     private static ArrayList<objects> l=new ArrayList<objects>();
     private static CustomAdapter customAdapter;
+
     Toolbar toolbar;
 
     @Override
@@ -75,8 +85,6 @@ public class After_login extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         for(int i=0;i<16;i++){
 
-
-
             final objects s= new objects(i+1);
             s.Hostel_name=getResources().getStringArray(R.array.Hostel_names)[i];
             String h_name;
@@ -85,12 +93,12 @@ public class After_login extends AppCompatActivity {
             DatabaseReference hostel_ref=ref.child(h_name);
             DatabaseReference rating_ref=hostel_ref.child("Rating");
             DatabaseReference curr_rating=rating_ref.child("Current_Rating");
-            if(i==0)
+
             curr_rating.addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Float value= dataSnapshot.getValue(Float.class);
-                    s.rating=value;
+                    s.rating = dataSnapshot.getValue(Float.class);
+                    customAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -103,18 +111,25 @@ public class After_login extends AppCompatActivity {
             s.likes=getResources().getIntArray(R.array.Likes)[i];
             s.dislikes=getResources().getIntArray(R.array.DisLikes)[i];
             l.add(s);
-
+          //  Toast.makeText(After_login.this, l.get(i).Hostel_name+s.rating, Toast.LENGTH_SHORT).show();
         }
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Hostel Mess");
+        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.common_google_signin_btn_text_light));
+
+       // MaterialSearchView searchView = findViewById(R.id.search_view);
+
         customAdapter=new CustomAdapter(l,After_login.this);
+
+       // adapter=new ArrayAdapter(After_login.this,android.R.layout.simple_list_item_1,ltemp);
 
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
-
+       // listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 
@@ -166,8 +181,8 @@ public class After_login extends AppCompatActivity {
                 else return 0;
             }
             else if(order==4){
-                if(t1.dislikes>t2.dislikes) return -1;
-                else if(t1.dislikes<t2.dislikes) return 1;
+                if(t1.dislikes>t2.dislikes) return 1;
+                else if(t1.dislikes<t2.dislikes) return -1;
                 else return 0;
             }
             return 0;
@@ -180,8 +195,26 @@ public class After_login extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_sort,menu);
-        return true;
+        MenuItem item  = menu.findItem(R.id.search_bar);
+        SearchView searchView = (SearchView) item.getActionView();
+
+       /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+               // customAdapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });*/
+        return super.onCreateOptionsMenu(menu);
     }
+
 
 
 
