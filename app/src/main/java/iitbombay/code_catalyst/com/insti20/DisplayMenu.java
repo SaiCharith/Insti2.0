@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import static java.sql.Types.NULL;
 
 public class DisplayMenu extends AppCompatActivity {
-    private int hostel_no;
-    private String day;
+
     private static ArrayList<String> l=new ArrayList<String>();
 
     private static CustomAdapter2 customAdapter;
@@ -30,12 +29,15 @@ public class DisplayMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_menu);
 
+        int hostel_no;
+        String day;
+
         Bundle bundle=getIntent().getExtras();
         hostel_no=bundle.getInt("index");
         day = bundle.getString("Day");
         TextView b= (TextView) findViewById(R.id.Day);
         b.setText(day+"'s Menu");
-        Toast.makeText(this,day+hostel_no,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,day,Toast.LENGTH_SHORT).show();
 
 
         String h_name;
@@ -53,30 +55,9 @@ public class DisplayMenu extends AppCompatActivity {
            // final String[] s = new String[1];
             final ArrayList<String> ltemp=new ArrayList<>();
             final int[] v={1};
-            Days_menu_each_part.addValueEventListener(new ValueEventListener(){
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                   String s = ""+ dataSnapshot.getValue(String.class);
-                    ltemp.add(s);
-                    customAdapter.notifyDataSetChanged();
-                    v[0]=5;
-                }
 
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-          //  l.add(s[0]);
-            l.add("ltemp.get(0)");
-
-//            String s;
-//            s="I am\n fine";///get from database
-           // if(s[0]==null) s[0]=" ";
-
-            Toast.makeText(this,day+h_name+v[0],Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this,day+h_name+v[0],Toast.LENGTH_SHORT).show();
         }
         customAdapter=new CustomAdapter2(l,DisplayMenu.this,h_name,day);
         ListView listView = (ListView) findViewById(R.id.day_menu_list);

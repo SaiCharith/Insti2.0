@@ -1,12 +1,13 @@
 package iitbombay.code_catalyst.com.insti20;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;;
 import android.widget.ListView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,6 +84,7 @@ public class After_login extends AppCompatActivity {
 
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
+        l.clear();
         for(int i=0;i<16;i++){
 
             final objects s= new objects(i+1);
@@ -226,23 +229,35 @@ public class After_login extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_sort,menu);
         MenuItem item  = menu.findItem(R.id.search_bar);
-        SearchView searchView = (SearchView) item.getActionView();
+         SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
-       /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+//
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(After_login.this,SearchResultActivity.class);
+                intent.putExtra("searchword",query);
+                startActivity(intent);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                // customAdapter.getFilter().filter(newText);
-                adapter.getFilter().filter(newText);
+               // adapter.getFilter().filter(newText);
+
                 return false;
             }
-        });*/
+        });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        return super.onOptionsItemSelected(item);
     }
 
 

@@ -38,7 +38,8 @@
         <activity
             android:name=".HostelActivity"
             android:label="@string/title_activity_hostel" />
-        <activity android:name=".DisplayMenu"></activity>
+        <activity android:name=".DisplayMenu" />
+        <activity android:name=".SearchResultActivity"></activity>
     </application>
 
 </manifest>

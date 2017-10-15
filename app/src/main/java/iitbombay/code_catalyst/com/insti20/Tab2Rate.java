@@ -69,7 +69,7 @@ public class Tab2Rate extends Fragment{
 //            }
 //        };
 //        rb.setOnClickListener(first_radio_listener);
-        Button location = (Button) rootView.findViewById(R.id.button);
+        Button location = (Button) rootView.findViewById(R.id.day_part);
 
         location.setOnClickListener(new View.OnClickListener(){
 
