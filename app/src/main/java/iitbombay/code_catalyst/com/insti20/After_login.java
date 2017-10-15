@@ -82,6 +82,7 @@ public class After_login extends AppCompatActivity {
 
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
+        l.clear();
         for(int i=0;i<16;i++){
 
             final objects s= new objects(i+1);
