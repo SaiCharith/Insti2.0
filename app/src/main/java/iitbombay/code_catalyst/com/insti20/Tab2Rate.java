@@ -82,7 +82,7 @@ public class Tab2Rate extends Fragment{
                 else h_name = "Hostel" + hostel_no;
                 DatabaseReference hostel_ref = ref.child(h_name);
                 final DatabaseReference rating_ref = hostel_ref.child("Rating");
-                DatabaseReference curr_rating = rating_ref.child("Current_Rating");
+//                DatabaseReference curr_rating = rating_ref.child("Current_Rating");
                 rating_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

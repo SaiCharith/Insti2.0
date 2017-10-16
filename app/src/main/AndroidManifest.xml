@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iitbombay.code_catalyst.com.insti20">
+    
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -26,9 +28,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".After_login" />
-        <activity android:name=".IITB_login"/>
+        <activity android:name=".IITB_login" />
         <activity android:name=".Mess_Secy_choice" />
-        <activity android:name=".Update_menu"></activity>
+        <activity android:name=".Update_menu" />
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +41,8 @@
         <activity
             android:name=".HostelActivity"
             android:label="@string/title_activity_hostel" />
-        <activity android:name=".DisplayMenu"></activity>
+        <activity android:name=".DisplayMenu" />
+        <activity android:name=".ViewFeedback"></activity>
     </application>
 
 </manifest>
