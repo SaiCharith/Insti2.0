@@ -19,8 +19,7 @@ import android.widget.ListView;
 public class Tab4menu extends Fragment {
 
     int hostel_no;
-    String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",
-    };
+    String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
     public void instantiate(int i){
         hostel_no=i;

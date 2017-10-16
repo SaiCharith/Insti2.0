@@ -56,11 +56,6 @@ class  CustomAdapter extends ArrayAdapter<objects> {
         }
     }
 
-    // Activity context;
-
-    //CustomAdapter(Activity c){
-    //      context=c;
-    // }
 
     @Override
     public int getCount() {
@@ -85,11 +80,6 @@ class  CustomAdapter extends ArrayAdapter<objects> {
 
 
         if(view==null){
-            //               LayoutInflater inflater=context.getLayoutInflater();
-            //               view=inflater.inflate(R.layout.customlayout,null);
-//                view=.inflate(R.layout.customlayout,null);
-
-            //   view=mContext.getLayoutInflater().inflate(R.layout.customlayout,null);
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.each_hostel_display,null);
             holder=new viewHolder(view);
