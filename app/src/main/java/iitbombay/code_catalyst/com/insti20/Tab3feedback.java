@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -33,27 +34,7 @@ import java.util.Map;
  * Created by charith on 1/10/17.
  */
 
-class FeedbackInput {
 
-    public String ID;
-    public String Name;
-    public String Roll_Number;
-    public String Description;
-    public String Feedback;
-
-    public FeedbackInput(){
-
-    }
-
-    public FeedbackInput(String id, String name, String roll, String description, String feed) {
-        this.ID=id;
-        this.Name = name;
-        this.Roll_Number = roll;
-        this.Description = description;
-        this.Feedback = feed;
-    }
-
-};
 
 
 public class Tab3feedback extends Fragment {
@@ -66,12 +47,17 @@ public class Tab3feedback extends Fragment {
     private StorageReference mStorage;
     private ProgressDialog mProgressDialog;
     private static final int GALLERY_INTENT = 2;
+  //  private boolean b = false;
+    Uri uri;
+    Uri image_uri;
+    String image_id;
     String id;
     int hostel_no;
     public void instantiate(int i){
         hostel_no=i;
         //getting hostel_no from the activity.
     }
+
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,7 +81,9 @@ public class Tab3feedback extends Fragment {
             @Override
                     public void onClick (View view){
                 Intent intent = new Intent(getActivity(), ViewFeedback.class);
+                intent.putExtra("hostel_no",hostel_no);
                 startActivity(intent);
+
             }
         });
 
@@ -138,18 +126,24 @@ public class Tab3feedback extends Fragment {
                     DatabaseReference hostel_ref = ref.child(h_name);
                     final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
                     //  final DatabaseReference roll_ref = feedback_ref.child(""+x);
+                    image_id = image_uri.toString();
+//                    if(b == false){
+//                        id = feedback_ref.push().getKey();
+//                        image_id ="";
+//                        b = true;
+//                    }
+
 
 
                     id = feedback_ref.push().getKey();
-                    final FeedbackInput feedbackInput = new FeedbackInput(id, name, roll, description, feed);
+                    final FeedbackInput feedbackInput = new FeedbackInput(image_id, name, roll, description, feed);
                     //FirebaseUser user = getActivity().firebaseAuth.getCurrentUser();
 
 
                     feedback_ref.child(id).setValue(feedbackInput);
 
-                    Toast.makeText(getActivity(), "Now you can add images", Toast.LENGTH_SHORT).show();
-                    buttonadd.setVisibility(View.VISIBLE);
-
+                    Toast.makeText(getActivity(), "Feedback Submitted", Toast.LENGTH_SHORT).show();
+                    //b = true;
                     //   }
                 }
 
@@ -161,25 +155,43 @@ public class Tab3feedback extends Fragment {
         return rootView;
     }
 
-
+    @SuppressWarnings("VisibleForTests")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         if(requestCode == GALLERY_INTENT && resultCode == getActivity().RESULT_OK){
             String h_name;
             if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
             else h_name = "Hostel" + hostel_no;
-            mProgressDialog.setMessage("Uploading...");
+
             mProgressDialog.show();
-            Uri uri = data.getData();
+            uri = data.getData();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
+           // String h_name;
+            if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
+            else h_name = "Hostel" + hostel_no;
+            DatabaseReference hostel_ref = ref.child(h_name);
+            final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
+            id = feedback_ref.push().getKey();
+          //  b = true;
             //StorageReference filepath = mStorage.child("photos").child(uri.getLastPathSegment());
             StorageReference filepath = mStorage.child(h_name).child(id);
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getActivity(),"Image is uploaded",Toast.LENGTH_SHORT).show();
+
                     mProgressDialog.dismiss();
+                    image_uri = taskSnapshot.getDownloadUrl();
+                }
+            })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = ( 100 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                    mProgressDialog.setMessage("Uploading..."+(int)progress+"%");
                 }
             });
         }
