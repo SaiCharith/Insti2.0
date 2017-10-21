@@ -35,12 +35,18 @@ public class IITB_login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
                     String string= getString(R.string.messsecy);
-                    Toast.makeText(IITB_login.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IITB_login.this,firebaseAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+
+                    String uid=firebaseAuth.getCurrentUser().getUid();
 
                     if(firebaseAuth.getCurrentUser().getEmail().equals(string)){
+                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+                        intent.putExtra("uid","uid");
                         startActivity(new Intent(IITB_login.this,Mess_Secy_choice.class));
                      }
                     else{
+                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+                        intent.putExtra("uid","uid");
                         startActivity(new Intent(IITB_login.this,After_login.class));
                     }
                 }

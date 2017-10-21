@@ -105,7 +105,8 @@ public class CustomAdapter4 extends BaseAdapter implements Filterable {
 
                 for(int i=0;i<filterList.size();i++){
                     if(filterList.get(i).getItem().toUpperCase().contains(constraint)){
-                        searchobjects p = new searchobjects(filterList.get(i).getItem(),
+                        searchobjects p = new searchobjects(filterList.get(i).getH_no(),
+                                                            filterList.get(i).getItem(),
                                                             filterList.get(i).getHostel_name(),
                                                             filterList.get(i).getDay(),
                                                             filterList.get(i).getDay_part());

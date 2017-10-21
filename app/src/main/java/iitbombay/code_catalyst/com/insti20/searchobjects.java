@@ -5,12 +5,14 @@ package iitbombay.code_catalyst.com.insti20;
  */
 
 public class searchobjects {
+    private int h_no;
     private String item;
     private String hostel_name;
     private String day;
     private String day_part;
 
-    public searchobjects(String item,String hostel_name,String day,String day_part){
+    public searchobjects(int h_no,String item,String hostel_name,String day,String day_part){
+        this.h_no=h_no;
         this.item=item;
         this.hostel_name=hostel_name;
         this.day=day;
@@ -46,5 +48,13 @@ public class searchobjects {
 
     public void setDay_part(String day_part) {
         this.day_part = day_part;
+    }
+
+    public int getH_no() {
+        return h_no;
+    }
+
+    public void setH_no(int h_no) {
+        this.h_no = h_no;
     }
 }

@@ -31,20 +31,22 @@ import static android.app.ProgressDialog.show;
  */
 class Post {
 
-    public Float rating;
-    public Integer no_of_people;
+    private Float rating;
+    private Integer no_of_people;
     public Map<String, Boolean> stars = new HashMap<>();
+
+
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(Float rat,Integer no) {
+    Post(Float rat, Integer no) {
         this.rating = rat;
         this.no_of_people=no;
     }
 
-    public Map<String, Object> toMap() {
+    Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("Current_Rating", rating);
         result.put("No_of_people", no_of_people);
@@ -54,6 +56,7 @@ class Post {
 };
 public class Tab2Rate extends Fragment{
     int hostel_no;
+    private String uid;
     public void instantiate(int i){
         hostel_no=i;
         //getting hostel_no from the activity.
@@ -62,26 +65,22 @@ public class Tab2Rate extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.tab2rate, container, false);
-//        RadioButton rb = (RadioButton) getActivity().findViewById(R.id.like_radio);
-//        View.OnClickListener first_radio_listener = new View.OnClickListener(){
-//            public void onClick(View v) {
-//                ImageButton b1=(ImageButton) getActivity().findViewById(R.id.button6);
-//                ImageButton b2=(ImageButton) getActivity().findViewById(R.id.button7);
-//                b1.setAlpha(1f);
-//                b2.setAlpha(1f);
-//
-//            }
-//        };
-//        rb.setOnClickListener(first_radio_listener);
-        Button location = (Button) rootView.findViewById(R.id.button);
-        RadioGroup rg=(RadioGroup) rootView.findViewById(R.id.like_dislike_radio);
+        Button location = rootView.findViewById(R.id.button);
+        RadioGroup rg= rootView.findViewById(R.id.like_dislike_radio);
+
+        Bundle bundle=getActivity().getIntent().getExtras();
+        uid=bundle.getString("uid");
+
+        Toast.makeText(getActivity(),uid,Toast.LENGTH_SHORT).show();
+
+
         final Integer[] a = {-1};
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                RadioButton rb=(RadioButton) rootView.findViewById(i);
+                RadioButton rb= rootView.findViewById(i);
                 if (R.id.like_radio == rb.getId()){
                     a[0] =1;
                 }
@@ -164,38 +163,6 @@ public class Tab2Rate extends Fragment{
                         }
                     });
                 }
-//                final Float[] currrating = new Float[1];
-//                curr_rating.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot snapshot) {
-//                        currrating[0] = snapshot.getValue(Float.class);  //prints "Do you have data? You'll love Firebase."
-//                    }
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                    }
-//                });
-//               // Toast.makeText(getActivity(), String.valueOf(currrating[0]),Toast.LENGTH_SHORT).show();
-//
-//                DatabaseReference no_of_people=rating_ref.child("No_of_people");
-//                final Integer[] no_of = new Integer[1];
-//                curr_rating.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot snapshot) {
-//                        no_of[0] = snapshot.getValue(Integer.class);  //prints "Do you have data? You'll love Firebase."
-//                    }
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                    }
-//                });
-//                RatingBar r= (RatingBar) rootView.findViewById(R.id.ratingBar);
-//               Float my_rate=r.getRating();
-//               // Float new_curr_rating=(my_rate+currrating[0]*no_of[0])/(no_of[0]+1);
-////                Post post = new Post(new_curr_rating,no_of[0]+1);
-////                Map<String, Object> postValues = post.toMap();
-//                //rating_ref.updateChildren(postValues);
-//            }
-//        });
-
 
 
             }

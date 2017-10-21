@@ -132,6 +132,9 @@ public class Update_menu extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(i==0){
+                    Update_menu.super.onBackPressed();
+                }
                 if(i>0&&i<7) i--;
                 brf.setText("");
                 lun.setText("");

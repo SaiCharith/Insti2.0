@@ -30,7 +30,7 @@ import java.util.ArrayList;
  */
 class CustomAdapter2 extends ArrayAdapter<String> {
 
-    private ArrayList<String> l;
+//    private ArrayList<String> l;
     private String[] day_parts={"Breakfast","lunch","tiffin","dinner"};
     private String H_name;
     private String Day;
@@ -42,8 +42,8 @@ class CustomAdapter2 extends ArrayAdapter<String> {
         super(context, resource);
     }
 
-    public CustomAdapter2(ArrayList<String> data, Context context,String h_name,String day) {
-        super(context, R.layout.activity_display_menu, data);
+    public CustomAdapter2(Context context,String h_name,String day) {
+        super(context, R.layout.activity_display_menu);
        // this.l = data;
         this.H_name=h_name;
         this.Day=day;
@@ -68,12 +68,6 @@ class CustomAdapter2 extends ArrayAdapter<String> {
             day_part=v.findViewById(R.id.day_part);
         }
     }
-
-    // Activity context;
-
-    //CustomAdapter(Activity c){
-    //      context=c;
-    // }
 
     @Override
     public int getCount() {

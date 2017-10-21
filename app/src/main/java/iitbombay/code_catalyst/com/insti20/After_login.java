@@ -82,6 +82,9 @@ public class After_login extends AppCompatActivity {
             }
         });
 
+//        Bundle bundle=getIntent().getExtras();
+//        final String uid=bundle.getString("uid");
+
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         l.clear();
@@ -163,6 +166,8 @@ public class After_login extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 
@@ -170,6 +175,7 @@ public class After_login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
                 Intent intent = new Intent(After_login.this,HostelActivity.class);
                 intent.putExtra("index",l.get(i).hostel_no); //passing hostel no to the upcoming activity.
+//                intent.putExtra("uid",uid);
                 startActivity(intent);
                 Toast.makeText(After_login.this, l.get(i).Hostel_name, Toast.LENGTH_SHORT).show();
             }

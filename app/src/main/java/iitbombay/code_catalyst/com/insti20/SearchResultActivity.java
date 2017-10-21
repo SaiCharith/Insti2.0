@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,13 +37,17 @@ public class SearchResultActivity extends AppCompatActivity {
         final String b=bundle.getString("searchword");
         Toast.makeText(SearchResultActivity.this,b,Toast.LENGTH_SHORT).show();
 
+        TextView tv = (TextView) findViewById(R.id.show_results);
+        tv.setText("showing results for \""+b+"\"\n");
+
         ListView listView = (ListView) findViewById(R.id.search_results);
-        ArrayList<searchobjects> Searchables =  new ArrayList<>();
+        final ArrayList<searchobjects> Searchables =  new ArrayList<>();
 //        Searchables.addAll(Arrays.asList(searchables));
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         Searchables.clear();
         for(int i=1;i<=16;i++){
+
             String h_name;
             if(i<10) h_name="Hostel0"+i;
             else h_name="Hostel"+i;
@@ -50,7 +57,7 @@ public class SearchResultActivity extends AppCompatActivity {
             for(int j=0;j<7;j++){
                 DatabaseReference day_menu_ref=current_menu_ref.child(days[j]);
                 for(int k=0;k<4;k++){
-                    final searchobjects s=new searchobjects("asdfghj",h_name,days[j],"");
+                    final searchobjects s=new searchobjects(i,"asdfghj",h_name,days[j],"");
                     s.setDay_part(day_each_part[k]);
                     DatabaseReference day_part_menu_ref=day_menu_ref.child(day_each_part[k]);
                     day_part_menu_ref.addValueEventListener(new ValueEventListener(){
@@ -68,16 +75,29 @@ public class SearchResultActivity extends AppCompatActivity {
 
                         }
                     });
-                    Searchables.add(s);
-
+//                    if(s.getItem().toUpperCase().contains(b.toUpperCase())) {
+                        Searchables.add(s);
+//                    }
                 }
 
             }
         }
 
         adapter=new CustomAdapter4(SearchResultActivity.this, Searchables);
-       // adapter.getFilter().filter(b);
+//        adapter.getFilter().filter(b);
         listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
+//                Intent intent = new Intent(SearchResultActivity.this,DisplayMenu.class);
+//                intent.putExtra("index",Searchables.get(i).getH_no()); //passing hostel no to the upcoming activity.
+//                intent.putExtra("Day",Searchables.get(i).getDay());
+//                startActivity(intent);
+//                Toast.makeText(SearchResultActivity.this, Searchables.get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 }
