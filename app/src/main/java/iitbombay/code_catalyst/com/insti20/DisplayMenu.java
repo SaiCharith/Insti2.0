@@ -18,9 +18,8 @@ import java.util.ArrayList;
 import static java.sql.Types.NULL;
 
 /**
- * \author Charith
- * \copyright Code-Catalyst
- * \mainpage
+ * @author Charith
+ *
  *
  */
 public class DisplayMenu extends AppCompatActivity {

@@ -71,7 +71,6 @@ public class Tab2Rate extends Fragment{
         Bundle bundle=getActivity().getIntent().getExtras();
         uid=bundle.getString("uid");
 
-        Toast.makeText(getActivity(),uid,Toast.LENGTH_SHORT).show();
 
 
         final Integer[] a = {-1};
@@ -93,77 +92,118 @@ public class Tab2Rate extends Fragment{
 
             @Override
             public void onClick(View view) {
-               // Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
+
                 String h_name;
                 if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
                 else h_name = "Hostel" + hostel_no;
-                DatabaseReference hostel_ref = ref.child(h_name);
+                final DatabaseReference hostel_ref = ref.child(h_name);
 
+                final DatabaseReference info_ref=hostel_ref.child("info");
 
-                if(a[0]!=-1) {
-                    final DatabaseReference rating_ref = hostel_ref.child("Rating");
-                    DatabaseReference curr_rating = rating_ref.child("Current_Rating");
+                final DatabaseReference user_info_ref=info_ref.child(uid);
 
-                    rating_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Float curr = dataSnapshot.child("Current_Rating").getValue(Float.class);
-                            Integer numb = dataSnapshot.child("No_of_people").getValue(Integer.class);
-                            RatingBar r = (RatingBar) rootView.findViewById(R.id.ratingBar);
-                            Float my_rate = r.getRating();
-                            r.setRating(0f);
-                            Float new_curr_rating = (my_rate + curr * numb) / (numb + 1);
-                            Post post = new Post(new_curr_rating, numb + 1);
-                            Map<String, Object> postValues = post.toMap();
-                            rating_ref.updateChildren(postValues);
+                final Float[] prate = {0f};
+                final int[] plike = {0};
+                final int[] pdislike = {0};
+                final int[] exist = {0};
+
+                info_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.hasChild(uid)) {
+                            prate[0] = dataSnapshot.child(uid).child("rating").getValue(Float.class);
+                            plike[0] = dataSnapshot.child(uid).child("like").getValue(Integer.class);
+                            pdislike[0] = dataSnapshot.child(uid).child("dislike").getValue(Integer.class);
+                            exist[0]=1;
                         }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    }
 
-                        }
-                    });
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
                 if(a[0]==-1)
                 {
                     Toast.makeText(getActivity(),"Please Tell us wheather you like it or not",Toast.LENGTH_LONG).show();
                 }
-                else if(a[0]==1)
-                {
-                    final DatabaseReference like_ref = hostel_ref.child("Likes");
-                    like_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                else {
+                    final DatabaseReference rating_ref = hostel_ref.child("Rating");
+
+                    hostel_ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            Float curr=dataSnapshot.getValue(Float.class);
-                            curr=curr+1;
-                            like_ref.setValue(curr);
+                            Float curr = dataSnapshot.child("Rating").child("Current_Rating").getValue(Float.class);
+                            Integer numb = dataSnapshot.child("Rating").child("No_of_people").getValue(Integer.class);
+                            RatingBar r = (RatingBar) rootView.findViewById(R.id.ratingBar);
+                            Float my_rate = r.getRating();
+                            r.setRating(0f);
+                            Float new_curr_rating = (my_rate-prate[0] + curr * numb) / (numb + 1-exist[0]);
+                            Post post = new Post(new_curr_rating, numb + 1 - exist[0]);
+                            Map<String, Object> postValues = post.toMap();
+                            rating_ref.updateChildren(postValues);
+                            DatabaseReference user_rating=user_info_ref.child("rating");
+                            user_rating.setValue(my_rate);
+
+                            final DatabaseReference like_ref = hostel_ref.child("Likes");
+                            final DatabaseReference dislike_ref = hostel_ref.child("Dislikes");
+
+                            DatabaseReference user_like=user_info_ref.child("like");
+                            DatabaseReference user_dislike=user_info_ref.child("dislike");
+
+                            if(a[0]==1){
+
+                                        int curr_like=dataSnapshot.child("Likes").getValue(int.class);
+                                        curr_like=curr_like+1-plike[0];
+                                        like_ref.setValue(curr_like);
+
+                                        user_like.setValue(1);
+                                        user_dislike.setValue(0);
+                                        if(exist[0]==1){
+
+                                                    int curr1=dataSnapshot.child("Dislikes").getValue(int.class);
+                                                    if(plike[0]==0) {
+                                                        curr1--;
+                                                    }
+                                                    dislike_ref.setValue(curr1);
+                                                }
+
+
+                                    }
+
+
+                            else {
+
+                                        int curr_dislike=dataSnapshot.child("Dislikes").getValue(int.class);
+                                        curr_dislike=curr_dislike+1-pdislike[0];
+                                        dislike_ref.setValue(curr_dislike);
+
+                                        user_like.setValue(0);
+                                        user_dislike.setValue(1);
+                                        if(exist[0]==1){
+
+                                                    int curr1=dataSnapshot.child("Likes").getValue(int.class);
+                                                    if(pdislike[0]==0) {
+                                                        curr1--;
+                                                    }
+                                                    like_ref.setValue(curr1);
+                                                }
+
+                            }
                         }
+
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
                         }
                     });
-
                 }
-                else if(a[0]==0){
-                    final DatabaseReference dislike_ref = hostel_ref.child("Dislikes");
-                    dislike_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Float curr=dataSnapshot.getValue(Float.class);
-                            curr=curr+1;
-                            dislike_ref.setValue(curr);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-
 
             }
 

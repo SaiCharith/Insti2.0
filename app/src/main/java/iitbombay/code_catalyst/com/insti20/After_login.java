@@ -40,16 +40,11 @@ public class After_login extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
-
-    //sub-class to store to group all fields to be displayed in one unit.
-
-   // private static String[] searches={"abc","avfr","xmli"};
-    //private static ArrayList<String> ltemp= (ArrayList<String>) Arrays.asList(searches);
-    //private static ArrayAdapter adapter;
-
     private static ArrayList<objects> l=new ArrayList<objects>();
     private static CustomAdapter customAdapter;
     Toolbar toolbar;
+
+    String uid;
 
     @Override
     protected void onStart() {
@@ -66,9 +61,14 @@ public class After_login extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+
                 if(firebaseAuth.getCurrentUser() == null)
                 {
                     startActivity(new Intent(After_login.this,MainActivity.class));
+                }
+                else {
+                    uid= firebaseAuth.getCurrentUser().getUid();
+
                 }
             }
 
@@ -82,8 +82,6 @@ public class After_login extends AppCompatActivity {
             }
         });
 
-//        Bundle bundle=getIntent().getExtras();
-//        final String uid=bundle.getString("uid");
 
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
@@ -104,7 +102,6 @@ public class After_login extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.likes= dataSnapshot.getValue(Integer.class);
-                    //s.rating=value;
                     customAdapter.notifyDataSetChanged();
 
                 }
@@ -114,13 +111,11 @@ public class After_login extends AppCompatActivity {
 
                 }
             });
-          //  Toast.makeText(After_login.this, String.valueOf(s.likes),Toast.LENGTH_SHORT).show();
 
             dislikes_ref.addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.dislikes= dataSnapshot.getValue(Integer.class);
-                    //s.rating=value;
                     customAdapter.notifyDataSetChanged();
 
                 }
@@ -134,7 +129,6 @@ public class After_login extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.rating= dataSnapshot.getValue(Float.class);
-                    //s.rating=value;
                     customAdapter.notifyDataSetChanged();
 
                 }
@@ -145,11 +139,8 @@ public class After_login extends AppCompatActivity {
                 }
             });
             s.image_id=imgs.getResourceId(i,-1);
-            //s.rating=(Float.parseFloat(getResources().getStringArray(R.array.Rating)[i]));
-            //s.likes=getResources().getIntArray(R.array.Likes)[i];
-            //s.dislikes=getResources().getIntArray(R.array.DisLikes)[i];
+
             l.add(s);
-          //  Toast.makeText(After_login.this, l.get(i).Hostel_name+s.rating, Toast.LENGTH_SHORT).show();
         }
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
@@ -159,7 +150,6 @@ public class After_login extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         toolbar.setBackgroundColor(getResources().getColor(R.color.common_google_signin_btn_text_light));
 
-       // MaterialSearchView searchView = findViewById(R.id.search_view);
 
         customAdapter=new CustomAdapter(l,After_login.this);
 
@@ -175,7 +165,7 @@ public class After_login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
                 Intent intent = new Intent(After_login.this,HostelActivity.class);
                 intent.putExtra("index",l.get(i).hostel_no); //passing hostel no to the upcoming activity.
-//                intent.putExtra("uid",uid);
+                intent.putExtra("uid",uid);
                 startActivity(intent);
                 Toast.makeText(After_login.this, l.get(i).Hostel_name, Toast.LENGTH_SHORT).show();
             }
@@ -183,9 +173,6 @@ public class After_login extends AppCompatActivity {
 
 
      }
-    //To hold view of each element in list view.
-    //Used for optimization.
-    //This avoids re-initializing of the view-holder contents.
 
     public static void sortlist(int order){
         Collections.sort(l,new Sorter(order));
@@ -234,7 +221,7 @@ public class After_login extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_sort,menu);
-        MenuItem item  = menu.findItem(R.id.search_bar);
+//        MenuItem item  = menu.findItem(R.id.search_bar);
          SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
@@ -265,9 +252,6 @@ public class After_login extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
+    
 
 }

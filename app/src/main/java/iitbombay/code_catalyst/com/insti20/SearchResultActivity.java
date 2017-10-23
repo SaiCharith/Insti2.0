@@ -21,13 +21,35 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author charith
+ * This activity is showed up when something is searched in searchbar.
+ */
+
 public class SearchResultActivity extends AppCompatActivity {
 
-//    private static String[] searchables={"country\nmywish","state","capital","small"};
+    /**
+     *  array of days is used for iterating along the days of week
+     */
     private static String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+    /**
+     *  array of day_each_part is used for iterating along each part of the day.
+     */
     private static String[] day_each_part={"Breakfast","lunch","tiffin","dinner"};
+    /**
+     * CustumAdapter4 is used to display the results in a listview
+     */
     CustomAdapter4 adapter;
 
+
+    /**
+     * In this method all the items of the menu in the 16 hostels and 7 days are populated to the list 'searchebles'.
+     * Later this is passed onto the adapter wich generates the listview.
+     * xml layout file linked with this activity is 'activity_search_result'
+     * Onclicking the an elemnt of listview, the view gets redirected to DisplayMenu corresponding to that day and that hostel.
+     * @param savedInstanceState instance of Bundle;
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +64,6 @@ public class SearchResultActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.search_results);
         final ArrayList<searchobjects> Searchables =  new ArrayList<>();
-//        Searchables.addAll(Arrays.asList(searchables));
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         Searchables.clear();
@@ -86,18 +107,18 @@ public class SearchResultActivity extends AppCompatActivity {
         adapter=new CustomAdapter4(SearchResultActivity.this, Searchables);
 //        adapter.getFilter().filter(b);
         listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-//
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
-//                Intent intent = new Intent(SearchResultActivity.this,DisplayMenu.class);
-//                intent.putExtra("index",Searchables.get(i).getH_no()); //passing hostel no to the upcoming activity.
-//                intent.putExtra("Day",Searchables.get(i).getDay());
-//                startActivity(intent);
-//                Toast.makeText(SearchResultActivity.this, Searchables.get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
+                Intent intent = new Intent(SearchResultActivity.this,DisplayMenu.class);
+                intent.putExtra("index",adapter.getSearchlst().get(i).getH_no()); //passing hostel no to the upcoming activity.
+                intent.putExtra("Day",adapter.getSearchlst().get(i).getDay());
+                startActivity(intent);
+                Toast.makeText(SearchResultActivity.this, adapter.getSearchlst().get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
