@@ -74,7 +74,8 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
 //        url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
 //        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 //        img.setImageBitmap(bmp);
-        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);
+        if(!(feedbackInput.ID == "")){
+        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);}
         //Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/code-catalyst-asc.appspot.com/o/Hostel14%2F-Kwkbfq9THzL-QHTeud1?alt=media&token=5b767e93-3fe3-463c-8a41-55edd5e835b8").into(viewholder.img);
         //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
        // Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(viewholder.img);
