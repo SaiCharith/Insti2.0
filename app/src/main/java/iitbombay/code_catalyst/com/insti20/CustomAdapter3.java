@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
+//import com.squareup.picasso.Picasso;
 
 /**
  * Created by atharvn on 16/10/17.
@@ -23,6 +24,7 @@ import java.util.List;
 public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
     private Activity context;
     private ArrayList<FeedbackInput> feedbackList;
+    URL url;
 
     @Override
     public int getCount() {
@@ -67,10 +69,16 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
 
         FeedbackInput feedbackInput = feedbackList.get(position);
 
-        viewholder.name.setText(feedbackInput.getName());
-        viewholder.description.setText(feedbackInput.getDescription());
-        Glide.with(context).load(feedbackList.get(position).getID()).into(viewholder.img);
-        viewholder.feedback.setText(feedbackInput.getFeedback());
+        viewholder.name.setText(feedbackInput.Name);
+        viewholder.description.setText(feedbackInput.Description);
+//        url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
+//        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//        img.setImageBitmap(bmp);
+        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);
+        //Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/code-catalyst-asc.appspot.com/o/Hostel14%2F-Kwkbfq9THzL-QHTeud1?alt=media&token=5b767e93-3fe3-463c-8a41-55edd5e835b8").into(viewholder.img);
+        //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
+       // Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(viewholder.img);
+        viewholder.feedback.setText(feedbackInput.Feedback);
 
         return convertView;
     }
@@ -85,7 +93,7 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
         viewHolder(View v){
             name=v.findViewById(R.id.name);
             description=v.findViewById(R.id.description);
-            ImageView img = (ImageView) v.findViewById((R.id.imgview));
+            img =v.findViewById((R.id.imgview));
             feedback = v.findViewById(R.id.feedback);
         }
     }

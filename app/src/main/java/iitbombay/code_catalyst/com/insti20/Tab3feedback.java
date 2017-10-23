@@ -34,9 +34,6 @@ import java.util.Map;
  * Created by charith on 1/10/17.
  */
 
-
-
-
 public class Tab3feedback extends Fragment {
 
    // private DatabaseReference DatabaseReference;
@@ -47,11 +44,11 @@ public class Tab3feedback extends Fragment {
     private StorageReference mStorage;
     private ProgressDialog mProgressDialog;
     private static final int GALLERY_INTENT = 2;
-  //  private boolean b = false;
-    Uri uri;
+    public boolean b = false;
+//    Uri uri;
     Uri image_uri;
     String image_id;
-    String id;
+    String push_id,push_id1;
     int hostel_no;
     public void instantiate(int i){
         hostel_no=i;
@@ -126,23 +123,31 @@ public class Tab3feedback extends Fragment {
                     DatabaseReference hostel_ref = ref.child(h_name);
                     final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
                     //  final DatabaseReference roll_ref = feedback_ref.child(""+x);
-                    image_id = image_uri.toString();
-//                    if(b == false){
-//                        id = feedback_ref.push().getKey();
-//                        image_id ="";
-//                        b = true;
-//                    }
+
+                    if(b == false){
+                        //id = feedback_ref.push().getKey();
+                        image_id ="";
+                        b = true;
+                    }else{
+                        image_id = image_uri.toString();
+                        b = false;
+                    }
 
 
 
-                    id = feedback_ref.push().getKey();
-                    final FeedbackInput feedbackInput = new FeedbackInput(image_id, name, roll, description, feed);
+                    push_id = feedback_ref.push().getKey();
+                    //final FeedbackInput feedbackInput;
+                    FeedbackInput feedbackInput = new FeedbackInput(image_id, name, roll, description, feed);
                     //FirebaseUser user = getActivity().firebaseAuth.getCurrentUser();
 
 
-                    feedback_ref.child(id).setValue(feedbackInput);
+                    feedback_ref.child(push_id).setValue(feedbackInput);
 
                     Toast.makeText(getActivity(), "Feedback Submitted", Toast.LENGTH_SHORT).show();
+                    editTextName.setText("");
+                    editTextRoll.setText("");
+                    editTextDescription.setText("");
+                    editTextFeed.setText("");
                     //b = true;
                     //   }
                 }
@@ -162,22 +167,20 @@ public class Tab3feedback extends Fragment {
 
 
         if(requestCode == GALLERY_INTENT && resultCode == getActivity().RESULT_OK){
+
+
+            mProgressDialog.show();
+            Uri uri = data.getData();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
             String h_name;
             if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
             else h_name = "Hostel" + hostel_no;
-
-            mProgressDialog.show();
-            uri = data.getData();
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
-           // String h_name;
-            if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
-            else h_name = "Hostel" + hostel_no;
-            DatabaseReference hostel_ref = ref.child(h_name);
-            final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
-            id = feedback_ref.push().getKey();
-          //  b = true;
+            final DatabaseReference hostel_ref = ref.child(h_name);
+            //final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
+            push_id1 = hostel_ref.push().getKey();
+            b = true;
             //StorageReference filepath = mStorage.child("photos").child(uri.getLastPathSegment());
-            StorageReference filepath = mStorage.child(h_name).child(id);
+            StorageReference filepath = mStorage.child(h_name).child(push_id1);
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

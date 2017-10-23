@@ -27,9 +27,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="EditText.Colored" parent="Theme.AppCompat">
-        <item name="colorControlNormal">#000000</item>
+        <item name="colorControlNormal">@color/darkgrey</item>
         <item name="colorControlActivated">#000000</item>
-        <item name="colorControlHighlight">@color/lightGrey</item>
+        <!--<item name="colorControlHighlight">@color/lightGrey</item>-->
     </style>
 
     <style name="RatingBar2" parent="Theme.AppCompat">
