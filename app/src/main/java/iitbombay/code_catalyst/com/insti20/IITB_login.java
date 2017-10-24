@@ -34,18 +34,24 @@ public class IITB_login extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
-                    String string= getString(R.string.messsecy);
+
                     Toast.makeText(IITB_login.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
 
 //                    String uid=firebaseAuth.getCurrentUser().getUid();
 
-                    if(firebaseAuth.getCurrentUser().getEmail().equals(string)){
-                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
-//                        intent.putExtra("uid","uid");
-                        startActivity(new Intent(IITB_login.this,Mess_Secy_choice.class));
-                     }
-                    else{
-                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+                    boolean b=true;
+                    String user=firebaseAuth.getCurrentUser().getEmail();
+                    for(int i=0;i<16;i++) {
+                        String string= getResources().getStringArray(R.array.messsecys)[i];
+                        if (user.equals(string)) {
+                            b=false;
+                            Intent intent = new Intent(IITB_login.this, Mess_Secy_choice.class);
+                            intent.putExtra("hostel_no",i+1);
+                            startActivity(intent);
+                        }
+                    }
+                    if(b){
+//                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
 //                        intent.putExtra("uid","uid");
                         startActivity(new Intent(IITB_login.this,After_login.class));
                     }

@@ -72,9 +72,9 @@ public class Update_menu extends AppCompatActivity {
 
     private void sethostelvalues(){
 
-//        Bundle bundle=getIntent().getExtras();
-//        hostel_no=bundle.getInt("Hostel_no");
-        hostel_no=3;  //Need to update as per different hostel mess secys;
+        Bundle bundle=getIntent().getExtras();
+        hostel_no=bundle.getInt("hostel_no");
+//        hostel_no=3;  //Need to update as per different hostel mess secys;
         if(hostel_no<10) hostel_name="Hostel0"+hostel_no;
         else hostel_name="Hostel"+hostel_no;
     }
@@ -129,31 +129,36 @@ public class Update_menu extends AppCompatActivity {
 //                }
 //            }
 //        }
+        tv.setText(days[0]);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(i==0){
                     Update_menu.super.onBackPressed();
                 }
-                if(i>0&&i<7) i--;
-                brf.setText("");
-                lun.setText("");
-                tif.setText("");
-                dinn.setText("");
-                tv.setText(days[i]);
+                if(i>0&&i<7) {
+                    i--;
+                    brf.setText("");
+                    lun.setText("");
+                    tif.setText("");
+                    dinn.setText("");
+                    tv.setText(days[i]);
+                }
             }
         });
 
-        tv.setText(days[i]);
+
+
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                    DatabaseReference hostel=ref.child(hostel_name);
-                    DatabaseReference menu=hostel.child("Mess_Menu");
-                    DatabaseReference buffer=menu.child("Buffer");
-                    DatabaseReference day=buffer.child(days[i]);
+                if(i<7) {
+                    DatabaseReference hostel = ref.child(hostel_name);
+                    DatabaseReference menu = hostel.child("Mess_Menu");
+                    DatabaseReference buffer = menu.child("Buffer");
+                    DatabaseReference day = buffer.child(days[i]);
                     String _brf = brf.getText().toString();
                     String _lun = lun.getText().toString();
                     String _tif = tif.getText().toString();
@@ -163,15 +168,17 @@ public class Update_menu extends AppCompatActivity {
 
                     Map<String, Object> postValues = mDay.toMap();
                     day.updateChildren(postValues);
-                    Toast.makeText(Update_menu.this, "Updated "+days[i]+"'s Menu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Update_menu.this, "Updated " + days[i] + "'s Menu", Toast.LENGTH_SHORT).show();
                     brf.setText("");
                     lun.setText("");
                     tif.setText("");
                     dinn.setText("");
                     i++;
-                    if(i<7) tv.setText(days[i]);
-
-                    else {}
+                    if(i<7) {
+                        tv.setText(days[i]);
+                    }
+                }
+//                else {}
 
             }
         });

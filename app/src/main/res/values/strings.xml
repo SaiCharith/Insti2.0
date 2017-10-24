@@ -44,62 +44,26 @@
     </array>
 
 
-    <string-array name="Rating">
-        <item>3</item>
-        <item>4</item>
-        <item>3.3</item>
-        <item>2</item>
-        <item>3.5</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4.6</item>
-        <item>3.5</item>
-        <item>2.8</item>
-        <item>3.5</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4.6</item>
-        <item>3.5</item>
-        <item>2.8</item>
+    <string-array name="messsecys">
+        <item>messsecy01@iitb.ac.in</item>
+        <item>messsecy02@iitb.ac.in</item>
+        <item>messsecy03@iitb.ac.in</item>
+        <item>messsecy04@iitb.ac.in</item>
+        <item>messsecy05@iitb.ac.in</item>
+        <item>messsecy06@iitb.ac.in</item>
+        <item>messsecy07@iitb.ac.in</item>
+        <item>messsecy08@iitb.ac.in</item>
+        <item>messsecy09@iitb.ac.in</item>
+        <item>messsecy10@iitb.ac.in</item>
+        <item>messsecy11@iitb.ac.in</item>
+        <item>messsecy12@iitb.ac.in</item>
+        <item>messsecy13@iitb.ac.in</item>
+        <item>messsecy14@iitb.ac.in</item>
+        <item>messsecy15@iitb.ac.in</item>
+        <item>messsecy16@iitb.ac.in</item>
     </string-array>
 
-    <integer-array name="Likes">
-        <item>660</item>
-        <item>407</item>
-        <item>300</item>
-        <item>607</item>
-        <item>100</item>
-        <item>620</item>
-        <item>450</item>
-        <item>300</item>
-        <item>607</item>
-        <item>100</item>
-        <item>620</item>
-        <item>660</item>
-        <item>407</item>
-        <item>300</item>
-        <item>607</item>
-        <item>100</item>
-    </integer-array>
 
-    <integer-array name="DisLikes">
-        <item>100</item>
-        <item>620</item>
-        <item>450</item>
-        <item>660</item>
-        <item>407</item>
-        <item>300</item>
-        <item>607</item>
-        <item>450</item>
-        <item>660</item>
-        <item>407</item>
-        <item>300</item>
-        <item>607</item>
-        <item>660</item>
-        <item>407</item>
-        <item>300</item>
-        <item>607</item>
-    </integer-array>
     <string name="title_activity_hostel">HostelActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
