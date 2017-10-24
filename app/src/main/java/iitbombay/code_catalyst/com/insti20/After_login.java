@@ -1,12 +1,13 @@
 package iitbombay.code_catalyst.com.insti20;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;;
 import android.widget.ListView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,6 +62,8 @@ public class After_login extends AppCompatActivity {
     private static CustomAdapter customAdapter;//Our Adapter which publishes our data to the List view
     Toolbar toolbar;
 
+    String uid;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -75,9 +79,14 @@ public class After_login extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener(){ //If user not signed in then this page is not allowed and he must be redirected to the sign in page
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+
                 if(firebaseAuth.getCurrentUser() == null)
                 {
                     startActivity(new Intent(After_login.this,MainActivity.class));
+                }
+                else {
+                    uid= firebaseAuth.getCurrentUser().getUid();
+
                 }
             }
 
@@ -91,9 +100,11 @@ public class After_login extends AppCompatActivity {
             }
         });
 
+
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);//get images of each hostel in a list
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");//connecting to our online database
-        for(int i=0;i<16;i++){ //Iterating over all hostels and populating it in list view
+        l.clear();
+        for(int i=0;i<16;i++){//Iterating over all hostels and populating it in list view
 
             final objects s= new objects(i+1);//calling constructor which gives hostel number as 1
             s.Hostel_name=getResources().getStringArray(R.array.Hostel_names)[i];
@@ -146,6 +157,7 @@ public class After_login extends AppCompatActivity {
                 }
             });
             s.image_id=imgs.getResourceId(i,-1);
+
             l.add(s);
         }
 
@@ -155,12 +167,13 @@ public class After_login extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         toolbar.setBackgroundColor(getResources().getColor(R.color.common_google_signin_btn_text_light));
 
-       // MaterialSearchView searchView = findViewById(R.id.search_view);
 
         customAdapter=new CustomAdapter(l,After_login.this);
 
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -168,7 +181,8 @@ public class After_login extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
                 Intent intent = new Intent(After_login.this,HostelActivity.class);
-                intent.putExtra("index",l.get(i).hostel_no); //passing hostel no to the upcoming activity
+                intent.putExtra("index",l.get(i).hostel_no); //passing hostel no to the upcoming activity.
+                intent.putExtra("uid",uid);
                 startActivity(intent);
                 Toast.makeText(After_login.this, l.get(i).Hostel_name, Toast.LENGTH_SHORT).show();
             }
@@ -227,28 +241,37 @@ public class After_login extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_sort,menu);
-        MenuItem item  = menu.findItem(R.id.search_bar);
-        SearchView searchView = (SearchView) item.getActionView();
+//        MenuItem item  = menu.findItem(R.id.search_bar);
+         SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
-       /* searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+//
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(After_login.this,SearchResultActivity.class);
+                intent.putExtra("searchword",query);
+                startActivity(intent);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                // customAdapter.getFilter().filter(newText);
-                adapter.getFilter().filter(newText);
+               // adapter.getFilter().filter(newText);
+
                 return false;
             }
-        });*/
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

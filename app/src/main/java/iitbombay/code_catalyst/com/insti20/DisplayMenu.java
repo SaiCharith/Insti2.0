@@ -17,25 +17,45 @@ import java.util.ArrayList;
 
 import static java.sql.Types.NULL;
 
+/**
+ * @author Charith
+ *
+ *
+ */
 public class DisplayMenu extends AppCompatActivity {
-    private int hostel_no;
-    private String day;
+    /*!
+     * \brief stores days of week as a list.List is used as it can be passed as an arugument to adapters.
+     */
     private static ArrayList<String> l=new ArrayList<String>();
 
+    /*!
+     * \brief CustomAdapter to convert the arraylist l to listview.
+     *
+     */
     private static CustomAdapter2 customAdapter;
-    private static String[] day_each_part={"Breakfast","lunch","tiffin","dinner"};
 
+    /*!
+     * \brief Method impleneted after this activity is called
+     * \param Bindle
+     * \return void
+     * \brief Layout used to show this activity is activity_display_menu.xml.
+     * This function basically calls the CustomAdapter2 and inflates the ListView 'day_menu_list' with with the menu of hostel_no and of pirticular day.
+     * hostel_no and Day come from previous activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_menu);
+
+        int hostel_no;
+        String day;
 
         Bundle bundle=getIntent().getExtras();
         hostel_no=bundle.getInt("index");
         day = bundle.getString("Day");
         TextView b= (TextView) findViewById(R.id.Day);
         b.setText(day+"'s Menu");
-        Toast.makeText(this,day+hostel_no,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,day,Toast.LENGTH_SHORT).show();
 
 
         String h_name;
@@ -43,42 +63,7 @@ public class DisplayMenu extends AppCompatActivity {
         if(hostel_no<10) h_name="Hostel0"+hostel_no;
         else h_name="Hostel"+hostel_no;
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
-        DatabaseReference hostel_ref=ref.child(h_name);
-        DatabaseReference Mess_menu_ref=hostel_ref.child("Mess_Menu");
-        DatabaseReference Current_menu=Mess_menu_ref.child("Current");
-        DatabaseReference Day_menu=Current_menu.child(day);
-        for(int i=0;i<4;i++){
-            DatabaseReference Days_menu_each_part=Day_menu.child(day_each_part[i]);
-           // final String[] s = new String[1];
-            final ArrayList<String> ltemp=new ArrayList<>();
-            final int[] v={1};
-            Days_menu_each_part.addValueEventListener(new ValueEventListener(){
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                   String s = ""+ dataSnapshot.getValue(String.class);
-                    ltemp.add(s);
-                    customAdapter.notifyDataSetChanged();
-                    v[0]=5;
-                }
-
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-          //  l.add(s[0]);
-            l.add("ltemp.get(0)");
-
-//            String s;
-//            s="I am\n fine";///get from database
-           // if(s[0]==null) s[0]=" ";
-
-            Toast.makeText(this,day+h_name+v[0],Toast.LENGTH_SHORT).show();
-        }
-        customAdapter=new CustomAdapter2(l,DisplayMenu.this,h_name,day);
+        customAdapter=new CustomAdapter2(DisplayMenu.this,h_name,day);
         ListView listView = (ListView) findViewById(R.id.day_menu_list);
         listView.setAdapter(customAdapter);
 

@@ -23,15 +23,32 @@ import java.util.ArrayList;
 
 /**
  * Created by charith on 2/10/17.
+ *
+ * @author charith
+ *
  */
 class  CustomAdapter extends ArrayAdapter<objects> {
-
+    /**
+     * Arraylist l is used to hold instances of the type 'objects'
+     * Contents of this list are displayed in the listview.
+     */
     private ArrayList<objects> l;
-    //Context mContext;
 
+
+    /**
+     * Default Constructor
+     * @param context gets the context
+     * @param resource gets the resource
+     */
     public CustomAdapter(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
     }
+
+    /**
+     * Custom constructor
+     * @param data gets the list to be displayed
+     * @param context gets the current context
+     */
 
     public CustomAdapter(ArrayList<objects> data, Context context) {
         super(context, R.layout.each_hostel_display, data);
@@ -40,43 +57,27 @@ class  CustomAdapter extends ArrayAdapter<objects> {
 
     }
 
-    static class viewHolder{
-        ImageView imageview;
-        TextView hostel_name;
-        RatingBar rating_bar;
-        TextView likes;
-        TextView dislikes;
-
-        viewHolder(View v){
-            imageview = v.findViewById(R.id.imageView);
-            hostel_name=v.findViewById(R.id.Hostel_name);
-            rating_bar=v.findViewById(R.id.ratingBar);
-            likes=v.findViewById(R.id.likes);
-            dislikes=v.findViewById(R.id.dislikes);
-        }
-    }
-
-    // Activity context;
-
-    //CustomAdapter(Activity c){
-    //      context=c;
-    // }
+    /**
+     * returns the size of the listview.
+     * @return int
+     */
 
     @Override
     public int getCount() {
-        return 16;
+        return l.size();
     }
 
-    @Override
-    public objects getItem(int i) {
-        return null;
-    }
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
+    /**
+     * This method fills the elements of listview with the corresponding objects in the list l.
+     * viewHolder is an instance of this element .
+     * viewHolder is used here for optimization using geTag and seTag methods.
+     *
+     * @param i current position
+     * @param view current view to be added to the listview
+     * @param viewGroup not very useful here
+     * @return View
+     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -85,11 +86,6 @@ class  CustomAdapter extends ArrayAdapter<objects> {
 
 
         if(view==null){
-            //               LayoutInflater inflater=context.getLayoutInflater();
-            //               view=inflater.inflate(R.layout.customlayout,null);
-//                view=.inflate(R.layout.customlayout,null);
-
-            //   view=mContext.getLayoutInflater().inflate(R.layout.customlayout,null);
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.each_hostel_display,null);
             holder=new viewHolder(view);
@@ -108,5 +104,45 @@ class  CustomAdapter extends ArrayAdapter<objects> {
         holder.dislikes.setText(String.valueOf(l.get(i).dislikes));
 
         return view;
+    }
+}
+
+/**
+ * This class is an instance of of elements of listview.
+ * Used for optimization.
+ */
+
+class viewHolder{
+    /**
+     * to hold the image.
+     */
+    ImageView imageview;
+    /**
+     * to hold the hostel name.
+     */
+    TextView hostel_name;
+    /**
+     * to hold the rating_bar.
+     */
+    RatingBar rating_bar;
+    /**
+     * to hold the likes.
+     */
+    TextView likes;
+    /**
+     * to hold the dislikes.
+     */
+    TextView dislikes;
+
+    /**
+     * This sets the id's of variables using the method findViewById(..).
+     * @param v to set the id's of various variables of viewHolder
+     */
+    viewHolder(View v){
+        imageview = v.findViewById(R.id.imageView);
+        hostel_name=v.findViewById(R.id.Hostel_name);
+        rating_bar=v.findViewById(R.id.ratingBar);
+        likes=v.findViewById(R.id.likes);
+        dislikes=v.findViewById(R.id.dislikes);
     }
 }

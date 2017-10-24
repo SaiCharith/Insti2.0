@@ -71,6 +71,9 @@ public class Update_menu extends AppCompatActivity {
     }
 
     private void sethostelvalues(){
+
+//        Bundle bundle=getIntent().getExtras();
+//        hostel_no=bundle.getInt("Hostel_no");
         hostel_no=3;  //Need to update as per different hostel mess secys;
         if(hostel_no<10) hostel_name="Hostel0"+hostel_no;
         else hostel_name="Hostel"+hostel_no;
@@ -129,6 +132,9 @@ public class Update_menu extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(i==0){
+                    Update_menu.super.onBackPressed();
+                }
                 if(i>0&&i<7) i--;
                 brf.setText("");
                 lun.setText("");

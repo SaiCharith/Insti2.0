@@ -37,16 +37,19 @@ public class IITB_login extends AppCompatActivity {
                     String string= getString(R.string.messsecy);
                     Toast.makeText(IITB_login.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
 
+//                    String uid=firebaseAuth.getCurrentUser().getUid();
+
                     if(firebaseAuth.getCurrentUser().getEmail().equals(string)){
+                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+//                        intent.putExtra("uid","uid");
                         startActivity(new Intent(IITB_login.this,Mess_Secy_choice.class));
                      }
                     else{
+                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+//                        intent.putExtra("uid","uid");
                         startActivity(new Intent(IITB_login.this,After_login.class));
                     }
                 }
-//                if(firebaseAuth.getCurrentUser().getEmail() == "messsecy@iitb.ac.in") {
-//                    startActivity(new Intent(IITB_login.this,Mess_Secy_choice.class));
-//                }
 
             }
         };
