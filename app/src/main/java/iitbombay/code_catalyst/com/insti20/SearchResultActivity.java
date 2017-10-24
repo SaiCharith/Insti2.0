@@ -78,7 +78,7 @@ public class SearchResultActivity extends AppCompatActivity {
             for(int j=0;j<7;j++){
                 DatabaseReference day_menu_ref=current_menu_ref.child(days[j]);
                 for(int k=0;k<4;k++){
-                    final searchobjects s=new searchobjects(i,"asdfghj",h_name,days[j],"");
+                    final searchobjects s=new searchobjects(i,"",h_name,days[j],"");
                     s.setDay_part(day_each_part[k]);
                     DatabaseReference day_part_menu_ref=day_menu_ref.child(day_each_part[k]);
                     day_part_menu_ref.addValueEventListener(new ValueEventListener(){
@@ -116,7 +116,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 intent.putExtra("index",adapter.getSearchlst().get(i).getH_no()); //passing hostel no to the upcoming activity.
                 intent.putExtra("Day",adapter.getSearchlst().get(i).getDay());
                 startActivity(intent);
-                Toast.makeText(SearchResultActivity.this, adapter.getSearchlst().get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(SearchResultActivity.this, adapter.getSearchlst().get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -25,29 +25,16 @@ import java.util.ArrayList;
 
 
 
-/**
- * Created by charith on 2/10/17.
- */
 class CustomAdapter2 extends ArrayAdapter<String> {
 
-//    private ArrayList<String> l;
+
     private String[] day_parts={"Breakfast","lunch","tiffin","dinner"};
-    private String H_name;
-    private String Day;
     DatabaseReference Day_menu;
 
-    //Context mContext;
-
-    public CustomAdapter2(@NonNull Context context, @LayoutRes int resource) {
-        super(context, resource);
-    }
 
     public CustomAdapter2(Context context,String h_name,String day) {
         super(context, R.layout.activity_display_menu);
-       // this.l = data;
-        this.H_name=h_name;
-        this.Day=day;
-        // this.mContext=context;
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         DatabaseReference hostel_ref=ref.child(h_name);
@@ -121,7 +108,6 @@ class CustomAdapter2 extends ArrayAdapter<String> {
 
             }
         });
-       // holder.dish.setText(l.get(i));
         holder.day_part.setText(day_parts[i]);
 
 

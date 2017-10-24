@@ -11,78 +11,156 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
- * Created by charith on 1/10/17.
+ *  This is 4th Fragment of the tabbed-activity. This fragment displays days of the week as buttons in a listview.The buttons when clicked will redirect to display_menu activity.
+ *  In the parent class while initiating this Fragment the function called instantiate must be called, which instantiates the hostel_no which is required for the Display_menu activity.
+ *  hostel_no and day are passed to Display_menu activity and Display_Menu activity is called by clicking on any day's button. This function is set-up holder.day.setOnclickListner.
+ *  sub-class CustomAdapter fills the listview with days buttons.
+ *  sub-class viewHolder used for optimization.This avoids re-initialization of buttons of viewHolder using view.getTag() and view.setTag() methods.
+ *
  */
 
 public class Tab4menu extends Fragment {
 
+    /**
+     * to store hostel-no.
+     */
     int hostel_no;
+    /**
+     * days of the week stored as String-array.
+     */
     String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
+
+    /**
+     * gets hostel_no and updates it.
+     * @param i represents hostel_no
+     */
     public void instantiate(int i){
         hostel_no=i;
-         //getting hostel_no from the activity.
     }
+
+    /**
+     * CustomAdapter to convert String of days to listview of buttons.
+     */
 
     CustomAdapter adapter = new CustomAdapter();
 
-//    public void Temp(int i){
-//        hostel_no=i;
-//    }
 
+    /**
+     * This method is called when the this Fragment gets created.
+     * All the dynamic aspects to be implemnted here.
+     * Listview is initialized and is filled by the adapter.
+     * @param inflater to fill the fragment with tab4menu.xml
+     * @param container to get the view
+     * @param savedInstanceState not useful
+     * @return rootView
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.tab4menu, container, false);
 
         ListView listview= rootView.findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
-
-        Button b = rootView.findViewById(R.id.day_part);
-
-
-
-
         return rootView;
     }
 
+    /**
+     * viewHolder class is used to hold the view at each instance of the listview.
+     */
+    private static class viewHolder{
+        /**
+         * to hold each day as a button.
+         */
+        Button day;
 
-    class CustomAdapter extends BaseAdapter {
+        /**
+         * constructor which initializes the button
+         * @param v gets the view
+         */
+        viewHolder(View v){
+            day=v.findViewById(R.id.day_part);
+        }
+    }
+
+
+    /**
+     * This class fills the listview with days buttons.
+     * Each button is added in each call to the getView method with different i values ranging from 0-7.
+     *
+     */
+    private class CustomAdapter extends BaseAdapter {
+        /**
+         *
+         * @return size of listview
+         */
         @Override
         public int getCount() {
             return 7;
         }
 
-
-
+        /**
+         *
+         * @param i current position
+         * @return null
+         */
         @Override
         public Object getItem(int i) {
             return null;
         }
 
+        /**
+         * Not useful here.
+         * @param i current position
+         * @return ItemId
+         */
         @Override
         public long getItemId(int i) {
             return 0;
         }
 
+        /**
+         * Most important function of this class which actually populates the listview.
+         * Initializing viewHolder only once using getTag and setTag methods.
+         * Updating viewholder by setting text and onClickListner to holder.day
+         * When the button is clicked the view is redirected to Display_Menu with the relevent day and hostel using Intent.putExtra(..,..).
+         *
+         * @param i current position
+         * @param view current view
+         * @param viewGroup not required
+         * @return view
+         */
+
         @Override
         public View getView(final int i, View view, ViewGroup viewGroup) {
 
+            final viewHolder holder;
 
-            view=getActivity().getLayoutInflater().inflate(R.layout.each_day,null);
 
-            Button b = view.findViewById(R.id.day_part);
-            b.setText(days[i]);
+            if(view==null){
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                view = inflater.inflate(R.layout.each_day,null);
+                holder=new viewHolder(view);
+                view.setTag(holder);
 
-            b.setOnClickListener(new View.OnClickListener(){
+            }
+
+            else{
+                holder= (viewHolder) view.getTag();
+            }
+
+            holder.day.setText(days[i]);
+
+            holder.day.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(),DisplayMenu.class);
-                    intent.putExtra("index",hostel_no); //passing hostel no to the upcoming activity.
-                    intent.putExtra("Day",days[i]); //passing day to the upcoming activity.
+                    intent.putExtra("index",hostel_no);
+                    intent.putExtra("Day",days[i]);
                     startActivity(intent);
                 }
             });

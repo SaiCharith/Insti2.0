@@ -65,11 +65,14 @@ public class Tab2Rate extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.tab2rate, container, false);
+
         Button location = rootView.findViewById(R.id.button);
         RadioGroup rg= rootView.findViewById(R.id.like_dislike_radio);
 
         Bundle bundle=getActivity().getIntent().getExtras();
         uid=bundle.getString("uid");
+
+
 
 
 
@@ -97,6 +100,7 @@ public class Tab2Rate extends Fragment{
                 String h_name;
                 if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
                 else h_name = "Hostel" + hostel_no;
+
                 final DatabaseReference hostel_ref = ref.child(h_name);
 
                 final DatabaseReference info_ref=hostel_ref.child("info");
@@ -109,6 +113,7 @@ public class Tab2Rate extends Fragment{
                 final int[] exist = {0};
 
                 info_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 

@@ -244,8 +244,8 @@ public class After_login extends AppCompatActivity {
 //        MenuItem item  = menu.findItem(R.id.search_bar);
          SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSubmitButtonEnabled(true);
 //
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){

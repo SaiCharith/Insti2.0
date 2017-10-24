@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iitbombay.code_catalyst.com.insti20">
     
+
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 
     <application
         android:allowBackup="true"
@@ -28,9 +30,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".After_login" />
-        <activity android:name=".IITB_login"/>
+        <activity android:name=".IITB_login" />
         <activity android:name=".Mess_Secy_choice" />
-        <activity android:name=".Update_menu"></activity>
+        <activity android:name=".Update_menu" />
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +44,10 @@
             android:name=".HostelActivity"
             android:label="@string/title_activity_hostel" />
         <activity android:name=".DisplayMenu" />
+
         <activity android:name=".SearchResultActivity"></activity>
+        <activity android:name=".ViewFeedback"></activity>
+
     </application>
 
 </manifest>

@@ -18,7 +18,6 @@ public class Tab1info extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1info, container, false);
         ImageView img = container.findViewById(R.id.image1);
-//        Picasso.with(getActivity()).load("").into(img);
         return rootView;
     }
 }

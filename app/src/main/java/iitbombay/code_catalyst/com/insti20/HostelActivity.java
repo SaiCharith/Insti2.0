@@ -114,6 +114,7 @@ public class HostelActivity extends Activity {
                     return tab2;
                 case 2:
                     Tab3feedback tab3 = new Tab3feedback();
+                    tab3.instantiate(hostel_no);
                     return tab3;
                 case 3:
                     Tab4menu tab4 = new Tab4menu();
