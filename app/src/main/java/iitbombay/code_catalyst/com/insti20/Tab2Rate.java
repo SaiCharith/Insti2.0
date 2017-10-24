@@ -70,6 +70,7 @@ public class Tab2Rate extends Fragment{
 //        };
 //        rb.setOnClickListener(first_radio_listener);
         Button location = (Button) rootView.findViewById(R.id.button);
+        //RadioGroup
 
         location.setOnClickListener(new View.OnClickListener(){
 

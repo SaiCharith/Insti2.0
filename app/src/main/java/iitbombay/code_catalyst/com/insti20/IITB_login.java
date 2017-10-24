@@ -18,11 +18,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class IITB_login extends AppCompatActivity {
-    private EditText username;
-    private EditText password;
-    private FirebaseAuth mAuth;
-    private ImageButton mLoginButton;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private EditText username; //Get Username
+    private EditText password;  //Get Password
+    private FirebaseAuth mAuth; //Authentication object
+    private ImageButton mLoginButton;   //Login Button
+    private FirebaseAuth.AuthStateListener mAuthListener; //Authentication Listeners
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iitb_login);
