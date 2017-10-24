@@ -103,15 +103,16 @@ class CustomAdapter2 extends ArrayAdapter<String> {
             holder= (viewHolder) view.getTag();
         }
 
+
+
         DatabaseReference Days_menu_each_part=Day_menu.child(day_parts[i]);
         Days_menu_each_part.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String s =  dataSnapshot.getValue(String.class);
                 holder.dish.setText(s);
-                //ltemp.add(s);
-               // customAdapter.notifyDataSetChanged();
-                //v[0]=5;
+                notifyDataSetChanged();
+
             }
 
 
@@ -122,6 +123,7 @@ class CustomAdapter2 extends ArrayAdapter<String> {
         });
        // holder.dish.setText(l.get(i));
         holder.day_part.setText(day_parts[i]);
+
 
         return view;
     }
