@@ -33,15 +33,6 @@ public class Tab4menu extends Fragment {
      */
     String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
-
-    /**
-     * gets hostel_no and updates it.
-     * @param i represents hostel_no
-     */
-    public void instantiate(int i){
-        hostel_no=i;
-    }
-
     /**
      * CustomAdapter to convert String of days to listview of buttons.
      */
@@ -62,6 +53,10 @@ public class Tab4menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.tab4menu, container, false);
+
+
+        Bundle bundle=getActivity().getIntent().getExtras();
+        hostel_no=bundle.getInt("index");
 
         ListView listview= rootView.findViewById(R.id.listview);
         listview.setAdapter(adapter);

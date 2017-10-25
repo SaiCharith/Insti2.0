@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * @author Code-Catalyst
+ *
  * This Activity is a swipe-page activity.
  * There are 4 fragments displayed under this activity namely
  * <ul>
@@ -30,13 +30,13 @@ import android.widget.TextView;
  *     <li>tab4menu</li>
  * </ul>
  *
- * SectoinsPagerAdapter displays view of a pirtuclar fragment depending on current position of user
- * A general class that is Instantiated Once The user opens a hostel from {@link After_login} and displays fragmented view of the Hostel Information
+ * SectoinsPagerAdapter is used here which displays view of a pirtuclar fragment depending on current position of user
  *
+ * @author Code-Catalyst
  */
 public class HostelActivity extends Activity {
 
-    private int hostel_no;
+    private int hostel_no=0;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -65,8 +65,8 @@ public class HostelActivity extends Activity {
         setContentView(R.layout.activity_hostel);
 
 
-        Bundle bundle=getIntent().getExtras();
-        hostel_no=bundle.getInt("index");
+//        Bundle bundle=getIntent().getExtras();
+//        hostel_no=bundle.getInt("index");
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -83,7 +83,7 @@ public class HostelActivity extends Activity {
     }
 
     /**
-     * here we are inflating the view with menu_hostel.xml
+     * here menu is being inflated with menu_hostel.xml
      * @param menu to display contents of menu in menubar
      * @return (boolean) true (informing that menu is present)
      */
@@ -144,19 +144,15 @@ public class HostelActivity extends Activity {
             switch (position) {
                 case 0:
                     Tab1info tab1 = new Tab1info();
-                    tab1.instantiate(hostel_no);
                     return tab1;
                 case 1:
                     Tab2Rate tab2 = new Tab2Rate();
-                    tab2.instantiate(hostel_no);
                     return tab2;
                 case 2:
                     Tab3feedback tab3 = new Tab3feedback();
-                    tab3.instantiate(hostel_no);
                     return tab3;
                 case 3:
                     Tab4menu tab4 = new Tab4menu();
-                    tab4.instantiate(hostel_no);
                     return tab4;
                 default:
                     return null;

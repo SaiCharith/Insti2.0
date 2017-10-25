@@ -16,8 +16,9 @@ import com.bumptech.glide.Glide;
 import java.net.URL;
 import java.util.ArrayList;
 /**
- * @author Code-Catalyst
+ *
  * CustomAdapter3 converts the obtained feedbacklist to listview for viewing feedbacks of all students.
+ * @author Code-Catalyst
  */
 
 public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
