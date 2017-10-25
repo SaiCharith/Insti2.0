@@ -33,6 +33,10 @@ import android.widget.TextView;
  * SectoinsPagerAdapter displays view of a pirtuclar fragment depending on current position of user
  */
 
+/**
+ * A general class that is Instantiated Once The user opens a hostel from {@link After_login} and displays fragmented view of the Hostel Information
+ * @author Code catalyst
+ */
 public class HostelActivity extends Activity {
 
     private int hostel_no;

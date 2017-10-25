@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import static java.sql.Types.NULL;
 
 /**
- * @author Code-Catalyst
+ * @author Code Catalyst
  *
  *
  */
