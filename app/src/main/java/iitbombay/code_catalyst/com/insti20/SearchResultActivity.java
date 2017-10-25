@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @author charith
  * This activity is showed up when something is searched in searchbar.
+ * @author Code-Catalyst
+ *
  */
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -68,6 +69,9 @@ public class SearchResultActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         Searchables.clear();
         for(int i=1;i<=16;i++){
+            /**
+             * iterating over 16 hostels
+             */
 
             String h_name;
             if(i<10) h_name="Hostel0"+i;
@@ -76,8 +80,14 @@ public class SearchResultActivity extends AppCompatActivity {
             DatabaseReference mess_menu_ref=hostel_ref.child("Mess_Menu");
             DatabaseReference current_menu_ref=mess_menu_ref.child("Current");
             for(int j=0;j<7;j++){
+                /**
+                 * iterating over each day
+                 */
                 DatabaseReference day_menu_ref=current_menu_ref.child(days[j]);
                 for(int k=0;k<4;k++){
+                    /**
+                     * iterating over each part of day
+                     */
                     final searchobjects s=new searchobjects(i,"",h_name,days[j],"");
                     s.setDay_part(day_each_part[k]);
                     DatabaseReference day_part_menu_ref=day_menu_ref.child(day_each_part[k]);
@@ -96,16 +106,14 @@ public class SearchResultActivity extends AppCompatActivity {
 
                         }
                     });
-//                    if(s.getItem().toUpperCase().contains(b.toUpperCase())) {
+
                         Searchables.add(s);
-//                    }
                 }
 
             }
         }
 
         adapter=new CustomAdapter4(SearchResultActivity.this, Searchables);
-//        adapter.getFilter().filter(b);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
@@ -113,10 +121,9 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long L) {
                 Intent intent = new Intent(SearchResultActivity.this,DisplayMenu.class);
-                intent.putExtra("index",adapter.getSearchlst().get(i).getH_no()); //passing hostel no to the upcoming activity.
+                intent.putExtra("index",adapter.getSearchlst().get(i).getH_no());
                 intent.putExtra("Day",adapter.getSearchlst().get(i).getDay());
                 startActivity(intent);
-//                Toast.makeText(SearchResultActivity.this, adapter.getSearchlst().get(i).getHostel_name(), Toast.LENGTH_SHORT).show();
             }
         });
 

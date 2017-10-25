@@ -160,7 +160,7 @@ public class After_login extends AppCompatActivity {
             /**
              * Adding listener to like reference making our list dynamic as we inform the adapter
              */
-            likes_ref.addListenerForSingleValueEvent(new ValueEventListener(){
+            likes_ref.addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.likes= dataSnapshot.getValue(Integer.class);
@@ -176,7 +176,7 @@ public class After_login extends AppCompatActivity {
             /**
              * Adding listener to dislike reference making our list dynamic as we inform the adapter
              */
-            dislikes_ref.addListenerForSingleValueEvent(new ValueEventListener(){    //Adding listener to a reference making our list dynamic as we inform the adapter
+            dislikes_ref.addValueEventListener(new ValueEventListener(){    //Adding listener to a reference making our list dynamic as we inform the adapter
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.dislikes= dataSnapshot.getValue(Integer.class);
@@ -192,7 +192,7 @@ public class After_login extends AppCompatActivity {
             /**
              * Adding listener to rating reference making our list dynamic as we inform the adapter
              */
-            curr_rating.addListenerForSingleValueEvent(new ValueEventListener(){  //Adding listener to a reference making our list dynamic as we inform the adapter
+            curr_rating.addValueEventListener(new ValueEventListener(){  //Adding listener to a reference making our list dynamic as we inform the adapter
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.rating= dataSnapshot.getValue(Float.class);

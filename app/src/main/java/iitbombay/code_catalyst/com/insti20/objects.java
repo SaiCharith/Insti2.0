@@ -1,8 +1,9 @@
 package iitbombay.code_catalyst.com.insti20;
 
 /**
- * @author Code-Catalyst
+ *
  * This class is used to hold information about a hostel.
+ * @author Code-Catalyst
  */
 
 

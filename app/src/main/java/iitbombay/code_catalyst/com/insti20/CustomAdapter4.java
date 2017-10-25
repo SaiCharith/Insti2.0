@@ -13,13 +13,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Customadapter4 converts ArrayList<searchobjects> to a listview with fields as in search_result_template.xml
+ *  Customadapter4 converts ArrayList<searchobjects> to a listview with fields as in search_result_template.xml
  * @author Code-Catalyst.
  */
 
 public class CustomAdapter4 extends BaseAdapter implements Filterable {
 
     /**
+     *
      * Stores the id of current Activity/Context
      */
     private Activity c;

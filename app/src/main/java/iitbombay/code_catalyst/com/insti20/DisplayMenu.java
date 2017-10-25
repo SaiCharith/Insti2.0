@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import static java.sql.Types.NULL;
 
 /**
+ *
+ * This class displays menu of the day in listview
  * @author Code Catalyst
  *
  *

@@ -98,42 +98,42 @@
 
     <array name="ImageS">
         <item></item>
-        <item>@drawable/hostel1s</item>
-        <item>@drawable/hostel2s</item>
-        <item>@drawable/hostel3s</item>
-        <item>@drawable/hostel4</item>
-        <item>@drawable/hostel5</item>
-        <item>@drawable/hostel6s</item>
-        <item>@drawable/hostel7s</item>
-        <item>@drawable/hostel8s</item>
-        <item>@drawable/hostel9s</item>
-        <item>@drawable/hostel10s</item>
-        <item>@drawable/hostel11</item>
-        <item>@drawable/hostel12s</item>
-        <item>@drawable/hostel13s</item>
-        <item>@drawable/hostel14s</item>
-        <item>@drawable/hostel15</item>
-        <item>@drawable/hostel16</item>
+        <!--<item>@drawable/hostel1s</item>-->
+        <!--<item>@drawable/hostel2s</item>-->
+        <!--<item>@drawable/hostel3s</item>-->
+        <!--<item>@drawable/hostel4</item>-->
+        <!--<item>@drawable/hostel5</item>-->
+        <!--<item>@drawable/hostel6s</item>-->
+        <!--<item>@drawable/hostel7s</item>-->
+        <!--<item>@drawable/hostel8s</item>-->
+        <!--<item>@drawable/hostel9s</item>-->
+        <!--<item>@drawable/hostel10s</item>-->
+        <!--<item>@drawable/hostel11</item>-->
+        <!--<item>@drawable/hostel12s</item>-->
+        <!--<item>@drawable/hostel13s</item>-->
+        <!--<item>@drawable/hostel14s</item>-->
+        <!--<item>@drawable/hostel15</item>-->
+        <!--<item>@drawable/hostel16</item>-->
     </array>
 
     <array name="ImageH">
         <item></item>
-        <item>@drawable/hostel1h</item>
-        <item>@drawable/hostel2h</item>
-        <item>@drawable/hostel3</item>
-        <item>@drawable/hostel4</item>
-        <item>@drawable/hostel5h</item>
-        <item>@drawable/hostel6h</item>
-        <item>@drawable/hostel7</item>
-        <item>@drawable/hostel8h</item>
-        <item>@drawable/hostel9h</item>
-        <item>@drawable/hostel10</item>
-        <item>@drawable/hostel11</item>
-        <item>@drawable/hostel12h</item>
-        <item>@drawable/hostel13h</item>
-        <item>@drawable/hostel14h</item>
-        <item>@drawable/hostel15h</item>
-        <item>@drawable/hostel16</item>
+        <!--<item>@drawable/hostel1h</item>-->
+        <!--<item>@drawable/hostel2h</item>-->
+        <!--<item>@drawable/hostel3</item>-->
+        <!--<item>@drawable/hostel4</item>-->
+        <!--<item>@drawable/hostel5h</item>-->
+        <!--<item>@drawable/hostel6h</item>-->
+        <!--<item>@drawable/hostel7</item>-->
+        <!--<item>@drawable/hostel8h</item>-->
+        <!--<item>@drawable/hostel9h</item>-->
+        <!--<item>@drawable/hostel10</item>-->
+        <!--<item>@drawable/hostel11</item>-->
+        <!--<item>@drawable/hostel12h</item>-->
+        <!--<item>@drawable/hostel13h</item>-->
+        <!--<item>@drawable/hostel14h</item>-->
+        <!--<item>@drawable/hostel15h</item>-->
+        <!--<item>@drawable/hostel16</item>-->
 
     </array>
 

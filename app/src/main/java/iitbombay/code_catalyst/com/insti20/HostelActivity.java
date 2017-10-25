@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * @author Code-Catalyst
+ *
  * This Activity is a swipe-page activity.
  * There are 4 fragments displayed under this activity namely
  * <ul>
@@ -30,9 +30,9 @@ import android.widget.TextView;
  *     <li>tab4menu</li>
  * </ul>
  *
- * SectoinsPagerAdapter displays view of a pirtuclar fragment depending on current position of user
- * A general class that is Instantiated Once The user opens a hostel from {@link After_login} and displays fragmented view of the Hostel Information
+ * SectoinsPagerAdapter is used here which displays view of a pirtuclar fragment depending on current position of user
  *
+ * @author Code-Catalyst
  */
 public class HostelActivity extends Activity {
 
@@ -83,7 +83,7 @@ public class HostelActivity extends Activity {
     }
 
     /**
-     * here we are inflating the view with menu_hostel.xml
+     * here menu is being inflated with menu_hostel.xml
      * @param menu to display contents of menu in menubar
      * @return (boolean) true (informing that menu is present)
      */
