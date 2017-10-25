@@ -76,7 +76,7 @@ class Post {
  * Rating is recoreded under ratebar and like/dislike is recoreded under radiobutton.
  *
  * Here we ensured that one user can rate only once. But this rating can be updated whenever user rates again.
- * this is done by storing the rating values in the firebasedatabase under Mess_repo/hostel/info/UID
+ * This is done by storing the rating values in the firebasedatabase under Mess_repo/hostel/info/UID
  *
  *
  * @author Code-Catalyst
