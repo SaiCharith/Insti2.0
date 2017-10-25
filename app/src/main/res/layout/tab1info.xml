@@ -2,8 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-
-
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -22,27 +20,29 @@
             android:background="#bae0e7">
 
             <TextView
-                android:id="@+id/heading"
+                android:id="@+id/headingS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:text="Mess Secy"
                 android:textColor="#232467"
                 android:textSize="30dp"/>
+
             <ImageView
-                android:id="@+id/image1"
-                android:src="@drawable/stark"
-                android:padding="5dp"
-                android:layout_below="@+id/heading"
+                android:id="@+id/imageS"
+                android:layout_width="200dp"
+                android:layout_height="250dp"
+                android:scaleType="centerInside"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_below="@+id/headingS"
+                android:padding="5dp"
+                android:src="@drawable/stark" />
             <TextView
-                android:id="@+id/imgname"
+                android:id="@+id/SecyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image1"
+                android:layout_below="@+id/imageS"
                 android:padding="5dp"
                 android:layout_centerInParent="true"
                 android:text="@string/s_name"
@@ -54,16 +54,18 @@
                 android:id="@+id/contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgname"
+                android:layout_below="@+id/SecyName"
                 android:text="Contact No.: "
                 android:textColor="#000000"/>
+
             <TextView
-                android:padding="5dp"
+                android:id="@+id/SecyNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/SecyName"
                 android:layout_toRightOf="@+id/contact"
-                android:layout_below="@+id/imgname"
-                android:text="@string/s_contact"/>
+                android:padding="5dp"
+                android:text="@string/s_contact" />
 
             <TextView
                 android:id="@+id/email"
@@ -74,14 +76,16 @@
                 android:paddingBottom="5dp"
                 android:text="Email-id: "
                 android:textColor="#000000" />
+
             <TextView
-                android:paddingLeft="5dp"
-                android:paddingBottom="5dp"
+                android:id="@+id/SecyMail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/email"
                 android:layout_below="@+id/contact"
-                android:text="@string/s_email"/>
+                android:layout_toRightOf="@+id/email"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:text="@string/s_email" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -99,19 +103,20 @@
                 android:textColor="#232467"
                 android:textSize="30dp"/>
             <ImageView
-                android:id="@+id/image1h"
+                android:id="@+id/imageH"
                 android:src="@drawable/stark"
                 android:padding="5dp"
                 android:layout_below="@+id/headingh"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="200dp"
+                android:layout_height="250dp"
+                android:scaleType="centerInside"/>
             <TextView
-                android:id="@+id/imgnameh"
+                android:id="@+id/ManagerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image1h"
+                android:layout_below="@+id/imageH"
                 android:padding="5dp"
                 android:layout_centerInParent="true"
                 android:text="@string/s_name"
@@ -123,16 +128,18 @@
                 android:id="@+id/contacth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imgnameh"
+                android:layout_below="@+id/ManagerName"
                 android:text="Contact No.: "
                 android:textColor="#000000"/>
+
             <TextView
-                android:padding="5dp"
+                android:id="@+id/ManagerNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/ManagerName"
                 android:layout_toRightOf="@+id/contacth"
-                android:layout_below="@+id/imgnameh"
-                android:text="@string/s_contact"/>
+                android:padding="5dp"
+                android:text="@string/s_contact" />
 
             <TextView
                 android:id="@+id/emailh"
@@ -143,21 +150,19 @@
                 android:paddingBottom="5dp"
                 android:text="Email-id: "
                 android:textColor="#000000" />
+
             <TextView
-                android:paddingLeft="5dp"
-                android:paddingBottom="5dp"
+                android:id="@+id/ManagerMail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/emailh"
                 android:layout_below="@+id/contacth"
-                android:text="@string/s_email"/>
+                android:layout_toRightOf="@+id/emailh"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:text="@string/s_email" />
 
         </RelativeLayout>
-        <!--<ImageView-->
-            <!--android:paddingTop="10dp"-->
-            <!--android:src="@drawable/tflogo"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="50dp" />-->
+
 
     </LinearLayout>
 </ScrollView>
