@@ -42,9 +42,6 @@ import static java.security.AccessController.getContext;
  * This is the Backbone of our app which displays the List of hostels in a very interactive
  * format along with the ratings likes and dislikes
  * Also we provide the features such as search and Sorting by Likes Dislikes Rating and Hostel number
- */
-
-/**
  * Displays the Home Page After Login Showing All Hostels in List form
  * @author Code-Catalyst
  */
@@ -61,15 +58,15 @@ public class After_login extends AppCompatActivity {
      * A listener attached to mAuth to see if Authentication mode is changed or not
      */
     FirebaseAuth.AuthStateListener mAuthListener;
-
-    //sub-class to store to group all fields to be displayed in one unit.
-
-   // private static String[] searches={"abc","avfr","xmli"};
-    //private static ArrayList<String> ltemp= (ArrayList<String>) Arrays.asList(searches);
-    //private static ArrayAdapter adapter;
-
+    /**
+     * Arraylist l to hold the information of 16 hostels.
+     * Elements of this are of the type objects.
+     */
     private static ArrayList<objects> l=new ArrayList<objects>();//list of our Hostel Objects
-    private static CustomAdapter customAdapter;//Our Adapter which publishes our data to the List view
+    /**
+     * CustomAdapter which publishes our data to the List view
+     */
+    private static CustomAdapter customAdapter;
     Toolbar toolbar;
     /**
      * Object to Store User Id
@@ -87,6 +84,7 @@ public class After_login extends AppCompatActivity {
 
     /**
      * Handles the Event once this Activity is created
+     *
      * @param savedInstanceState
      */
     @Override
@@ -211,20 +209,31 @@ public class After_login extends AppCompatActivity {
             l.add(s);
         }
 
+        /**
+         * Setting up toolbar
+         */
+
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Hostel Mess");
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         toolbar.setBackgroundColor(getResources().getColor(R.color.common_google_signin_btn_text_light));
 
-
+        /**
+         * initializing customAdapter
+         */
         customAdapter=new CustomAdapter(l,After_login.this);
 
+        /**
+         * initializing and filling it objects in listview.
+         */
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
 
-
-
+        /**
+         * Setting onClickListner to listview elements.
+         * Here starting HostelActivity.
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 
@@ -240,24 +249,41 @@ public class After_login extends AppCompatActivity {
 
 
      }
-    //To hold view of each element in list view.
-    //Used for optimization.
-    //This avoids re-initializing of the view-holder contents.
 
+
+    /**
+     * Sorting list l and informing customAdapter.
+     * @param order to sort based on different fields (like rating,like,....)
+     */
     public static void sortlist(int order){
         Collections.sort(l,new Sorter(order));
-        //Toast.makeText(MainActivity.this,"Sorting",)
         customAdapter.notifyDataSetChanged();
-        //Toast.makeText(,"sorting",Toast.LENGTH_SHORT).show();
-
     }
 
+    /**
+     * Sub-class to sort list l based on likes or rating or hostel_no or dislikes.
+     * This class sets the comparator and based on this comparator list is sorted.
+     */
     static class Sorter implements Comparator<objects> {
+        /**
+         * to sort based on different fields (like rating,like,....)
+         */
         int order=1;
+
+        /**
+         * Constructor which initializes order
+         * @param order
+         */
         Sorter(int order){
             this.order=order;
         }
 
+        /**
+         * Setting the comparator.
+         * @param t1 object1
+         * @param t2 object2
+         * @return -1 or 0 or 1 based on t1 and t2.
+         */
         @Override
         public int compare(objects t1, objects t2) {
 
@@ -285,19 +311,17 @@ public class After_login extends AppCompatActivity {
         }
     }
 
-
-
-
-
+    /**
+     * Creating the menubar.
+     * Setting functionality to searchView to SearchResult activity by passing the searchword using Intent.putExtra().
+     * @param menu gets the menu
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_sort,menu);
-//        MenuItem item  = menu.findItem(R.id.search_bar);
-         SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
-//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        getMenuInflater().inflate(R.menu.menu_sort,menu);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
         searchView.setSubmitButtonEnabled(true);
-//
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
@@ -310,17 +334,10 @@ public class After_login extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               // customAdapter.getFilter().filter(newText);
-               // adapter.getFilter().filter(newText);
-
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        return super.onOptionsItemSelected(item);
     }
 
 
