@@ -17,12 +17,35 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * This is The activity called from the {@link MainActivity} which takes id and password from user and verifies it and send us to {@link Mess_Secy_choice} or {@link After_login} depending on the user
+ */
 public class IITB_login extends AppCompatActivity {
+    /**
+     * variable to store the username which the user types
+     */
     private EditText username; //Get Username
+    /**
+     * variable to store the password which the user types
+     */
     private EditText password;  //Get Password
+    /**
+     * An Object of mAuth(from Firebase) to verify if the user is signed in or not
+     */
     private FirebaseAuth mAuth; //Authentication object
+    /**
+     * An object to Implement the Login Button
+     */
     private ImageButton mLoginButton;   //Login Button
+    /**
+     * A listener attached to mAuth to see if Authentication mode is changed or not
+     */
     private FirebaseAuth.AuthStateListener mAuthListener; //Authentication Listeners
+
+    /**
+     * When The acticity is created this function initializes all the private variable with required values finding them by id from resources
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iitb_login);
@@ -60,6 +83,10 @@ public class IITB_login extends AppCompatActivity {
             }
         };
         mLoginButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Method start_Sign_In() is called as soon as button is clicked
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 start_Sign_In();
@@ -68,12 +95,18 @@ public class IITB_login extends AppCompatActivity {
 
     }
 
+    /**
+     * Just attaches the mAuthListener to mAuth as activity is started
+     */
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    /**
+     * Checks if the user has entered the password and username and toasts the required text if not. Once entered it verifies the user and password and update the Authentication state which is detected by mAuthListener and we are intended to the desired activity
+     */
     private void start_Sign_In(){
         String User_name=username.getText().toString();
         String pass_word=password.getText().toString();

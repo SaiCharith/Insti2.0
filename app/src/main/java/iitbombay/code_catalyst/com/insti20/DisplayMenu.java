@@ -18,29 +18,30 @@ import java.util.ArrayList;
 import static java.sql.Types.NULL;
 
 /**
- * @author Charith
+ * @author Code Catalyst
  *
  *
  */
 public class DisplayMenu extends AppCompatActivity {
-    /*!
-     * \brief stores days of week as a list.List is used as it can be passed as an arugument to adapters.
+    /**
+     *  stores days of week as a list.List is used as it can be passed as an arugument to adapters.
      */
     private static ArrayList<String> l=new ArrayList<String>();
 
-    /*!
-     * \brief CustomAdapter to convert the arraylist l to listview.
+    /**
+     *  CustomAdapter to convert the arraylist l to listview.
      *
      */
     private static CustomAdapter2 customAdapter;
 
-    /*!
-     * \brief Method impleneted after this activity is called
-     * \param Bindle
-     * \return void
-     * \brief Layout used to show this activity is activity_display_menu.xml.
+    /**
+     *  Method impleneted after this activity is called
+     *
+     *  Layout used to show this activity is activity_display_menu.xml.
      * This function basically calls the CustomAdapter2 and inflates the ListView 'day_menu_list' with with the menu of hostel_no and of pirticular day.
      * hostel_no and Day come from previous activity.
+     * @param savedInstanceState not used.
+     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

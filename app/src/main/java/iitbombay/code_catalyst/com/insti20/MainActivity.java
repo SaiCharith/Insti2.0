@@ -29,20 +29,48 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+/**
+ * This is Basically the Sign in page / Activity of our App which provide 2 options gmail login(any gmail id) or ldap login (our own database)
+ * @author Code Catalyst
+ */
 public class MainActivity extends AppCompatActivity {
+    /**
+     * Just a Random number required for gmail authentication (not at all important just formality)
+     */
     private static final int RC_SIGN_IN = 2;
+    /**
+     * An object to store the instance of our gmail button
+     */
     SignInButton button;
+    /**
+     * An Object of mAuth(from Firebase) to verify if the user is signed in or not
+     */
     FirebaseAuth mAuth;
+    /**
+     * A listener attached to mAuth to see if Authentication mode is changed or not
+     */
     FirebaseAuth.AuthStateListener mAuthListener;
+    /**
+     * a Google Api object used for google authentication
+     */
     GoogleApiClient mGoogleApiClient;
+    /**
+     * An object to store the instance of our ldap id
+     */
     Button Ldap;
+    /**
+     * Just attaches the mAuthListener to mAuth as activity is started
+     */
     @Override
     protected void onStart() {
         super.onStart();
-
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    /**
+     * Sets Ldap button and Gmail button to the respective activities and called methods sign_In
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,16 +119,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-   /* GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build();
-*/
+    /**
+     * Calls the sign in Intent of google using mGoogleApiClient
+     */
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+    /**
+     * Calls the function firebaseAuthWithGoogle after getting result from Auth.GoogleSignInApi.getSignInResultFromIntent method
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Takes the account as parameter and after getting credentials from GoogleAuthProvider it changes the Authentication state in Firebase appropriately
+     * @param account
+     */
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -135,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Please check your connection", Toast.LENGTH_SHORT).show();
                             // updateUI(null);
                         }
-
-                        // ...
                     }
                 });
 

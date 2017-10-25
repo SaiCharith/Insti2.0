@@ -36,47 +36,76 @@ import java.util.Comparator;
 import static java.security.AccessController.getContext;
 
 /**
- * @class This is the class which takes care of the screen which appears after the
+ * This is the class which takes care of the screen which appears after the
  * authentication of the user is done . Or in other words This is the activity which
  * is intended after Main_Activity.
  * This is the Backbone of our app which displays the List of hostels in a very interactive
  * format along with the ratings likes and dislikes
  * Also we provide the features such as search and Sorting by Likes Dislikes Rating and Hostel number
- *
- *
+ * Displays the Home Page After Login Showing All Hostels in List form
+ * @author Code-Catalyst
  */
 public class After_login extends AppCompatActivity {
-
-    Button button;//Sign out button
-    FirebaseAuth mAuth;//An Object of mAuth to verify if the user is signed in or not
-    FirebaseAuth.AuthStateListener mAuthListener;//A listener attached to mAuth to see if Authentication mode is changed or not
-
-
-    //sub-class to store to group all fields to be displayed in one unit.
-
-   // private static String[] searches={"abc","avfr","xmli"};
-    //private static ArrayList<String> ltemp= (ArrayList<String>) Arrays.asList(searches);
-    //private static ArrayAdapter adapter;
-
+    /**
+     * Used as a storage for object of Sign out button
+     */
+    Button button;
+    /**
+     * An Object of mAuth(from Firebase) to verify if the user is signed in or not
+     */
+    FirebaseAuth mAuth;
+    /**
+     * A listener attached to mAuth to see if Authentication mode is changed or not
+     */
+    FirebaseAuth.AuthStateListener mAuthListener;
+    /**
+     * Arraylist l to hold the information of 16 hostels.
+     * Elements of this are of the type objects.
+     */
     private static ArrayList<objects> l=new ArrayList<objects>();//list of our Hostel Objects
-    private static CustomAdapter customAdapter;//Our Adapter which publishes our data to the List view
+    /**
+     * CustomAdapter which publishes our data to the List view
+     */
+    private static CustomAdapter customAdapter;
     Toolbar toolbar;
-
+    /**
+     * Object to Store User Id
+     */
     String uid;
 
+    /**
+     * Attaches Listener to the mAuth (Firebase Authentication object) in the Start
+     */
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);//attaching listener to mAuth
     }
 
+    /**
+     * Handles the Event once this Activity is created
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_after_login);//Publishing current window with our corresponding xml layout
-        button=(Button) findViewById(R.id.logout);//Assigning the button by extracting by id
-        mAuth =FirebaseAuth.getInstance();//Instantiating mAuth connecting to firebase
-        mAuthListener = new FirebaseAuth.AuthStateListener(){ //If user not signed in then this page is not allowed and he must be redirected to the sign in page
+        /**
+         * Publishing current window with our corresponding xml layout
+         */
+        setContentView(R.layout.activity_after_login);
+        /**
+         * Assigning the button by extracting by id
+         */
+        button=(Button) findViewById(R.id.logout);
+        /**
+         * Instantiating mAuth connecting to firebase
+         */
+        mAuth =FirebaseAuth.getInstance();
+        /**
+         * If user not signed in then this page is not allowed and he must be redirected to the sign in page
+         */
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
 
@@ -91,7 +120,9 @@ public class After_login extends AppCompatActivity {
             }
 
         };
-
+        /**
+         * If the user voluntarily Signs out This does so
+         */
         button.setOnClickListener(new View.OnClickListener(){//for volantrary sign out of the user
 
             @Override
@@ -100,13 +131,23 @@ public class After_login extends AppCompatActivity {
             }
         });
 
-
-        TypedArray imgs = getResources().obtainTypedArray(R.array.Images);//get images of each hostel in a list
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");//connecting to our online database
+        /**
+         * get images of each hostel in a list
+         */
+        TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
+        /**
+         * connecting to our online database
+         */
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         l.clear();
-        for(int i=0;i<16;i++){//Iterating over all hostels and populating it in list view
-
-            final objects s= new objects(i+1);//calling constructor which gives hostel number as 1
+        /**
+         * Iterating over all hostels and populating it in list view
+         */
+        for(int i=0;i<16;i++){
+            /**
+             * calling constructor which gives hostel number as i
+             */
+            final objects s= new objects(i+1);
             s.Hostel_name=getResources().getStringArray(R.array.Hostel_names)[i];
             String h_name;
             if(s.hostel_no<10) h_name="Hostel0"+s.hostel_no;//handling single digit
@@ -116,7 +157,10 @@ public class After_login extends AppCompatActivity {
             DatabaseReference curr_rating=rating_ref.child("Current_Rating");//penetrating deeper in the json tree
             DatabaseReference likes_ref=hostel_ref.child("Likes");//penetrating deeper in the json tree
             DatabaseReference dislikes_ref=hostel_ref.child("Dislikes");//penetrating deeper in the json tree
-            likes_ref.addValueEventListener(new ValueEventListener(){ //Adding listener to a reference making our list dynamic as we inform the adapter
+            /**
+             * Adding listener to like reference making our list dynamic as we inform the adapter
+             */
+            likes_ref.addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.likes= dataSnapshot.getValue(Integer.class);
@@ -129,8 +173,10 @@ public class After_login extends AppCompatActivity {
 
                 }
             });
-
-            dislikes_ref.addValueEventListener(new ValueEventListener(){    //Adding listener to a reference making our list dynamic as we inform the adapter
+            /**
+             * Adding listener to dislike reference making our list dynamic as we inform the adapter
+             */
+            dislikes_ref.addListenerForSingleValueEvent(new ValueEventListener(){    //Adding listener to a reference making our list dynamic as we inform the adapter
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.dislikes= dataSnapshot.getValue(Integer.class);
@@ -143,7 +189,10 @@ public class After_login extends AppCompatActivity {
 
                 }
             });
-            curr_rating.addValueEventListener(new ValueEventListener(){  //Adding listener to a reference making our list dynamic as we inform the adapter
+            /**
+             * Adding listener to rating reference making our list dynamic as we inform the adapter
+             */
+            curr_rating.addListenerForSingleValueEvent(new ValueEventListener(){  //Adding listener to a reference making our list dynamic as we inform the adapter
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.rating= dataSnapshot.getValue(Float.class);
@@ -157,9 +206,12 @@ public class After_login extends AppCompatActivity {
                 }
             });
             s.image_id=imgs.getResourceId(i,-1);
-
             l.add(s);
         }
+
+        /**
+         * Setting up toolbar
+         */
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -167,14 +219,21 @@ public class After_login extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
         toolbar.setBackgroundColor(getResources().getColor(R.color.common_google_signin_btn_text_light));
 
-
+        /**
+         * initializing customAdapter
+         */
         customAdapter=new CustomAdapter(l,After_login.this);
 
+        /**
+         * initializing and filling it objects in listview.
+         */
         ListView listView = (ListView) findViewById(R.id.hostel_display);
         listView.setAdapter(customAdapter);
 
-
-
+        /**
+         * Setting onClickListner to listview elements.
+         * Here starting HostelActivity.
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
 
@@ -190,24 +249,41 @@ public class After_login extends AppCompatActivity {
 
 
      }
-    //To hold view of each element in list view.
-    //Used for optimization.
-    //This avoids re-initializing of the view-holder contents.
 
+
+    /**
+     * Sorting list l and informing customAdapter.
+     * @param order to sort based on different fields (like rating,like,....)
+     */
     public static void sortlist(int order){
         Collections.sort(l,new Sorter(order));
-        //Toast.makeText(MainActivity.this,"Sorting",)
         customAdapter.notifyDataSetChanged();
-        //Toast.makeText(,"sorting",Toast.LENGTH_SHORT).show();
-
     }
 
+    /**
+     * Sub-class to sort list l based on likes or rating or hostel_no or dislikes.
+     * This class sets the comparator and based on this comparator list is sorted.
+     */
     static class Sorter implements Comparator<objects> {
+        /**
+         * to sort based on different fields (like rating,like,....)
+         */
         int order=1;
+
+        /**
+         * Constructor which initializes order
+         * @param order
+         */
         Sorter(int order){
             this.order=order;
         }
 
+        /**
+         * Setting the comparator.
+         * @param t1 object1
+         * @param t2 object2
+         * @return -1 or 0 or 1 based on t1 and t2.
+         */
         @Override
         public int compare(objects t1, objects t2) {
 
@@ -235,19 +311,17 @@ public class After_login extends AppCompatActivity {
         }
     }
 
-
-
-
-
+    /**
+     * Creating the menubar.
+     * Setting functionality to searchView to SearchResult activity by passing the searchword using Intent.putExtra().
+     * @param menu gets the menu
+     * @return
+     */
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_sort,menu);
-//        MenuItem item  = menu.findItem(R.id.search_bar);
-         SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
 
-//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        getMenuInflater().inflate(R.menu.menu_sort,menu);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView( menu.findItem(R.id.search_bar));
         searchView.setSubmitButtonEnabled(true);
-//
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
             @Override
@@ -260,17 +334,10 @@ public class After_login extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               // customAdapter.getFilter().filter(newText);
-               // adapter.getFilter().filter(newText);
-
                 return false;
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        return super.onOptionsItemSelected(item);
     }
 
 
