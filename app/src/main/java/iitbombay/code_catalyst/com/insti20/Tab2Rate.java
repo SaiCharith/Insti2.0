@@ -1,6 +1,7 @@
 package iitbombay.code_catalyst.com.insti20;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.LayoutInflater;
@@ -129,6 +130,18 @@ public class Tab2Rate extends Fragment{
                 }
             }
         });
+
+        Button buttonanalysis = (Button) rootView.findViewById(R.id.Analysis);
+        buttonanalysis.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(getActivity(), Analysis.class);
+               // intent.putExtra("hostel_no",hostel_no);
+                startActivity(intent);
+            }
+        });
+
         location.setOnClickListener(new View.OnClickListener(){
 
             @Override
