@@ -84,8 +84,8 @@
         <item>"abc xyz","9999999999","abc@gmail.com"</item>
         <item>"abc xyz","9999999999","abc@gmail.com"</item>
         <item>"Anant Joshi","9820502797","abc@gmail.com "</item>
-        <item>"Kushal Agarwal","9163779100","abc@gmail.com"</item>
-        <item>"Karan Soni","99999999999","abc@gmail.com"</item>
+        <item>"Malhar Jadhav","8291088240","abc@gmail.com"</item>
+        <item>"Priyen Bapodara","9428240554","priyenbapodara@gmail.com"</item>
         <item>"Vivek Kumar Kandeyang","8291473729","vivekkandeyang97@gmail.com"</item>
         <item>"Deepesh Agrawal","8291474056","agrawaldeepesh404@gmail.com"</item>
         <item>"abc xyz","9999999999","abc@gmail.com"</item>
@@ -97,7 +97,7 @@
     </string-array>
 
     <array name="ImageS">
-        <item>@drawable/hostel1s</item>
+        <item></item>
         <item>@drawable/hostel1s</item>
         <item>@drawable/hostel2s</item>
         <item>@drawable/hostel3s</item>
@@ -117,7 +117,7 @@
     </array>
 
     <array name="ImageH">
-        <item>@drawable/hostel1s</item>
+        <item></item>
         <item>@drawable/hostel1h</item>
         <item>@drawable/hostel2h</item>
         <item>@drawable/hostel3</item>

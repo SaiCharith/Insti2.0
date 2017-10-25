@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:textColor="#232467"
-                android:paddingLeft="4dp"
+                android:paddingLeft="20dp"
                 android:text="Name" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
                 android:textSize="16dp"
-                android:paddingLeft="4dp"
+                android:paddingLeft="30dp"
                 android:text="TextView" />
 
             <ImageView
@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/feedback"
-                android:paddingLeft="4dp"
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imgview"

@@ -31,13 +31,16 @@
             <ImageView
                 android:id="@+id/imageS"
                 android:layout_width="200dp"
-                android:layout_height="250dp"
-                android:scaleType="centerInside"
+                android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/headingS"
-                android:padding="5dp"
-                android:src="@drawable/stark" />
+                android:cropToPadding="false"
+                android:paddingLeft="90dp"
+                android:paddingRight="90dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/stark"/>
+                <!--android:scaleType="centerInside" />-->
             <TextView
                 android:id="@+id/SecyName"
                 android:layout_width="wrap_content"
@@ -102,16 +105,19 @@
                 android:text="Hall Manager"
                 android:textColor="#232467"
                 android:textSize="30dp"/>
+
             <ImageView
                 android:id="@+id/imageH"
-                android:src="@drawable/stark"
-                android:padding="5dp"
-                android:layout_below="@+id/headingh"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="200dp"
-                android:layout_height="250dp"
-                android:scaleType="centerInside"/>
+                android:layout_below="@+id/headingh"
+                android:paddingLeft="90dp"
+                android:paddingRight="90dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/stark"/>
+                <!--android:scaleType="centerInside"/>-->
             <TextView
                 android:id="@+id/ManagerName"
                 android:layout_width="wrap_content"
