@@ -36,7 +36,7 @@ import android.widget.TextView;
  */
 public class HostelActivity extends Activity {
 
-    private int hostel_no;
+    private int hostel_no=0;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -65,8 +65,8 @@ public class HostelActivity extends Activity {
         setContentView(R.layout.activity_hostel);
 
 
-        Bundle bundle=getIntent().getExtras();
-        hostel_no=bundle.getInt("index");
+//        Bundle bundle=getIntent().getExtras();
+//        hostel_no=bundle.getInt("index");
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -144,19 +144,15 @@ public class HostelActivity extends Activity {
             switch (position) {
                 case 0:
                     Tab1info tab1 = new Tab1info();
-                    tab1.instantiate(hostel_no);
                     return tab1;
                 case 1:
                     Tab2Rate tab2 = new Tab2Rate();
-                    tab2.instantiate(hostel_no);
                     return tab2;
                 case 2:
                     Tab3feedback tab3 = new Tab3feedback();
-                    tab3.instantiate(hostel_no);
                     return tab3;
                 case 3:
                     Tab4menu tab4 = new Tab4menu();
-                    tab4.instantiate(hostel_no);
                     return tab4;
                 default:
                     return null;

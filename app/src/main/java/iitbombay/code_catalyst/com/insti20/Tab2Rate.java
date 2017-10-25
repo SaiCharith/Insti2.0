@@ -83,12 +83,15 @@ class Post {
  * @author Code-Catalyst
  */
 public class Tab2Rate extends Fragment{
+    /**
+     * stores hostel number
+     */
     int hostel_no;
+    /**
+     * UID is unique to each user which is used to store some specific details of user like his rating
+     */
     private String uid;
-    public void instantiate(int i){
-        hostel_no=i;
-        //getting hostel_no from the activity.
-    }
+
 
     /**
      *
@@ -109,6 +112,7 @@ public class Tab2Rate extends Fragment{
 
         Bundle bundle=getActivity().getIntent().getExtras();
         uid=bundle.getString("uid");
+        hostel_no=bundle.getInt("index");
 
         /**
          * a[0] is used as a marker.

@@ -40,7 +40,7 @@
                 android:paddingRight="90dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/stark"/>
-                <!--android:scaleType="centerInside" />-->
+            <!--android:scaleType="centerInside" />-->
             <TextView
                 android:id="@+id/SecyName"
                 android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                 android:paddingRight="90dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/stark"/>
-                <!--android:scaleType="centerInside"/>-->
+            <!--android:scaleType="centerInside"/>-->
             <TextView
                 android:id="@+id/ManagerName"
                 android:layout_width="wrap_content"

@@ -77,7 +77,7 @@
     <string name="s_email">abc@gmail.com</string>
 
     <string-array name="Secy">
-        <item>"dgbhns","546"</item>
+        <item>"dgbhns","546",""</item>
         <item>"Arun Kumar Miryala","9133809600","arunmiryala@ee.iitb.ac.in"</item>
         <item>"Bhimsen Gupta","8652716049","bhim.iitb32@gmail.com"</item>
         <item>"Ashish Nanda","9999999999","ashishnanda.694@gmail.com"</item>
@@ -98,47 +98,47 @@
 
     <array name="ImageS">
         <item></item>
-        <!--<item>@drawable/hostel1s</item>-->
-        <!--<item>@drawable/hostel2s</item>-->
-        <!--<item>@drawable/hostel3s</item>-->
-        <!--<item>@drawable/hostel4</item>-->
-        <!--<item>@drawable/hostel5</item>-->
-        <!--<item>@drawable/hostel6s</item>-->
-        <!--<item>@drawable/hostel7s</item>-->
-        <!--<item>@drawable/hostel8s</item>-->
-        <!--<item>@drawable/hostel9s</item>-->
-        <!--<item>@drawable/hostel10s</item>-->
-        <!--<item>@drawable/hostel11</item>-->
-        <!--<item>@drawable/hostel12s</item>-->
-        <!--<item>@drawable/hostel13s</item>-->
-        <!--<item>@drawable/hostel14s</item>-->
-        <!--<item>@drawable/hostel15</item>-->
-        <!--<item>@drawable/hostel16</item>-->
+        <item>@drawable/hostel1s</item>
+        <item>@drawable/hostel2s</item>
+        <item>@drawable/hostel3s</item>
+        <item>@drawable/hostel4</item>
+        <item>@drawable/hostel5</item>
+        <item>@drawable/hostel6s</item>
+        <item>@drawable/hostel7s</item>
+        <item>@drawable/hostel8s</item>
+        <item>@drawable/hostel9s</item>
+        <item>@drawable/hostel10s</item>
+        <item>@drawable/hostel11</item>
+        <item>@drawable/hostel12s</item>
+        <item>@drawable/hostel13s</item>
+        <item>@drawable/hostel14s</item>
+        <item>@drawable/hostel15</item>
+        <item>@drawable/hostel16</item>
     </array>
 
     <array name="ImageH">
         <item></item>
-        <!--<item>@drawable/hostel1h</item>-->
-        <!--<item>@drawable/hostel2h</item>-->
-        <!--<item>@drawable/hostel3</item>-->
-        <!--<item>@drawable/hostel4</item>-->
-        <!--<item>@drawable/hostel5h</item>-->
-        <!--<item>@drawable/hostel6h</item>-->
-        <!--<item>@drawable/hostel7</item>-->
-        <!--<item>@drawable/hostel8h</item>-->
-        <!--<item>@drawable/hostel9h</item>-->
-        <!--<item>@drawable/hostel10</item>-->
-        <!--<item>@drawable/hostel11</item>-->
-        <!--<item>@drawable/hostel12h</item>-->
-        <!--<item>@drawable/hostel13h</item>-->
-        <!--<item>@drawable/hostel14h</item>-->
-        <!--<item>@drawable/hostel15h</item>-->
-        <!--<item>@drawable/hostel16</item>-->
+        <item>@drawable/hostel1h</item>
+        <item>@drawable/hostel2h</item>
+        <item>@drawable/hostel3</item>
+        <item>@drawable/hostel4</item>
+        <item>@drawable/hostel5h</item>
+        <item>@drawable/hostel6h</item>
+        <item>@drawable/hostel7</item>
+        <item>@drawable/hostel8h</item>
+        <item>@drawable/hostel9h</item>
+        <item>@drawable/hostel10</item>
+        <item>@drawable/hostel11</item>
+        <item>@drawable/hostel12h</item>
+        <item>@drawable/hostel13h</item>
+        <item>@drawable/hostel14h</item>
+        <item>@drawable/hostel15h</item>
+        <item>@drawable/hostel16</item>
 
     </array>
 
     <string-array name="Manager">
-        <item>"dgbhns","546"</item>
+        <item>"dgbhns","546",""</item>
         <item>"Prof. R. B. Sunoj","022-2576 7173","sunoj@chem.iitb.ac.in"</item>
         <item>"Prof. Dasaka Murty","+91-22-2576 7316 ","dasaka@iitb.ac.in"</item>
         <item>"abc xyz","9999999999","abc@gmail.com"</item>

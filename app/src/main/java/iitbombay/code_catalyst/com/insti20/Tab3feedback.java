@@ -127,15 +127,6 @@ public class Tab3feedback extends Fragment {
     int hostel_no;
 
     /**
-     * gets hostel_no and updates it.
-     * @param i represents hostel_no
-     */
-    public void instantiate(int i){
-        hostel_no=i;
-        //getting hostel_no from the activity.
-    }
-
-    /**
      * This method is called when the this Fragment gets created.
      * All the fields filled by student are uploaded at particular sub-branch of database with the
      * help of FeedbackInput class. On clicking add photo button, new intent is called which allows us
@@ -149,6 +140,9 @@ public class Tab3feedback extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.tab3feedback, container, false);
+
+        Bundle bundle=getActivity().getIntent().getExtras();
+        hostel_no=bundle.getInt("index");
 
         mStorage = FirebaseStorage.getInstance().getReference();
 

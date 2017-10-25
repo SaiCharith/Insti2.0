@@ -68,15 +68,6 @@ public class Tab1info extends Fragment {
     int hostel_no;
 
     /**
-     * gets hostel_no and updates it.
-     * @param i represents hostel_no
-     */
-    public void instantiate(int i){
-        hostel_no=i;
-        //getting hostel_no from the activity.
-    }
-
-    /**
      * This method is called when the this Fragment gets created.
      * All the Textviews and Imageviews are set to their respective values by extracting details from a
      * string-array and image-array which is defined in resources
@@ -88,6 +79,9 @@ public class Tab1info extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1info, container, false);
+
+        Bundle bundle=getActivity().getIntent().getExtras();
+        hostel_no=bundle.getInt("index");
 
         secyname = rootView.findViewById(R.id.SecyName);
         secynumber = rootView.findViewById(R.id.SecyNumber);
@@ -103,22 +97,22 @@ public class Tab1info extends Fragment {
         String [] secyinfo = secy.split(",");
         String Sname = secyinfo[0];
         String Snumber = secyinfo[1];
-        String Smail = secyinfo[2];
-
+//        String Smail = secyinfo[2];
+//
         secyname.setText(Sname);
         secynumber.setText(Snumber);
-        secymail.setText(Smail);
+//        secymail.setText(Smail);
         imagesecy.setImageResource((getResources().obtainTypedArray(R.array.ImageS)).getResourceId(hostel_no,0));
-
+//
         String manager = getResources().getStringArray(R.array.Manager)[hostel_no];
         String [] managerinfo = manager.split(",");
         String Mname = managerinfo[0];
         String Mnumber = managerinfo[1];
-        String Mmail = managerinfo[2];
+//        String Mmail = managerinfo[2];
 
         managername.setText(Mname);
         managernumber.setText(Mnumber);
-        managermail.setText(Mmail);
+//        managermail.setText(Mmail);
         imagemanager.setImageResource((getResources().obtainTypedArray(R.array.ImageH)).getResourceId(hostel_no,0));
 
         return rootView;
