@@ -156,5 +156,6 @@
         <item>"Prof Atul Srivastava","(+91)-22-25767531","atulsr@iitb.ac.in"</item>
         <item>"abc xyz","9999999999","abc@gmail.com"</item>
     </string-array>
+    <string name="title_activity_tabbed">TabbedActivity</string>
 
 </resources>

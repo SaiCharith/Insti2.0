@@ -44,7 +44,9 @@
         <activity android:name=".DisplayMenu" />
         <activity android:name=".SearchResultActivity" />
         <activity android:name=".ViewFeedback" />
-        <activity android:name=".Analysis"></activity>
+        <activity
+            android:name=".TabbedActivity"
+            android:label="@string/title_activity_tabbed"></activity>
     </application>
 
 </manifest>

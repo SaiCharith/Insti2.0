@@ -136,7 +136,7 @@ public class Tab2Rate extends Fragment{
 
             @Override
             public void onClick (View view){
-                Intent intent = new Intent(getActivity(), Analysis.class);
+                Intent intent = new Intent(getActivity(), TabbedActivity.class);
                // intent.putExtra("hostel_no",hostel_no);
                 startActivity(intent);
             }
