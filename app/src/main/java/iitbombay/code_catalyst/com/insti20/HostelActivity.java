@@ -19,6 +19,10 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+/**
+ * A general class that is Instantiated Once The user opens a hostel from {@link After_login} and displays fragmented view of the Hostel Information
+ * @author Code catalyst
+ */
 public class HostelActivity extends Activity {
 
     private int hostel_no=17;
