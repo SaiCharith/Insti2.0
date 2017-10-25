@@ -31,17 +31,6 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
         return feedbackList.size();
     }
 
-    @Nullable
-    @Override
-    public FeedbackInput getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
     public CustomAdapter3(Activity context, ArrayList<FeedbackInput>feedbackList){
         super(context, R.layout.view_feedback);
         this.context = context;

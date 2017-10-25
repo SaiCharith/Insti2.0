@@ -24,43 +24,4 @@ public class FeedbackInput {
         this.Feedback = feed;
     }
 
-//    public String getID() {
-//        return ID;
-//    }
-//
-//    public void setID(String id) {
-//        this.ID = id;
-//    }
-//
-//    public String getName() {
-//        return Name;
-//    }
-//
-//    public void setName(String name) {
-//        Name = name;
-//    }
-//
-//    public String getRoll_Number() {
-//        return Roll_Number;
-//    }
-//
-//    public void setRoll_Number(String roll_Number) {
-//        Roll_Number = roll_Number;
-//    }
-//
-//    public String getDescription() {
-//        return Description;
-//    }
-//
-//    public void setDescription(String description) {
-//        Description = description;
-//    }
-//
-//    public String getFeedback() {
-//        return Feedback;
-//    }
-//
-//    public void setFeedback(String feedback) {
-//        Feedback = feedback;
-//    }
 };

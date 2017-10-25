@@ -22,9 +22,8 @@ import java.util.ArrayList;
 
 
 /**
- * Created by charith on 2/10/17.
- *
- * @author charith
+ * CustomAdapter converts list of <objects> to a listview with fields as in each_hostel_display.xml
+ * @author Code-Catalyst
  *
  */
 class  CustomAdapter extends ArrayAdapter<objects> {

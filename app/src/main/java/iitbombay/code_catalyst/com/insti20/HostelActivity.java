@@ -19,9 +19,23 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+/**
+ * @author Code-Catalyst
+ * This Activity is a swipe-page activity.
+ * There are 4 fragments displayed under this activity namely
+ * <ul>
+ *     <li>tab1info</li>
+ *     <li>tab2rate</li>
+ *     <li>tab3feedback</li>
+ *     <li>tab4menu</li>
+ * </ul>
+ *
+ * SectoinsPagerAdapter displays view of a pirtuclar fragment depending on current position of user
+ */
+
 public class HostelActivity extends Activity {
 
-    private int hostel_no=17;
+    private int hostel_no;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,6 +51,12 @@ public class HostelActivity extends Activity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    /**
+     * Method caled when the activity is created.
+     * Here mSectionsPagerAdapter, mViewPager, TabLayout are initialized.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +81,11 @@ public class HostelActivity extends Activity {
 
     }
 
+    /**
+     * here we are inflating the view with menu_hostel.xml
+     * @param menu to display contents of menu in menubar
+     * @return (boolean) true (informing that menu is present)
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,6 +94,14 @@ public class HostelActivity extends Activity {
         return true;
     }
 
+
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     * @param item
+     * @return (boolean)
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -97,20 +130,24 @@ public class HostelActivity extends Activity {
             super(fm);
         }
 
+        /**
+         * getItem is called to instantiate the fragment for the given page.
+         * Each fragment is alse instantiated with hostel_no.
+         * @param position represents the position of user in one of the 4 tabs
+         * @return  Fragment (Fragment at ith position)
+         */
+
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            //return PlaceholderFragment.newInstance(position + 1);
 
             switch (position) {
                 case 0:
                     Tab1info tab1 = new Tab1info();
+                    tab1.instantiate(hostel_no);
                     return tab1;
                 case 1:
                     Tab2Rate tab2 = new Tab2Rate();
                     tab2.instantiate(hostel_no);
-
                     return tab2;
                 case 2:
                     Tab3feedback tab3 = new Tab3feedback();
@@ -125,12 +162,20 @@ public class HostelActivity extends Activity {
             }
         }
 
+        /**
+         * gets the number of pages to be displayed under this activity.
+         * @return 4 (as the requirement is only 4 fragments)
+         */
         @Override
         public int getCount() {
-            // Show 4 total pages.
             return 4;
         }
 
+        /**
+         *
+         * @param position position of tab
+         * @return CharSequence which represents the name of the tab.
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
