@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    android:
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,9 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="69dp"
-            android:fontFamily="cursive"
             android:text="Rate Here"
             android:textColor="?attr/actionModeSplitBackground"
             android:textSize="30sp" />
@@ -64,7 +61,7 @@
             android:text="Submit" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/Analysis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/button"
