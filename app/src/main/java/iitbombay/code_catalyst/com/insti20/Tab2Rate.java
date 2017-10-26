@@ -105,7 +105,7 @@ public class Tab2Rate extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.tab2rate, container, false);
+        final View rootView = inflater.inflate(R.layout.rating_try, container, false);
 
         Button location = rootView.findViewById(R.id.button);
         RadioGroup rg= rootView.findViewById(R.id.like_dislike_radio);
