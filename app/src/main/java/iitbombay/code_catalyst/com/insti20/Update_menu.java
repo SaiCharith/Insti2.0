@@ -17,40 +17,65 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
+/**
+ * This class is used to Update the mess menu of a particular hostel.
+ * Mess_menu is updated at the Buffer in the FirebaseDatabase
+ * @author Code-Catalyst
+ *
+ */
 public class Update_menu extends AppCompatActivity {
 
+    /**
+     * Stores hostel_no
+     */
     int hostel_no;
+    /**
+     * Stores hostel_name
+     */
     String hostel_name;
+    /**
+     * iterator used to iterate along days of week.
+     */
     int i=0;
 
+    /**
+     * Reference to database.
+     */
     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
-//    DatabaseReference hostel=ref.child("Hostel3");
-//    DatabaseReference menu=hostel.child("Mess_Menu");
-//    DatabaseReference buffer=menu.child("buffer");
 
-
-    String[] types={"Buffer","Current"};
+    /**
+     * Stores days of the week.
+     */
     String[] days={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
-
-
+    /**
+     * Sub-class to hold info updated by messsecy and to push it to the database.
+     */
      private class Each_day{
-//        ArrayList<String> Breakfast=new ArrayList<String>();
-//        ArrayList<String> Lunch=new ArrayList<String>();
-//        ArrayList<String> Tiffin=new ArrayList<String>();
-//        ArrayList<String> Dinner=new ArrayList<String>();
+        /**
+         * Stores Breakfast
+         */
          String Breakfast;
+        /**
+         * Stores Lunch
+         */
          String Lunch;
+        /**
+         * Stores Tiffin
+         */
          String Tiffin;
+        /**
+         * Stores Dinner
+         */
          String Dinner;
-        Each_day() {
-            Breakfast="Not Available";
-            Lunch="Not Available";
-            Tiffin="Not Available";
-            Dinner="Not Available";
-        }
 
+        /**
+         * Constructor to update
+         * @param a Breakfast
+         * @param b Lunch
+         * @param c Tiffin
+         * @param d Dinner
+         */
         Each_day(String a,String b,String c,String d)
         {
 
@@ -59,7 +84,12 @@ public class Update_menu extends AppCompatActivity {
             Tiffin=c;
             Dinner=d;
         }
-        public Map<String, Object> toMap() {
+
+        /**
+         * pairs fields and values of this class into a hashmap which is then updated at the firebasedatabase.
+         * @return result(a hashmap with fields and corresponding values)
+         */
+        Map<String, Object> toMap() {
             HashMap<String, Object> result = new HashMap<>();
             result.put("Breakfast", Breakfast);
             result.put("dinner", Dinner);
@@ -70,15 +100,25 @@ public class Update_menu extends AppCompatActivity {
 
     }
 
+    /**
+     * Setting hostel values which come from previous activity.
+     */
+
     private void sethostelvalues(){
 
         Bundle bundle=getIntent().getExtras();
         hostel_no=bundle.getInt("hostel_no");
-//        hostel_no=3;  //Need to update as per different hostel mess secys;
         if(hostel_no<10) hostel_name="Hostel0"+hostel_no;
         else hostel_name="Hostel"+hostel_no;
     }
 
+    /**
+     * Getting reference to 4 editText and 2 buttons as present in activity_update_menu.xml
+     * Here set the functionality of the buttons back and update.
+     * varible 'i' is used as an iterating elemnet and when user clicks update 'i' is incremented and when back is pressed 'i' is reduced by 1 along withhandling base cases.
+     * In update button text from edit text is obtained and is pushed onto the firebasedatabase.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +132,7 @@ public class Update_menu extends AppCompatActivity {
         final EditText dinn= (EditText) findViewById(R.id.dinner);
         Button update=(Button) findViewById(R.id.update);
         Button back=(Button) findViewById(R.id.back);
+        Button Next=findViewById(R.id.next);
         final TextView tv= (TextView) findViewById(R.id.update_day);
 
 //        for(int hostel_no=1;hostel_no<=16;hostel_no++) {
@@ -147,8 +188,19 @@ public class Update_menu extends AppCompatActivity {
             }
         });
 
-
-
+        Next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(i>=0&&i<6){
+                    i++;
+                    brf.setText("");
+                    lun.setText("");
+                    tif.setText("");
+                    dinn.setText("");
+                    tv.setText(days[i]);
+                }
+            }
+        });
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +230,6 @@ public class Update_menu extends AppCompatActivity {
                         tv.setText(days[i]);
                     }
                 }
-//                else {}
 
             }
         });

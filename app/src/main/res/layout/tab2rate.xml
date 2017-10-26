@@ -53,14 +53,16 @@
         tools:layout_constraintLeft_creator="1" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/Analysis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="25dp"
         android:layout_marginTop="16dp"
-        android:text="Analysis"
-        android:padding="5dp"
         android:background="@drawable/button"
+        android:elevation="0dp"
+        android:padding="5dp"
+        android:text="Analysis"
+        android:textColor="@color/colorAccent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

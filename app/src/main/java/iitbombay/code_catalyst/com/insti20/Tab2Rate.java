@@ -1,6 +1,7 @@
 package iitbombay.code_catalyst.com.insti20;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.LayoutInflater;
@@ -27,24 +28,39 @@ import java.util.StringTokenizer;
 import static android.app.ProgressDialog.show;
 
 /**
- * Created by charith on 1/10/17.
+ * This class is used by Tab2rate to hold and push values of rating ,people to firebasedatabase.
+ * @author Code-Catalyst
  */
 class Post {
-
+    /**
+     * holds rating
+     */
     private Float rating;
+    /**
+     * Stores no of people.
+     */
     private Integer no_of_people;
-    public Map<String, Boolean> stars = new HashMap<>();
 
-
-
+    /**
+     * Default constructor required for calls to DataSnapshot.getValue(Post.class)
+     */
     public Post() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
+    /**
+     *
+     * @param rat gets rating
+     * @param no gets no of people
+     */
     Post(Float rat, Integer no) {
         this.rating = rat;
         this.no_of_people=no;
     }
+
+    /**
+     *
+     * @return hashmap with rating and number of people
+     */
 
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -53,14 +69,39 @@ class Post {
         return result;
     }
 
-};
+}
+
+/**
+ *
+ * This is 2nd Fragment of the tabbed-activity. This fragment enbles the user rate and like/dislike.
+ * Rating is recoreded under ratebar and like/dislike is recoreded under radiobutton.
+ *
+ * Here we ensured that one user can rate only once. But this rating can be updated whenever user rates again.
+ * This is done by storing the rating values in the firebasedatabase under Mess_repo/hostel/info/UID
+ *
+ *
+ * @author Code-Catalyst
+ */
 public class Tab2Rate extends Fragment{
+    /**
+     * stores hostel number
+     */
     int hostel_no;
+    /**
+     * UID is unique to each user which is used to store some specific details of user like his rating
+     */
     private String uid;
-    public void instantiate(int i){
-        hostel_no=i;
-        //getting hostel_no from the activity.
-    }
+
+
+    /**
+     *
+     * Get users rating, like/dislike and update the values to the firebasedatabase.
+     *
+     * @param inflater to fill the fragment with tab4menu.xml
+     * @param container to get the view
+     * @param savedInstanceState not useful
+     * @return rootView
+     */
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,15 +112,17 @@ public class Tab2Rate extends Fragment{
 
         Bundle bundle=getActivity().getIntent().getExtras();
         uid=bundle.getString("uid");
+        hostel_no=bundle.getInt("index");
 
-
-
-
-
+        /**
+         * a[0] is used as a marker.
+         * a[0] = -1 or 0 or 1
+         * -1 represents user did not rate
+         *  0 represents dislike is selected
+         *  1 represents like is selected
+         */
         final Integer[] a = {-1};
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-
-
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
                 RadioButton rb= rootView.findViewById(i);
@@ -91,6 +134,18 @@ public class Tab2Rate extends Fragment{
                 }
             }
         });
+
+        Button buttonanalysis = (Button) rootView.findViewById(R.id.Analysis);
+        buttonanalysis.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(getActivity(), TabbedActivity.class);
+               // intent.putExtra("hostel_no",hostel_no);
+                startActivity(intent);
+            }
+        });
+
         location.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -112,6 +167,9 @@ public class Tab2Rate extends Fragment{
                 final int[] pdislike = {0};
                 final int[] exist = {0};
 
+                /**
+                 * exist[0] is used as marker to know whether user has already rated or not.
+                 */
                 info_ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
                     @Override
@@ -132,11 +190,17 @@ public class Tab2Rate extends Fragment{
                     }
                 });
 
+                /**
+                 * if user does not fill the fields and presses submit
+                 */
                 if(a[0]==-1)
                 {
                     Toast.makeText(getActivity(),"Please Tell us wheather you like it or not",Toast.LENGTH_LONG).show();
                 }
 
+                /**
+                 * updating the values at the firebasedatabse
+                 */
                 else {
                     final DatabaseReference rating_ref = hostel_ref.child("Rating");
 
@@ -162,6 +226,9 @@ public class Tab2Rate extends Fragment{
                             DatabaseReference user_dislike=user_info_ref.child("dislike");
 
                             if(a[0]==1){
+                                /**
+                                 * user likes
+                                 */
 
                                         int curr_like=dataSnapshot.child("Likes").getValue(int.class);
                                         curr_like=curr_like+1-plike[0];
@@ -170,9 +237,15 @@ public class Tab2Rate extends Fragment{
                                         user_like.setValue(1);
                                         user_dislike.setValue(0);
                                         if(exist[0]==1){
+                                            /**
+                                             * user already exists
+                                             */
 
                                                     int curr1=dataSnapshot.child("Dislikes").getValue(int.class);
                                                     if(plike[0]==0) {
+                                                        /**
+                                                         * user disliked previously
+                                                         */
                                                         curr1--;
                                                     }
                                                     dislike_ref.setValue(curr1);
@@ -183,6 +256,9 @@ public class Tab2Rate extends Fragment{
 
 
                             else {
+                                /**
+                                 * user dislikes
+                                 */
 
                                         int curr_dislike=dataSnapshot.child("Dislikes").getValue(int.class);
                                         curr_dislike=curr_dislike+1-pdislike[0];
@@ -191,9 +267,15 @@ public class Tab2Rate extends Fragment{
                                         user_like.setValue(0);
                                         user_dislike.setValue(1);
                                         if(exist[0]==1){
+                                            /**
+                                             * user exists
+                                             */
 
                                                     int curr1=dataSnapshot.child("Likes").getValue(int.class);
                                                     if(pdislike[0]==0) {
+                                                        /**
+                                                         * user liked previously
+                                                         */
                                                         curr1--;
                                                     }
                                                     like_ref.setValue(curr1);

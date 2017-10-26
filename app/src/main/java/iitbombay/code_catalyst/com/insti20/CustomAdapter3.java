@@ -1,6 +1,7 @@
 package iitbombay.code_catalyst.com.insti20;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,40 +15,52 @@ import com.bumptech.glide.Glide;
 
 import java.net.URL;
 import java.util.ArrayList;
-
-//import com.squareup.picasso.Picasso;
-
 /**
- * Created by Code Catalyst on 16/10/17.
+ *
+ * CustomAdapter3 converts the obtained feedbacklist to listview for viewing feedbacks of all students.
+ * @author Code-Catalyst
  */
 
 public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
-    private Activity context;
-    private ArrayList<FeedbackInput> feedbackList;
-    URL url;
 
+    /**
+     * Stores the id of current Activity/Context
+     */
+    private Activity context;
+    /**
+     * List to be displayed in the listview
+     */
+    private ArrayList<FeedbackInput> feedbackList;
+
+    /**
+     * to get the number of elements to be displayed on the listview.
+     * @return (int) size of listview
+     */
     @Override
     public int getCount() {
         return feedbackList.size();
     }
+//    private ProgressDialog progressDialog;
 
-    @Nullable
-    @Override
-    public FeedbackInput getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
+    /**
+     *
+     * @param context to update context
+     * @param feedbackList to get the list of feedbacks.
+     */
     public CustomAdapter3(Activity context, ArrayList<FeedbackInput>feedbackList){
         super(context, R.layout.view_feedback);
         this.context = context;
         this.feedbackList = feedbackList;
     }
 
+    /**
+     * Most important method in to display the listview.
+     * Optimizing the number of inflation calls using setTag and getTag methods.
+     * @param position index
+     * @param convertView veiw of list corresponding to index position
+     * @param parent not very important here
+     * @return view
+     */
     @NonNull
     @Override
     public View getView (int position , View convertView, ViewGroup parent){
@@ -63,38 +76,51 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
         else {
             viewholder = (viewHolder) convertView.getTag();
         }
-//        TextView name = (TextView) listViewItem.findViewById(R.id.name);
-//        TextView description = (TextView) listViewItem.findViewById(R.id.description);
-//        TextView feedback = (TextView) listViewItem.findViewById(R.id.feedback);
 
         FeedbackInput feedbackInput = feedbackList.get(position);
 
         viewholder.name.setText(feedbackInput.Name);
         viewholder.description.setText(feedbackInput.Description);
-//        url = new URL("http://image10.bizrate-images.com/resize?sq=60&uid=2216744464");
-//        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        img.setImageBitmap(bmp);
-        if(!(feedbackInput.ID == "")){
-        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);}
-        //Glide.with(context).load("https://firebasestorage.googleapis.com/v0/b/code-catalyst-asc.appspot.com/o/Hostel14%2F-Kwkbfq9THzL-QHTeud1?alt=media&token=5b767e93-3fe3-463c-8a41-55edd5e835b8").into(viewholder.img);
-        //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
-       // Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(viewholder.img);
+        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);
         viewholder.feedback.setText(feedbackInput.Feedback);
 
         return convertView;
     }
 
+    /**
+     * Sub-class of CustomAdapter3.
+     * Used to hold the view of each instance of listview.
+     */
     private static class viewHolder{
+
+        /**
+         * to hold the name of student.
+         */
         TextView name;
+
+        /**
+         * to hold the description of feedback.
+         */
         TextView description;
+
+        /**
+         * to hold the image uploaded along with feedback.
+         */
         ImageView img;
+
+        /**
+         * to hold the feedback.
+         */
         TextView feedback;
 
-
+        /**
+         * Constructor which initializes variables of viewHolder.
+         * @param v current view
+         */
         viewHolder(View v){
             name=v.findViewById(R.id.name);
             description=v.findViewById(R.id.description);
-            img =v.findViewById((R.id.imgview));
+            img =v.findViewById(R.id.imgview);
             feedback = v.findViewById(R.id.feedback);
         }
     }

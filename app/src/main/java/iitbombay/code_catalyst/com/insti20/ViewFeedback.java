@@ -1,5 +1,6 @@
 package iitbombay.code_catalyst.com.insti20;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -17,6 +18,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class adds all the feedback details to the list and then calls CustomAdapter3 which in turn
+ * creates listview.
+ */
 
 public class ViewFeedback extends AppCompatActivity {
 
@@ -24,13 +29,13 @@ public class ViewFeedback extends AppCompatActivity {
     String h_name;
     ListView feedback_Listview;
     ArrayList<FeedbackInput> feedbackList;
+//    private ProgressDialog progressDialog;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
 
-//    public void instantiate(int i){
-//        hostel_no=i;
-//        //getting hostel_no from the activity.
-//    }
-
+    /**
+     * This takes all the necessary details from database and adds them to list. CustomAdapter3 is also called over
+     * here and this converts the list to listview.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -45,6 +50,7 @@ public class ViewFeedback extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 feedbackList.clear();
+//                progressDialog.dismiss();
                 for (DataSnapshot feedbackSnapshot: dataSnapshot.getChildren()){
                     FeedbackInput feedbackInput = feedbackSnapshot.getValue(FeedbackInput.class);
 
@@ -56,19 +62,26 @@ public class ViewFeedback extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+//                progressDialog.dismiss();
             }
         });
 
 
     }
 
+    /**
+     * initialising the feedbacklist.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_feedback_list);
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Loading...");
+//        progressDialog.show();
 
-        feedback_Listview= (ListView) findViewById(R.id.feedback_list);
+        feedback_Listview= findViewById(R.id.feedback_list);
         feedbackList = new ArrayList<>();
     }
 }
