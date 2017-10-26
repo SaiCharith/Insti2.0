@@ -24,8 +24,23 @@ import iitbombay.code_catalyst.com.insti20.R;
  * Created by atharvn on 26/10/17.
  */
 
+/**
+ *  This is 1st Fragment of the Tabbed-activity. This fragment displays the graph with each hostel on X-axis
+ *  representend by hostel number and thier corresponding likes on Y-axis, so that we can easily analyze.
+ *  We have used GraphView API for creating graphs. Number of likes for each hostel is accessed in our
+ *  firebase database and each point thus formed, is appended in DataPoint series which is plotted using GraphView
+ */
+
 public class LikeGraph extends Fragment {
 
+    /**
+     * This method is called when the this Fragment gets created.
+     * Get users likes for every hostel and represent them in a graph.
+     * @param inflater to fill the fragment with tab4menu.xml
+     * @param container to get the view
+     * @param savedInstanceState not useful
+     * @return rootView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +70,6 @@ public class LikeGraph extends Fragment {
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 

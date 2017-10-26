@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
  */
 
 /**
- *  This is 1st Fragment of the tabbed-activity. This fragment displays necessary information about Mess Secy's
+ *  This is 1st Fragment of the Hostel-activity. This fragment displays necessary information about Mess Secy's
  *  and Hall Managers/Wardens in Relative Layout.
  *  In the parent class while initiating this Fragment the function called instantiate must be called, which
  *  instantiates the hostel_no which is required for getting information of secy and warden for respective hostels.

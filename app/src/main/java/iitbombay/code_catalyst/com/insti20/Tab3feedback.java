@@ -35,7 +35,7 @@ import java.util.Map;
  */
 
 /**
- *  This is 3rd Fragment of the tabbed-activity. This fragment is platform for students to give their
+ *  This is 3rd Fragment of the Hostel-activity. This fragment is platform for students to give their
  *  feedback and also view everyone's feedback. Students fill thier details and feedback in different
  *  EditText's which is further added to Firebase database and then restored in view feedback section.
  *  Students can also add photos alongwith feedback which is stored under Firebase Storage.
