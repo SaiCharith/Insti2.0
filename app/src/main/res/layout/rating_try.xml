@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="127dp" />
+            android:layout_marginTop="50dp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="69dp"
+            android:layout_marginTop="10dp"
             android:text="Rate Here"
             android:textColor="?attr/actionModeSplitBackground"
             android:textSize="30sp" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ratingBar"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -67,7 +67,7 @@
             android:layout_alignLeft="@+id/button"
             android:layout_alignBottom="@+id/button"
             android:layout_marginBottom="0dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="100dp"
             android:text="Analysis" />
 
 
