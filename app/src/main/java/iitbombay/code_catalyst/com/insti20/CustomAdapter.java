@@ -80,22 +80,19 @@ class  CustomAdapter extends ArrayAdapter<objects> {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-
-        viewHolder holder;
-
-
-        if(view==null){
+        viewHolder holder;       //to set data to be displayed.
+        if(view==null){          //inflating view only if it is null
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.each_hostel_display,null);
             holder=new viewHolder(view);
-            view.setTag(holder);
+            view.setTag(holder);     //setting tag to viewHolder so that it is not required to reinitialize later
 
         }
 
         else{
-            holder= (viewHolder) view.getTag();
+            holder= (viewHolder) view.getTag();   //getting reference to viewHolder
         }
-
+        //setting values to be displayed in the listview.
         holder.imageview.setImageResource(l.get(i).image_id);
         holder.hostel_name.setText(l.get(i).Hostel_name);
         holder.rating_bar.setRating(l.get(i).rating);

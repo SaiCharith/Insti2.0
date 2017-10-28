@@ -66,22 +66,22 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
     public View getView (int position , View convertView, ViewGroup parent){
         viewHolder viewholder;
 
-        if (convertView == null) {
+        if (convertView == null) {       //inflating view only if it is null
             LayoutInflater inflater = context.getLayoutInflater();
             convertView = inflater.inflate(R.layout.view_feedback, null);
             viewholder = new viewHolder(convertView);
-            convertView.setTag(viewholder);
+            convertView.setTag(viewholder); //setting tag to viewHolder so that it is not required to re-initialize later
         }
 
         else {
-            viewholder = (viewHolder) convertView.getTag();
+            viewholder = (viewHolder) convertView.getTag(); //getting reference to viewHolder
         }
 
         FeedbackInput feedbackInput = feedbackList.get(position);
-
+        //setting values to be displayed in the listview.
         viewholder.name.setText(feedbackInput.Name);
         viewholder.description.setText(feedbackInput.Description);
-        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);
+        Glide.with(context).load(feedbackInput.ID).into(viewholder.img);  //to load images from firebase storage.
         viewholder.feedback.setText(feedbackInput.Feedback);
 
         return convertView;

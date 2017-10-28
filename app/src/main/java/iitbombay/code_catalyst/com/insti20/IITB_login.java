@@ -60,11 +60,9 @@ public class IITB_login extends AppCompatActivity {
 
                     Toast.makeText(IITB_login.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
 
-//                    String uid=firebaseAuth.getCurrentUser().getUid();
-
                     boolean b=true;
                     String user=firebaseAuth.getCurrentUser().getEmail();
-                    for(int i=0;i<16;i++) {
+                    for(int i=0;i<16;i++) {    //cheching whwether user is a messsecy or not
                         String string= getResources().getStringArray(R.array.messsecys)[i];
                         if (user.equals(string)) {
                             b=false;
@@ -73,9 +71,7 @@ public class IITB_login extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
-                    if(b){
-//                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
-//                        intent.putExtra("uid","uid");
+                    if(b){        //if user is not messsecy
                         startActivity(new Intent(IITB_login.this,After_login.class));
                     }
                 }

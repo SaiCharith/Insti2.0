@@ -112,7 +112,7 @@ public class Tab2Rate extends Fragment{
 
         Bundle bundle=getActivity().getIntent().getExtras();
         uid=bundle.getString("uid");
-        hostel_no=bundle.getInt("index");
+        hostel_no=bundle.getInt("index");         //getting uid and hostel number from previous activity
 
         /**
          * a[0] is used as a marker.
@@ -157,10 +157,8 @@ public class Tab2Rate extends Fragment{
                 else h_name = "Hostel" + hostel_no;
 
                 final DatabaseReference hostel_ref = ref.child(h_name);
-
                 final DatabaseReference info_ref=hostel_ref.child("info");
-
-                final DatabaseReference user_info_ref=info_ref.child(uid);
+                final DatabaseReference user_info_ref=info_ref.child(uid);    //setting database reference
 
                 final Float[] prate = {0f};
                 final int[] plike = {0};
@@ -175,11 +173,11 @@ public class Tab2Rate extends Fragment{
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        if(dataSnapshot.hasChild(uid)) {
+                        if(dataSnapshot.hasChild(uid)) {                   //checking whether user already gave his rating or not.
                             prate[0] = dataSnapshot.child(uid).child("rating").getValue(Float.class);
                             plike[0] = dataSnapshot.child(uid).child("like").getValue(Integer.class);
                             pdislike[0] = dataSnapshot.child(uid).child("dislike").getValue(Integer.class);
-                            exist[0]=1;
+                            exist[0]=1;                                    //acts as a marker
                         }
 
                     }
@@ -212,18 +210,18 @@ public class Tab2Rate extends Fragment{
                             RatingBar r = (RatingBar) rootView.findViewById(R.id.ratingBar);
                             Float my_rate = r.getRating();
                             r.setRating(0f);
-                            Float new_curr_rating = (my_rate-prate[0] + curr * numb) / (numb + 1-exist[0]);
+                            Float new_curr_rating = (my_rate-prate[0] + curr * numb) / (numb + 1-exist[0]);  //new rating of the hostel
                             Post post = new Post(new_curr_rating, numb + 1 - exist[0]);
                             Map<String, Object> postValues = post.toMap();
-                            rating_ref.updateChildren(postValues);
+                            rating_ref.updateChildren(postValues);                                           //updating the database
                             DatabaseReference user_rating=user_info_ref.child("rating");
                             user_rating.setValue(my_rate);
 
                             final DatabaseReference like_ref = hostel_ref.child("Likes");
-                            final DatabaseReference dislike_ref = hostel_ref.child("Dislikes");
+                            final DatabaseReference dislike_ref = hostel_ref.child("Dislikes");              //reference to likes and dislikes
 
                             DatabaseReference user_like=user_info_ref.child("like");
-                            DatabaseReference user_dislike=user_info_ref.child("dislike");
+                            DatabaseReference user_dislike=user_info_ref.child("dislike");                   //reference to user's likes and dislikes.
 
                             if(a[0]==1){
                                 /**
@@ -232,10 +230,10 @@ public class Tab2Rate extends Fragment{
 
                                         int curr_like=dataSnapshot.child("Likes").getValue(int.class);
                                         curr_like=curr_like+1-plike[0];
-                                        like_ref.setValue(curr_like);
+                                        like_ref.setValue(curr_like);                                       //updating likes of the hostel.
 
                                         user_like.setValue(1);
-                                        user_dislike.setValue(0);
+                                        user_dislike.setValue(0);                                           //updating the values of likes and dislikes of user in the database
                                         if(exist[0]==1){
                                             /**
                                              * user already exists
@@ -248,7 +246,7 @@ public class Tab2Rate extends Fragment{
                                                          */
                                                         curr1--;
                                                     }
-                                                    dislike_ref.setValue(curr1);
+                                                    dislike_ref.setValue(curr1);                            //updating dislikes of the hostel.
                                                 }
 
 
@@ -262,7 +260,7 @@ public class Tab2Rate extends Fragment{
 
                                         int curr_dislike=dataSnapshot.child("Dislikes").getValue(int.class);
                                         curr_dislike=curr_dislike+1-pdislike[0];
-                                        dislike_ref.setValue(curr_dislike);
+                                        dislike_ref.setValue(curr_dislike);                                //updating dislikes of the hostel.
 
                                         user_like.setValue(0);
                                         user_dislike.setValue(1);
@@ -278,7 +276,7 @@ public class Tab2Rate extends Fragment{
                                                          */
                                                         curr1--;
                                                     }
-                                                    like_ref.setValue(curr1);
+                                                    like_ref.setValue(curr1);                             //updating likes of the hostel.
                                                 }
 
                             }

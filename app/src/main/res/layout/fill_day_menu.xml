@@ -11,11 +11,12 @@
         android:layout_below="@+id/day_part"
         android:layout_marginTop="17dp"
         android:layout_toRightOf="@+id/day_part"
-        android:fontFamily="sans-serif-smallcaps"
+
         android:text="\n\n\n\n"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="24sp"/>
+        <!--android:fontFamily="sans-serif-smallcaps"/>-->
 
     <Button
         android:id="@+id/day_part"
