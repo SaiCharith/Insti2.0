@@ -6,40 +6,44 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rating_bg1">
+        android:background="@drawable/rate3">
+
+        <TextView
+            android:id="@+id/ratehere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+
+            android:text="Rate Here"
+            android:textColor="#bae0e7"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <!--android:textColor="?attr/actionModeSplitBackground"/>-->
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="Rate Here"
-            android:textColor="?attr/actionModeSplitBackground"
-            android:textSize="30sp" />
+            android:layout_marginTop="28dp"
+            android:layout_below="@+id/ratehere"
+            android:layout_centerHorizontal="true" />
 
         <RadioGroup
             android:id="@+id/like_dislike_radio"
-            android:layout_width="400dp"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:orientation="horizontal"
             android:layout_below="@+id/ratingBar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_centerHorizontal="true">
 
             <RadioButton
                 android:id="@+id/like_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="#D5DBDB"
                 android:layout_weight="33"
                 android:text="like it?" />
 
@@ -47,6 +51,8 @@
                 android:id="@+id/Dislike_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="#D5DBDB"
                 android:layout_weight="10"
                 android:text="Don't like it?" />
         </RadioGroup>
@@ -55,20 +61,25 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:text="Submit" />
+            android:layout_alignLeft="@+id/ratingBar"
+            android:layout_alignStart="@+id/ratingBar"
+            android:layout_marginBottom="26dp" />
 
         <Button
             android:id="@+id/Analysis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="17dp"
+            android:text="Analysis"
+            android:layout_alignBaseline="@+id/button"
             android:layout_alignBottom="@+id/button"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="100dp"
-            android:text="Analysis" />
+            android:layout_alignRight="@+id/ratingBar"
+            android:layout_alignEnd="@+id/ratingBar" />
 
 
     </RelativeLayout>
