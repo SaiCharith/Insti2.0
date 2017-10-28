@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 /**
- *  This is 4th Fragment of the tabbed-activity. This fragment displays days of the week as buttons in a listview.The buttons when clicked will redirect to display_menu activity.
+ *  This is 4th Fragment of the Hostel-activity. This fragment displays days of the week as buttons in a listview.The buttons when clicked will redirect to display_menu activity.
  *  In the parent class while initiating this Fragment the function called instantiate must be called, which instantiates the hostel_no which is required for the Display_menu activity.
  *  hostel_no and day are passed to Display_menu activity and Display_Menu activity is called by clicking on any day's button. This function is set-up holder.day.setOnclickListner.
  *  sub-class CustomAdapter fills the listview with days buttons.

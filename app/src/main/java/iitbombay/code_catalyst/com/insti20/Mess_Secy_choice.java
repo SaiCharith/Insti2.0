@@ -14,6 +14,14 @@ import android.widget.Button;
  *
  */
 public class Mess_Secy_choice extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
     /**
      * create two objects of type button and adds a required listener that intents to the the corresponding activity
      * Here the buttons original_app and update_menu are given the functionalities to redirect to either After_login or Update_menu respectievly
@@ -34,7 +42,11 @@ public class Mess_Secy_choice extends AppCompatActivity {
         Button original_app=(Button) findViewById(R.id.originalapp);
         original_app.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(Mess_Secy_choice.this,After_login.class));
+                Bundle bundle=getIntent().getExtras();
+                int hostel_no=bundle.getInt("hostel_no");
+                Intent intent=new Intent(Mess_Secy_choice.this,After_login.class);
+                intent.putExtra("hostel_no",hostel_no);
+                startActivity(intent);
             }
         });
         update_menu.setOnClickListener(new View.OnClickListener() {

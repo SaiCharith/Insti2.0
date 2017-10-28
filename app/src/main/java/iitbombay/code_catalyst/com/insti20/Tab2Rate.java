@@ -73,7 +73,7 @@ class Post {
 
 /**
  *
- * This is 2nd Fragment of the tabbed-activity. This fragment enbles the user rate and like/dislike.
+ * This is 2nd Fragment of the Hostel-activity. This fragment enbles the user rate and like/dislike.
  * Rating is recoreded under ratebar and like/dislike is recoreded under radiobutton.
  *
  * Here we ensured that one user can rate only once. But this rating can be updated whenever user rates again.
@@ -105,7 +105,7 @@ public class Tab2Rate extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.rating_try, container, false);
+        final View rootView = inflater.inflate(R.layout.tab2rate, container, false);
 
         Button location = rootView.findViewById(R.id.button);
         RadioGroup rg= rootView.findViewById(R.id.like_dislike_radio);
@@ -288,6 +288,14 @@ public class Tab2Rate extends Fragment{
 
                         }
                     });
+                    RadioButton rb=(RadioButton) rootView.findViewById(R.id.like_radio);
+                    rb.setChecked(false);
+                    rb=(RadioButton) rootView.findViewById(R.id.Dislike_radio);
+                    rb.setChecked(false);
+                    RatingBar r = (RatingBar) rootView.findViewById(R.id.ratingBar);
+                    r.setRating(0f);
+
+                    Toast.makeText(getActivity(),"Thank you for your Rating",Toast.LENGTH_SHORT).show();
                 }
 
             }

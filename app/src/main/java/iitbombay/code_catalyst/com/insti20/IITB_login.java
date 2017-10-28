@@ -71,8 +71,13 @@ public class IITB_login extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
-                    if(b){        //if user is not messsecy
-                        startActivity(new Intent(IITB_login.this,After_login.class));
+                    if(b){
+//                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
+//                        intent.putExtra("uid","uid");
+                        Intent intent = new Intent(IITB_login.this, After_login.class);
+                        intent.putExtra("hostel_no",0);
+                        startActivity(intent);
+
                     }
                 }
 
