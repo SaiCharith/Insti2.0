@@ -73,7 +73,7 @@ class Post {
 
 /**
  *
- * This is 2nd Fragment of the tabbed-activity. This fragment enbles the user rate and like/dislike.
+ * This is 2nd Fragment of the Hostel-activity. This fragment enbles the user rate and like/dislike.
  * Rating is recoreded under ratebar and like/dislike is recoreded under radiobutton.
  *
  * Here we ensured that one user can rate only once. But this rating can be updated whenever user rates again.

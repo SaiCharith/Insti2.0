@@ -19,6 +19,20 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+/**
+ *
+ * This Activity is a swipe-page activity.
+ * There are 3 fragments displayed under this activity namely
+ * <ul>
+ *     <li>likes</li>
+ *     <li>dislikes</li>
+ *     <li>ratings</li>
+ * </ul>
+ *
+ * SectoinsPagerAdapter is used here which displays view of a pirtuclar fragment depending on current position of user
+ *
+ * @author Code-Catalyst
+ */
 public class TabbedActivity extends Activity {
 
     /**
@@ -54,7 +68,11 @@ public class TabbedActivity extends Activity {
 
     }
 
-
+    /**
+     * here menu is being inflated with menu_hostel.xml
+     * @param menu to display contents of menu in menubar
+     * @return (boolean) true (informing that menu is present)
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,6 +80,13 @@ public class TabbedActivity extends Activity {
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button, so long
+     * as you specify a parent activity in AndroidManifest.xml.
+     * @param item
+     * @return (boolean)
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -87,6 +112,12 @@ public class TabbedActivity extends Activity {
             super(fm);
         }
 
+        /**
+         * getItem is called to instantiate the fragment for the given page.
+         * Each fragment is alse instantiated with hostel_no.
+         * @param position represents the position of user in one of the 4 tabs
+         * @return  Fragment (Fragment at ith position)
+         */
         @Override
         public Fragment getItem(int position) {
 
@@ -106,13 +137,21 @@ public class TabbedActivity extends Activity {
             }
         }
 
-
+        /**
+         * gets the number of pages to be displayed under this activity.
+         * @return 3 (as the requirement is only 3 fragments)
+         */
         @Override
         public int getCount() {
             // Show 3 total pages.
             return 3;
         }
 
+        /**
+         *
+         * @param position position of tab
+         * @return CharSequence which represents the name of the tab.
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
@@ -121,7 +160,7 @@ public class TabbedActivity extends Activity {
                 case 1:
                     return "Dislikes";
                 case 2:
-                    return "Rating";
+                    return "Ratings";
             }
             return null;
         }

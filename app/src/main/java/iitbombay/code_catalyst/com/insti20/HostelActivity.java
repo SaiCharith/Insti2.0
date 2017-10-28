@@ -95,7 +95,6 @@ public class HostelActivity extends Activity {
         return true;
     }
 
-
     /**
      * Handle action bar item clicks here. The action bar will
      * automatically handle clicks on the Home/Up button, so long
