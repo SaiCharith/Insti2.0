@@ -84,22 +84,28 @@ public class After_login extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);//attaching listener to mAuth
     }
+
+    /**
+     * Overriding the functionality of onBackPressed.
+     * This function is executed when user presses back button.
+     * Here Activity is either finished(if user is mess-secy) or completly closed using homeIntenet.
+     */
     @Override
     public void onBackPressed() {
 
-        //finish();
+
         Bundle b=getIntent().getExtras();
-        int x=b.getInt("hostel_no");
+        int x=b.getInt("hostel_no");    //getting hostel number, valid for mess secy. For other users this value is 0.
 
         Toast.makeText(After_login.this, String.valueOf(x), Toast.LENGTH_SHORT).show();
         if(x==0) {
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
             homeIntent.addCategory(Intent.CATEGORY_HOME);
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(homeIntent);
+            startActivity(homeIntent);   //leads to closing(minimizing) the app.
         }
         else{
-            finish();
+            finish();  //finishes the activity.
         }
     }
     /**
@@ -185,7 +191,7 @@ public class After_login extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.likes= dataSnapshot.getValue(Integer.class);
-                    customAdapter.notifyDataSetChanged();
+                    customAdapter.notifyDataSetChanged();                    //informing adapter of changes in data
 
                 }
 
@@ -201,7 +207,7 @@ public class After_login extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.dislikes= dataSnapshot.getValue(Integer.class);
-                    customAdapter.notifyDataSetChanged();
+                    customAdapter.notifyDataSetChanged();                   //informing adapter of changes in data
 
                 }
 
@@ -217,7 +223,7 @@ public class After_login extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     s.rating= dataSnapshot.getValue(Float.class);
-                    customAdapter.notifyDataSetChanged();
+                    customAdapter.notifyDataSetChanged();               //informing adapter of changes in data
 
                 }
 
@@ -263,7 +269,7 @@ public class After_login extends AppCompatActivity {
                 Intent intent = new Intent(After_login.this,HostelActivity.class);
                 intent.putExtra("index",l.get(i).hostel_no); //passing hostel no to the upcoming activity.
                 intent.putExtra("uid",uid);
-                startActivity(intent);
+                startActivity(intent);                      //Starting HostelActivity and passing hostel_no and UID.
                 Toast.makeText(After_login.this, l.get(i).Hostel_name, Toast.LENGTH_SHORT).show();
             }
         });
@@ -277,8 +283,8 @@ public class After_login extends AppCompatActivity {
      * @param order to sort based on different fields (like rating,like,....)
      */
     public static void sortlist(int order){
-        Collections.sort(l,new Sorter(order));
-        customAdapter.notifyDataSetChanged();
+        Collections.sort(l,new Sorter(order));   //sort the list l
+        customAdapter.notifyDataSetChanged();    //inform customAdapter
     }
 
     /**
@@ -301,6 +307,12 @@ public class After_login extends AppCompatActivity {
 
         /**
          * Setting the comparator.
+         * <ul>
+         *     <li>order=1 represents sorting by hostel_no</li>
+         *     <li>order=2 represents sorting by rating</li>
+         *     <li>order=2 represents sorting by likes</li>
+         *     <li>order=2 represents sorting by dislikes</li>
+         * </ul>
          * @param t1 object1
          * @param t2 object2
          * @return -1 or 0 or 1 based on t1 and t2.

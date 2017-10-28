@@ -163,24 +163,16 @@ public class Update_menu extends AppCompatActivity {
                     Update_menu.super.onBackPressed();
                 }
                 if(i>=0&&i<6){
-//                    i++;               //goes ond day forward
-//                    brf.setText("");
-//                    lun.setText("");
-//                    tif.setText("");
-//                    dinn.setText("");  //making the edittextfields null.
-//                    tv.setText(days[i]); //Displays the day's menu being updated.
-                        i++;
-                        brf.setText("");
-                        lun.setText("");
-                        tif.setText("");
-                        dinn.setText("");
-                        tv.setText(days[i]);
-                        if(i==6)
-                        {
-
-                            Next.setText("Home");
-
-                        }
+                    i++;    //goes ond day forward
+                    brf.setText("");
+                    lun.setText("");
+                    tif.setText("");
+                    dinn.setText("");  //making the edittextfields null.
+                    tv.setText(days[i]);  //Displays the day's menu being updated.
+                    if(i==6)
+                    {
+                        Next.setText("Home");
+                    }
 
 
                 }

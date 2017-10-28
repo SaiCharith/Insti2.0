@@ -68,15 +68,13 @@ public class IITB_login extends AppCompatActivity {
                             b=false;
                             Intent intent = new Intent(IITB_login.this, Mess_Secy_choice.class);
                             intent.putExtra("hostel_no",i+1);
-                            startActivity(intent);
+                            startActivity(intent);  //Satrting Activity Mess_Secy_chioce
                         }
                     }
-                    if(b){
-//                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
-//                        intent.putExtra("uid","uid");
+                    if(b){          //if user is not me-ssecy
                         Intent intent = new Intent(IITB_login.this, After_login.class);
                         intent.putExtra("hostel_no",0);
-                        startActivity(intent);
+                        startActivity(intent);  //Starting After_login Activity and passing 0 indicating that user is not mess-secy
 
                     }
                 }
@@ -112,14 +110,14 @@ public class IITB_login extends AppCompatActivity {
         String User_name=username.getText().toString();
         String pass_word=password.getText().toString();
         if(TextUtils.isEmpty(User_name)||TextUtils.isEmpty(pass_word)){
-            Toast.makeText(IITB_login.this, "Fields are Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(IITB_login.this, "Fields are Empty", Toast.LENGTH_SHORT).show(); //notifying user of empty fields.
         }
         else {
             mAuth.signInWithEmailAndPassword(User_name, pass_word).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (!task.isSuccessful()) {
-                        Toast.makeText(IITB_login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(IITB_login.this, "Authentication failed", Toast.LENGTH_SHORT).show(); //notifying user of invalid credentials
                     }
                 }
             });
