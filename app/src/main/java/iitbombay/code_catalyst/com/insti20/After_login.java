@@ -68,6 +68,9 @@ public class After_login extends AppCompatActivity {
      */
     private static CustomAdapter customAdapter;
     Toolbar toolbar;
+
+
+
     /**
      * Object to Store User Id
      */
@@ -81,7 +84,24 @@ public class After_login extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);//attaching listener to mAuth
     }
+    @Override
+    public void onBackPressed() {
 
+        //finish();
+        Bundle b=getIntent().getExtras();
+        int x=b.getInt("hostel_no");
+
+        Toast.makeText(After_login.this, String.valueOf(x), Toast.LENGTH_SHORT).show();
+        if(x==0) {
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory(Intent.CATEGORY_HOME);
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
+        }
+        else{
+            finish();
+        }
+    }
     /**
      * Handles the Event once this Activity is created
      *
@@ -112,6 +132,7 @@ public class After_login extends AppCompatActivity {
                 if(firebaseAuth.getCurrentUser() == null)
                 {
                     startActivity(new Intent(After_login.this,MainActivity.class));
+
                 }
                 else {
                     uid= firebaseAuth.getCurrentUser().getUid();
@@ -132,7 +153,7 @@ public class After_login extends AppCompatActivity {
         });
 
         /**
-         * get images of each hostel in a list
+         * get images of eanch hostel in a list
          */
         TypedArray imgs = getResources().obtainTypedArray(R.array.Images);
         /**
