@@ -76,7 +76,10 @@ public class IITB_login extends AppCompatActivity {
                     if(b){
 //                        Intent intent=new Intent(IITB_login.this,HostelActivity.class);
 //                        intent.putExtra("uid","uid");
-                        startActivity(new Intent(IITB_login.this,After_login.class));
+                        Intent intent = new Intent(IITB_login.this, After_login.class);
+                        intent.putExtra("hostel_no",0);
+                        startActivity(intent);
+
                     }
                 }
 

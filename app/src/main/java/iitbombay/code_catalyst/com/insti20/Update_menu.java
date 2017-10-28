@@ -132,7 +132,7 @@ public class Update_menu extends AppCompatActivity {
         final EditText dinn= (EditText) findViewById(R.id.dinner);
         Button update=(Button) findViewById(R.id.update);
         Button back=(Button) findViewById(R.id.back);
-        Button Next=findViewById(R.id.next);
+        final Button Next=findViewById(R.id.next);
         final TextView tv= (TextView) findViewById(R.id.update_day);
 
 //        for(int hostel_no=1;hostel_no<=16;hostel_no++) {
@@ -179,6 +179,7 @@ public class Update_menu extends AppCompatActivity {
                 }
                 if(i>0&&i<7) {
                     i--;
+                    Next.setText("Next");
                     brf.setText("");
                     lun.setText("");
                     tif.setText("");
@@ -191,14 +192,27 @@ public class Update_menu extends AppCompatActivity {
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(i>=0&&i<6){
-                    i++;
-                    brf.setText("");
-                    lun.setText("");
-                    tif.setText("");
-                    dinn.setText("");
-                    tv.setText(days[i]);
+                if(i==6)
+                {
+                    Update_menu.super.onBackPressed();
                 }
+                if(i>=0&&i<6){
+                        i++;
+                        brf.setText("");
+                        lun.setText("");
+                        tif.setText("");
+                        dinn.setText("");
+                        tv.setText(days[i]);
+                        if(i==6)
+                        {
+
+                            Next.setText("Home");
+
+                        }
+
+
+                }
+
             }
         });
 

@@ -76,6 +76,7 @@ public class Splashscreen extends Activity {
                     }
                     Intent intent = new Intent(Splashscreen.this,
                             MainActivity.class);
+                    intent.putExtra("backpressed",false);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     Splashscreen.this.finish();

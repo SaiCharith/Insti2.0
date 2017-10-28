@@ -66,7 +66,14 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+    @Override
+    public void onBackPressed() {
 
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
     /**
      * Sets Ldap button and Gmail button to the respective activities and called methods sign_In
      * @param savedInstanceState
@@ -93,9 +100,29 @@ public class MainActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
-                if(firebaseAuth.getCurrentUser() != null)
-                {
-                     startActivity(new Intent(MainActivity.this,After_login.class));
+                if(firebaseAuth.getCurrentUser()!=null){
+
+                    Toast.makeText(MainActivity.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+
+//                    String uid=firebaseAuth.getCurrentUser().getUid();
+
+                    boolean b=true;
+                    String user=firebaseAuth.getCurrentUser().getEmail();
+                    for(int i=0;i<16;i++) {
+                        String string= getResources().getStringArray(R.array.messsecys)[i];
+                        if (user.equals(string)) {
+                            b=false;
+                            Intent intent = new Intent(MainActivity.this, Mess_Secy_choice.class);
+                            intent.putExtra("hostel_no",i+1);
+                            startActivity(intent);
+                        }
+                    }
+                    if(b){
+                         Intent intent = new Intent(MainActivity.this, After_login.class);
+                        intent.putExtra("hostel_no",0);
+                        startActivity(intent);
+
+                    }
                 }
             }
 
