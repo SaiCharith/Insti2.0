@@ -287,7 +287,7 @@ public class After_login extends AppCompatActivity {
     }
 
     /**
-     * Sub-class to sort list l based on likes or rating or hostel_no or dislikes.
+     * Sub-class to sort list based on likes or rating or hostel_no or dislikes.
      * This class sets the comparator and based on this comparator list is sorted.
      */
     static class Sorter implements Comparator<objects> {

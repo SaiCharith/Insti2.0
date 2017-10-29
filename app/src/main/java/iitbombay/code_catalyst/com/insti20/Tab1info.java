@@ -98,12 +98,12 @@ public class Tab1info extends Fragment {
         String Sname = secyinfo[0];
         String Snumber = secyinfo[1];
         String Smail = secyinfo[2];
-//
+
         secyname.setText(Sname);
         secynumber.setText(Snumber);
         secymail.setText(Smail);
         imagesecy.setImageResource((getResources().obtainTypedArray(R.array.ImageS)).getResourceId(hostel_no,0));
-//
+
         String manager = getResources().getStringArray(R.array.Manager)[hostel_no];
         String [] managerinfo = manager.split(",");
         String Mname = managerinfo[0];

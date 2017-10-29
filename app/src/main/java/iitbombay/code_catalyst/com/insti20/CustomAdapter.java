@@ -104,8 +104,7 @@ class  CustomAdapter extends ArrayAdapter<objects> {
 }
 
 /**
- * This class is an instance of of elements of listview.
- * Used for optimization.
+ * This class is an instance of elements of listview, used for optimization.
  */
 
 class viewHolder{

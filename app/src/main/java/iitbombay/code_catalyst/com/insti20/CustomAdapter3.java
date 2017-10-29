@@ -87,8 +87,8 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
     }
 
     /**
-     * Sub-class of CustomAdapter3.
-     * Used to hold the view of each instance of listview.
+     * Sub-class of CustomAdapter3, Used to hold the view of each instance of listview.
+     *
      */
     private static class viewHolder{
 

@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * It is the activity which lets the mess secy to choose whether he wants to go to the original app or wants to update the menu
  * This is an activity which is displayed only for messecys
- * This activity provides option for messsecy to choose between original app and updation of menu.
+ *
  * @author Code-Catalyst
  *
  */
