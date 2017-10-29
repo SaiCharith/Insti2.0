@@ -29,7 +29,6 @@ public class ViewFeedback extends AppCompatActivity {
     String h_name;
     ListView feedback_Listview;
     ArrayList<FeedbackInput> feedbackList;
-//    private ProgressDialog progressDialog;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
 
     /**
@@ -50,7 +49,6 @@ public class ViewFeedback extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 feedbackList.clear();
-//                progressDialog.dismiss();
                 for (DataSnapshot feedbackSnapshot: dataSnapshot.getChildren()){
                     FeedbackInput feedbackInput = feedbackSnapshot.getValue(FeedbackInput.class);
 
@@ -62,7 +60,6 @@ public class ViewFeedback extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-//                progressDialog.dismiss();
             }
         });
 
@@ -77,9 +74,7 @@ public class ViewFeedback extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_feedback_list);
-//        progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage("Loading...");
-//        progressDialog.show();
+
 
         feedback_Listview= findViewById(R.id.feedback_list);
         feedbackList = new ArrayList<>();

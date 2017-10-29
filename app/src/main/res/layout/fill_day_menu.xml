@@ -11,6 +11,7 @@
         android:layout_below="@+id/day_part"
         android:layout_marginTop="17dp"
         android:layout_toRightOf="@+id/day_part"
+
         android:text="\n\n\n\n"
         android:textAlignment="center"
         android:textColor="@android:color/white"

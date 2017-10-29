@@ -135,56 +135,22 @@ public class Update_menu extends AppCompatActivity {
         final Button Next=findViewById(R.id.next);
         final TextView tv= (TextView) findViewById(R.id.update_day);
 
-//        for(int hostel_no=1;hostel_no<=16;hostel_no++) {
-//            String hostel_name;
-//           if(hostel_no<10) {
-//              hostel_name ="0"+hostel_no;
-//           }
-//           else {
-//              hostel_name=""+hostel_no;
-//           }
-//            DatabaseReference hostel = ref.child("Hostel"+hostel_name);
-//            DatabaseReference rating=hostel.child("Rating");
-//            DatabaseReference menu=hostel.child("Mess_Menu");
-//
-//
-//            HashMap<String,Object> rating_childs = new HashMap<>();
-//            rating_childs.put("Current_Rating",0.0);
-//            rating_childs.put("No_of_people",0);
-//            rating.updateChildren(rating_childs);
-//
-//            HashMap<String,Object> hostel_childs=new HashMap<>();
-//            hostel_childs.put("Likes",0);
-//            hostel_childs.put("Dislikes",0);
-//            hostel.updateChildren(hostel_childs);
-//
-//            for(int k=0;k<2;k++){
-//                DatabaseReference current=menu.child(types[k]);
-//                for (int i = 0; i < 7; i++) {
-//                    DatabaseReference day = current.child(days[i]);
-//                    Each_day mDay = new Each_day("N/A", "N/A", "N/A", "N/A");
-//                    // Toast.makeText(Update_menu.this, "Updated"+i, Toast.LENGTH_SHORT).show();
-//                    Map<String, Object> postValues = mDay.toMap();
-//                    day.updateChildren(postValues);
-//
-//                }
-//            }
-//        }
+
         tv.setText(days[0]);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(i==0){
+                if(i==0){     //if day is Sunday and back is pressed it will go back to previous activity.
                     Update_menu.super.onBackPressed();
                 }
                 if(i>0&&i<7) {
-                    i--;
+                    i--;               //goes one day
                     Next.setText("Next");
                     brf.setText("");
                     lun.setText("");
                     tif.setText("");
-                    dinn.setText("");
-                    tv.setText(days[i]);
+                    dinn.setText("");  //making the edittextfields null.
+                    tv.setText(days[i]); //Displays the day's menu being updated.
                 }
             }
         });
@@ -197,18 +163,16 @@ public class Update_menu extends AppCompatActivity {
                     Update_menu.super.onBackPressed();
                 }
                 if(i>=0&&i<6){
-                        i++;
-                        brf.setText("");
-                        lun.setText("");
-                        tif.setText("");
-                        dinn.setText("");
-                        tv.setText(days[i]);
-                        if(i==6)
-                        {
-
-                            Next.setText("Home");
-
-                        }
+                    i++;    //goes ond day forward
+                    brf.setText("");
+                    lun.setText("");
+                    tif.setText("");
+                    dinn.setText("");  //making the edittextfields null.
+                    tv.setText(days[i]);  //Displays the day's menu being updated.
+                    if(i==6)
+                    {
+                        Next.setText("Home");
+                    }
 
 
                 }
@@ -220,11 +184,12 @@ public class Update_menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(i<7) {
+                if(i<7) {    //As i represents days of week starting from Sunday.
                     DatabaseReference hostel = ref.child(hostel_name);
                     DatabaseReference menu = hostel.child("Mess_Menu");
                     DatabaseReference buffer = menu.child("Buffer");
-                    DatabaseReference day = buffer.child(days[i]);
+                    DatabaseReference day = buffer.child(days[i]);   //getting reference to firebase database structured as Mess_Repo/hostel_name/Mess_Menu/Buffer/day
+                                                                     //Values here are stored under Buffer and are copied into Current using Firebase functions
                     String _brf = brf.getText().toString();
                     String _lun = lun.getText().toString();
                     String _tif = tif.getText().toString();
@@ -232,16 +197,16 @@ public class Update_menu extends AppCompatActivity {
 
                     Each_day mDay = new Each_day(_brf, _lun, _tif, _dinn);
 
-                    Map<String, Object> postValues = mDay.toMap();
+                    Map<String, Object> postValues = mDay.toMap();   //Converting food_items to hash_Map and updating it to database.
                     day.updateChildren(postValues);
                     Toast.makeText(Update_menu.this, "Updated " + days[i] + "'s Menu", Toast.LENGTH_SHORT).show();
+                    i++;
                     brf.setText("");
                     lun.setText("");
                     tif.setText("");
-                    dinn.setText("");
-                    i++;
+                    dinn.setText("");  //making the edittextfields null.
                     if(i<7) {
-                        tv.setText(days[i]);
+                        tv.setText(days[i]);  //Displays the day's menu being updated.
                     }
                 }
 

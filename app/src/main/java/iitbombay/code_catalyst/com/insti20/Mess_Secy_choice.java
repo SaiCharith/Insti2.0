@@ -14,13 +14,18 @@ import android.widget.Button;
  *
  */
 public class Mess_Secy_choice extends AppCompatActivity {
+    /**
+     * Overriding the functionality of onBackPressed.
+     * This function is executed when user presses back button.
+     * Here Activity is either finished(if user is mess-secy) or completly closed using homeIntenet.
+     */
     @Override
     public void onBackPressed() {
 
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory( Intent.CATEGORY_HOME );
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(homeIntent);
+        startActivity(homeIntent);   //leads to closing(minimizing) the app.
     }
     /**
      * create two objects of type button and adds a required listener that intents to the the corresponding activity
@@ -42,20 +47,20 @@ public class Mess_Secy_choice extends AppCompatActivity {
         Button original_app=(Button) findViewById(R.id.originalapp);
         original_app.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Bundle bundle=getIntent().getExtras();
+                Bundle bundle=getIntent().getExtras();  //when mess-secy clicks "Original App" button
                 int hostel_no=bundle.getInt("hostel_no");
                 Intent intent=new Intent(Mess_Secy_choice.this,After_login.class);
                 intent.putExtra("hostel_no",hostel_no);
-                startActivity(intent);
+                startActivity(intent); //passing hostel number and starting Activity After_login.
             }
         });
         update_menu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View v) {       //when mess-secy clicks update_menu button
                 Bundle bundle=getIntent().getExtras();
-                int hostel_no=bundle.getInt("hostel_no");
+                int hostel_no=bundle.getInt("hostel_no");    //getting hostel_no from previous activity
                 Intent intent = new Intent(Mess_Secy_choice.this,Update_menu.class);
                 intent.putExtra("hostel_no",hostel_no);
-                startActivity(intent);
+                startActivity(intent);               //initializing Update_menu activity by passing hostel_no.
             }
         });
 

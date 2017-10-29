@@ -50,7 +50,7 @@ class CustomAdapter2 extends ArrayAdapter<String> {
     public CustomAdapter2(Context context,String h_name,String day) {
         super(context, R.layout.activity_display_menu);
 
-
+        //getting reference to the database
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
         DatabaseReference hostel_ref=ref.child(h_name);
         DatabaseReference Mess_menu_ref=hostel_ref.child("Mess_Menu");
@@ -133,27 +133,26 @@ class CustomAdapter2 extends ArrayAdapter<String> {
         final viewHolder holder;
 
 
-        if(view==null){
+        if(view==null){  //inflating view only if it is null
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.fill_day_menu,null);
             holder=new viewHolder(view);
-            view.setTag(holder);
+            view.setTag(holder);   //setting tag to viewHolder so that it is not required to reinitialize later
 
         }
 
         else{
-            holder= (viewHolder) view.getTag();
+            holder= (viewHolder) view.getTag();   //getting reference to viewHolder
         }
 
-
-
+        //getting reference to each part of the day from firebase
         DatabaseReference Days_menu_each_part=Day_menu.child(day_parts[i]);
         Days_menu_each_part.addValueEventListener(new ValueEventListener(){
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {  //this function runs whenever data in the database is changed.
                 String s =  dataSnapshot.getValue(String.class);
                 holder.dish.setText(s);
-                notifyDataSetChanged();
+                notifyDataSetChanged();  //informs customAdapter2 that there is change in dataset.
 
             }
 
@@ -163,7 +162,7 @@ class CustomAdapter2 extends ArrayAdapter<String> {
 
             }
         });
-        holder.day_part.setText(day_parts[i]);
+        holder.day_part.setText(day_parts[i]); //setting values to be displayed in the listview.
 
 
         return view;

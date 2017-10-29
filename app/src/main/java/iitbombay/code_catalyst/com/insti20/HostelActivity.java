@@ -36,7 +36,6 @@ import android.widget.TextView;
  */
 public class HostelActivity extends Activity {
 
-    private int hostel_no=0;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -64,9 +63,6 @@ public class HostelActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hostel);
 
-
-//        Bundle bundle=getIntent().getExtras();
-//        hostel_no=bundle.getInt("index");
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -140,7 +136,7 @@ public class HostelActivity extends Activity {
         @Override
         public Fragment getItem(int position) {
 
-            switch (position) {
+            switch (position) {     //redirecting to fragments based on position
                 case 0:
                     Tab1info tab1 = new Tab1info();
                     return tab1;
@@ -174,7 +170,7 @@ public class HostelActivity extends Activity {
          */
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
+            switch (position) {  //Headings displayed in the Menu_bar
                 case 0:
                     return "INFO";
                 case 1:

@@ -54,11 +54,11 @@ public class DisplayMenu extends AppCompatActivity {
         String day;
 
         Bundle bundle=getIntent().getExtras();
-        hostel_no=bundle.getInt("index");
-        day = bundle.getString("Day");
+        hostel_no=bundle.getInt("index");                   //geting hostel_no from previous activity
+        day = bundle.getString("Day");                      //setting day which user selects
         TextView b= (TextView) findViewById(R.id.Day);
         b.setText(day+"'s Menu");
-        Toast.makeText(this,day,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,day,Toast.LENGTH_SHORT).show();  //displaying the day which user choses.
 
 
         String h_name;
@@ -68,7 +68,7 @@ public class DisplayMenu extends AppCompatActivity {
 
         customAdapter=new CustomAdapter2(DisplayMenu.this,h_name,day);
         ListView listView = (ListView) findViewById(R.id.day_menu_list);
-        listView.setAdapter(customAdapter);
+        listView.setAdapter(customAdapter);                 //setting the listview
 
     }
 

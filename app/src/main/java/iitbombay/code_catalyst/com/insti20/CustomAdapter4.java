@@ -133,23 +133,21 @@ public class CustomAdapter4 extends BaseAdapter implements Filterable {
 
         viewHolder holder;
 
-
         if(view==null){
             LayoutInflater inflater = c.getLayoutInflater();
             view = inflater.inflate(R.layout.search_result_template,null);
             holder=new viewHolder(view);
-            view.setTag(holder);
+            view.setTag(holder); //setting tag to viewHolder so that it is not required to reinitialize later
 
         }
         else{
-            holder= (viewHolder) view.getTag();
+            holder= (viewHolder) view.getTag();  //getting reference to viewHolder
         }
-
+        //setting values to be displayed in the listview.
         holder.hostel_name.setText(searchlst.get(i).getHostel_name());
         holder.result.setText(searchlst.get(i).getItem());
         holder.day_part.setText(searchlst.get(i).getDay_part());
         holder.day.setText(searchlst.get(i).getDay());
-
         return view;
     }
 
@@ -188,7 +186,7 @@ public class CustomAdapter4 extends BaseAdapter implements Filterable {
                 ArrayList<searchobjects> filters=new ArrayList<>();
 
                 for(int i=0;i<filterList.size();i++){
-                    if(filterList.get(i).getItem().toUpperCase().contains(constraint)){
+                    if(filterList.get(i).getItem().toUpperCase().contains(constraint)){ //filtering the list based on constraint.
                         searchobjects p = new searchobjects(filterList.get(i).getH_no(),
                                                             filterList.get(i).getItem(),
                                                             filterList.get(i).getHostel_name(),

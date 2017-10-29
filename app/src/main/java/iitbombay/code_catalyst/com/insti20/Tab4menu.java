@@ -56,10 +56,10 @@ public class Tab4menu extends Fragment {
 
 
         Bundle bundle=getActivity().getIntent().getExtras();
-        hostel_no=bundle.getInt("index");
+        hostel_no=bundle.getInt("index");       //getting hostel_no from previous activity
 
         ListView listview= rootView.findViewById(R.id.listview);
-        listview.setAdapter(adapter);
+        listview.setAdapter(adapter);           //setting the listview
 
         return rootView;
     }
@@ -136,23 +136,23 @@ public class Tab4menu extends Fragment {
             final viewHolder holder;
 
 
-            if(view==null){
+            if(view==null){              //inflating only when the view is null.
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 view = inflater.inflate(R.layout.each_day,null);
                 holder=new viewHolder(view);
-                view.setTag(holder);
+                view.setTag(holder);     //setting tag to viewHolder so that it is not required to reinitialize later
 
             }
 
             else{
-                holder= (viewHolder) view.getTag();
+                holder= (viewHolder) view.getTag(); //getting reference to viewHolder
             }
 
-            holder.day.setText(days[i]);
+            holder.day.setText(days[i]);  //setting values to elements of listview
 
             holder.day.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view) {  //when user clicks this button he is redirected to Display_Menu.Also hostel_no and day are passed using Intent.
                     Intent intent = new Intent(getActivity(),DisplayMenu.class);
                     intent.putExtra("index",hostel_no);
                     intent.putExtra("Day",days[i]);

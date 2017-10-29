@@ -78,7 +78,7 @@ public class Splashscreen extends Activity {
                             MainActivity.class);
                     intent.putExtra("backpressed",false);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
+                    startActivity(intent);      //Redirecting to MainActivity.
                     Splashscreen.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing
