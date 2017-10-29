@@ -96,8 +96,7 @@ public class After_login extends AppCompatActivity {
 
         Bundle b=getIntent().getExtras();
         int x=b.getInt("hostel_no");    //getting hostel number, valid for mess secy. For other users this value is 0.
-
-        Toast.makeText(After_login.this, String.valueOf(x), Toast.LENGTH_SHORT).show();
+        
         if(x==0) {
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
             homeIntent.addCategory(Intent.CATEGORY_HOME);
