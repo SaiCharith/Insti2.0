@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this,firebaseAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
 
-//                    String uid=firebaseAuth.getCurrentUser().getUid();
 
                     boolean b=true;
                     String user=firebaseAuth.getCurrentUser().getEmail();

@@ -39,23 +39,23 @@ public class ViewFeedback extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Bundle bundle = getIntent().getExtras();
-        hostel_no = bundle.getInt("hostel_no");
+        hostel_no = bundle.getInt("hostel_no");     //getting hostel number from previous activity
         if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
         else h_name = "Hostel" + hostel_no;
         DatabaseReference hostel_ref = ref.child(h_name);
-        final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
+        final DatabaseReference feedback_ref = hostel_ref.child("Feedback");  //Reference to database
 
         feedback_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 feedbackList.clear();
-                for (DataSnapshot feedbackSnapshot: dataSnapshot.getChildren()){
-                    FeedbackInput feedbackInput = feedbackSnapshot.getValue(FeedbackInput.class);
+                for (DataSnapshot feedbackSnapshot: dataSnapshot.getChildren()){                    //iterating through childern of  Feedback
+                    FeedbackInput feedbackInput = feedbackSnapshot.getValue(FeedbackInput.class);   //getting data from datbse
 
-                    feedbackList.add(feedbackInput);
+                    feedbackList.add(feedbackInput);                                                //saving data as list
                 }
-                CustomAdapter3 adapter = new CustomAdapter3(ViewFeedback.this, feedbackList);
-                feedback_Listview.setAdapter(adapter);
+                CustomAdapter3 adapter = new CustomAdapter3(ViewFeedback.this, feedbackList);       //setting the adapter.
+                feedback_Listview.setAdapter(adapter);                                              //making the listview.
             }
 
             @Override
