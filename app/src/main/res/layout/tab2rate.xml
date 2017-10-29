@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,6 +29,7 @@
             android:layout_below="@+id/ratehere"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="28dp"
+            android:progressTint="@color/common_google_signin_btn_text_dark_default"
             android:rating="2.5" />
 
         <RadioGroup
