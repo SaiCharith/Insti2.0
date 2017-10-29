@@ -105,6 +105,7 @@ public class DislikeGraph extends Fragment {
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         GridLabelRenderer renderer = graph.getGridLabelRenderer();
         renderer.setHorizontalLabelsAngle(135);//Rotating the X labels by 135 degrees
+        renderer.setVerticalAxisTitle("Dislikes");
         graph.getViewport().setXAxisBoundsManual(true);
 
         return rootView;

@@ -105,6 +105,7 @@ public class RatingGraph extends Fragment {
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         GridLabelRenderer renderer = graph.getGridLabelRenderer();
         renderer.setHorizontalLabelsAngle(135);//Rotating the X labels by 135 degrees
+        renderer.setVerticalAxisTitle("Ratings");
         graph.getViewport().setXAxisBoundsManual(true);
         return rootView;
     }
