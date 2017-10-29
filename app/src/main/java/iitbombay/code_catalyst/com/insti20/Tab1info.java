@@ -93,8 +93,8 @@ public class Tab1info extends Fragment {
         managermail = rootView.findViewById(R.id.ManagerMail);
         imagemanager = rootView.findViewById(R.id.imageH);
 
-        String secy = getResources().getStringArray(R.array.Secy)[hostel_no];
-        String [] secyinfo = secy.split(",");
+        String secy = getResources().getStringArray(R.array.Secy)[hostel_no];//Array of all secy's
+        String [] secyinfo = secy.split(",");//splitting the array at ","
         String Sname = secyinfo[0];
         String Snumber = secyinfo[1];
 //        String Smail = secyinfo[2];

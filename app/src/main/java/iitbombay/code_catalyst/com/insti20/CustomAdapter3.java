@@ -40,7 +40,6 @@ public class CustomAdapter3 extends ArrayAdapter<FeedbackInput> {
     public int getCount() {
         return feedbackList.size();
     }
-//    private ProgressDialog progressDialog;
 
     /**
      *

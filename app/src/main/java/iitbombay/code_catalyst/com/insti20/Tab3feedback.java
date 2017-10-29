@@ -144,7 +144,7 @@ public class Tab3feedback extends Fragment {
         Bundle bundle=getActivity().getIntent().getExtras();
         hostel_no=bundle.getInt("index");
 
-        mStorage = FirebaseStorage.getInstance().getReference();
+        mStorage = FirebaseStorage.getInstance().getReference();//Reference for Firebase Storage, uploaded images are stored here
 
         editTextName = rootView.findViewById(R.id.editTextName);
         editTextRoll = rootView.findViewById(R.id.editTextRoll);
@@ -161,7 +161,7 @@ public class Tab3feedback extends Fragment {
                     public void onClick (View view){
                 Intent intent = new Intent(getActivity(), ViewFeedback.class);
                 intent.putExtra("hostel_no",hostel_no);
-                startActivity(intent);
+                startActivity(intent);//Starting Activity ViewFeedback
 
             }
         });
@@ -172,7 +172,7 @@ public class Tab3feedback extends Fragment {
             public void onClick (View view){
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                startActivityForResult(intent, GALLERY_INTENT);
+                startActivityForResult(intent, GALLERY_INTENT);//StartActivityForResult is called for uploading image to Storage
             }
         });
 
@@ -187,6 +187,7 @@ public class Tab3feedback extends Fragment {
                 String feed = editTextFeed.getText().toString().trim();
 
                 if(name.equals("") || roll.equals("") || description.equals("") || feed.equals("")){
+                    //Ensures that feedback is not empty
                     Toast.makeText(getActivity(), "All Fields must be filled", Toast.LENGTH_SHORT).show();
                 }else {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
@@ -196,6 +197,7 @@ public class Tab3feedback extends Fragment {
                     DatabaseReference hostel_ref = ref.child(h_name);
                     final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
 
+                    //if button add is not pressed(no uploaded image), then set image_id to null
                     if(b == false){
                         image_id ="";
                         b = true;
@@ -204,11 +206,12 @@ public class Tab3feedback extends Fragment {
                         b = false;
                     }
 
-                    push_id = feedback_ref.push().getKey();
+                    push_id = feedback_ref.push().getKey(); // randomly generated key
                     FeedbackInput feedbackInput = new FeedbackInput(image_id, name, roll, description, feed);
                     feedback_ref.child(push_id).setValue(feedbackInput);
                     Toast.makeText(getActivity(), "Feedback Submitted", Toast.LENGTH_SHORT).show();
 
+                    //Making all the EditTexts blank after feedback is submitted
                     editTextName.setText("");
                     editTextRoll.setText("");
                     editTextDescription.setText("");
@@ -247,9 +250,8 @@ public class Tab3feedback extends Fragment {
             if (hostel_no < 10) h_name = "Hostel0" + hostel_no;
             else h_name = "Hostel" + hostel_no;
             final DatabaseReference hostel_ref = ref.child(h_name);
-            //final DatabaseReference feedback_ref = hostel_ref.child("Feedback");
             push_id1 = hostel_ref.push().getKey();
-            b = true;
+            b = true; //setting it to true, since add button is clicked
             //StorageReference filepath = mStorage.child("photos").child(uri.getLastPathSegment());
             StorageReference filepath = mStorage.child(h_name).child(push_id1);
             filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -258,12 +260,13 @@ public class Tab3feedback extends Fragment {
                     Toast.makeText(getActivity(),"Image is uploaded",Toast.LENGTH_SHORT).show();
 
                     mProgressDialog.dismiss();
-                    image_url = taskSnapshot.getDownloadUrl();
+                    image_url = taskSnapshot.getDownloadUrl();//getting URL of image
                 }
             })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    //Progress Dialog along with percentage uploading feature
                     double progress = ( 100 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
                     mProgressDialog.setMessage("Uploading..."+(int)progress+"%");
                 }

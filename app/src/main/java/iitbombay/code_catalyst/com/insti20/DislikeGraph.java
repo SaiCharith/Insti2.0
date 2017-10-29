@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -33,6 +35,9 @@ import iitbombay.code_catalyst.com.insti20.R;
 
 public class DislikeGraph extends Fragment {
 
+    ArrayList<String> list = new ArrayList<String>(16);//for defining Array List of all hostels for writing X labels
+    String[] mString = new String[list.size()];//String of X labels
+
     /**
      * This method is called when the this Fragment gets created.
      * Get users dislikes for every hostel and represent them in a graph.
@@ -46,6 +51,20 @@ public class DislikeGraph extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.likegraph, container, false);
 
+        list.clear();//Clearing the list to avoid overwriting of X labels
+
+        //For loop to form ArrayList of 16 elements
+        for(int i = 0 ; i<17; i++) {
+            if(i == 0){
+                list.add(0+"");
+            }
+            else {
+                list.add("Hostel" + (i+1));
+            }
+        }
+        mString = list.toArray(mString);//Converting Arraylist to String
+
+
         final LineGraphSeries<DataPoint> series;
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://code-catalyst-asc.firebaseio.com/Mess_Repo");
@@ -55,17 +74,18 @@ public class DislikeGraph extends Fragment {
         ref.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                       final Integer[] k = {0};
+                       final Integer[] k = {0};//Integer array to store dislikes
                 for(int i = 1 ; i<17; i++) {
-                    final ArrayList<Integer> likes = new ArrayList<Integer>();
 
-                    String h_name;
+                    String h_name;// Stores hostel number
                     if (i < 10) h_name = "Hostel0" + i;//handling single digit
                     else h_name = "Hostel" + i;
+
+                    //Assigning values of dislike in h_name hostel to k[0]
                       k[0] = dataSnapshot.child(h_name).child("Dislikes").getValue(Integer.class);
-                    series.appendData(new DataPoint(i,k[0]),true,16);
+                    series.appendData(new DataPoint(i,k[0]),true,16);//appended the obtained point to series
                     if (i == 16) {
-                        graph.addSeries(series);
+                        graph.addSeries(series); //plotting all the points of series and then connecting them
                     }
                 }
             }
@@ -79,11 +99,13 @@ public class DislikeGraph extends Fragment {
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(17);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(10);
-
-        graph.getViewport().setYAxisBoundsManual(true);
+//        graph.getViewport().setMaxY(6);
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(mString);//setting 'hostel_number' as label for X axis
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        GridLabelRenderer renderer = graph.getGridLabelRenderer();
+        renderer.setHorizontalLabelsAngle(135);//Rotating the X labels by 135 degrees
         graph.getViewport().setXAxisBoundsManual(true);
-
 
         return rootView;
     }
